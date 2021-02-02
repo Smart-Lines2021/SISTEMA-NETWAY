@@ -51,7 +51,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
                 </form>
-              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <i class="nav-icon fa fa-sign-out-alt"></i>
               <p>Cerrar Sesión</p>
             </a>
           </li>

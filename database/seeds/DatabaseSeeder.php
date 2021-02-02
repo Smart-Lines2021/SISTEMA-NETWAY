@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+    	DB::statement('SET FOREIGN_KEY_CHECKS=0;'); //Nos ayuda a evitar que se revisen las llaves foraneas antes de ejecutar un seeder
+        $this->call(UserSeeder::class); //Ejecutamos el UserSeeder
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
