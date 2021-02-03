@@ -1,9 +1,11 @@
 @extends('admin.layout.layout')
-
+@section('title')
+   <h1 class="m-0 text-dark">Inicio</h1>
+@endsection
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
-    <li class="breadcrumb-item active">Dashboard v1</li>
+    <li class="breadcrumb-item active">Administración</li>
 </ol>
 @stop
 
