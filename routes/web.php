@@ -18,3 +18,5 @@ Route::get('/', 'Admin\HomeController@index')->name('home');
 /*Auth::routes();*/
 Auth::routes(['register'=>false]); //Para que no se puedan registrar directamente
 Route::resource('administracion/usuarios','Admin\UserController')->parameters(['usuario'=>'usuario'])->names('admin.usuarios');
+Route::put('administracion/usuarios/{usuario}/roles','Admin\UserRoleController@update')->name('admin.usuarios.roles.update');
+Route::put('administracion/usuarios/{usuario}/permisos','Admin\UserPermissionController@update')->name('admin.usuarios.permisos.update');

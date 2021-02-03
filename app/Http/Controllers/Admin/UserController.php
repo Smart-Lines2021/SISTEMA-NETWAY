@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserRequest;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -14,7 +19,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.usuarios.index');
+        $usuarios = User::where('activo','=',1)->get();
+        return view('admin.usuarios.index',[
+            'usuarios'=>$usuarios]);
     }
 
     /**
@@ -57,7 +64,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $usuario=User::findOrFail($id);
+        $roles=Role::pluck('name','id');
+        $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
+        return view('admin.usuarios.edit',[
+            'usuario'=>$usuario,
+            'roles'=>$roles,
+            'permisosControlUsuarios'=>$permisosControlUsuarios]);
     }
 
     /**
@@ -67,9 +81,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $usuario)
     {
-        //
+        $usuario->update($request->validated());
+        return back()->with('mensaje','Se ha Actualizado el usuario');
     }
 
     /**

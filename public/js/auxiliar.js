@@ -1,5 +1,5 @@
  $(function () {
-    $('#example2').DataTable({
+    $('#table_id').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": true,
