@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', 'Admin\HomeController@index')->name('home');
-//Control de Sesiones y de Registro
+
+//Control de Sesiones y de usuarios
 /*Auth::routes();*/
 Auth::routes(['register'=>false]); //Para que no se puedan registrar directamente
+Route::resource('administracion/usuarios','Admin\UserController')->parameters(['usuario'=>'usuario'])->names('admin.usuarios');
