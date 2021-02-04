@@ -31,7 +31,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $usuario=new User;
+        $roles=Role::pluck('name','id');
+        $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
+        return view('admin.usuarios.create',[
+            'usuario'=>$usuario,
+            'roles'=>$roles,
+            'permisosControlUsuarios'=>$permisosControlUsuarios]);
     }
 
     /**
@@ -40,10 +46,19 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $usuario = User::create($request->validated());
+        //asignamos roles
+        if ($request->filled('roles')) {
+           $usuario->assignRole($request->roles);
+       }
+        //asignamos permisos
+       if ($request->filled('permissions')) {
+        $usuario->givePermissionTo($request->permissions);
     }
+    return redirect()->route('admin.usuarios.index')->with('mensaje','Se ha creado un nuevo usuario');
+}
 
     /**
      * Display the specified resource.
@@ -95,6 +110,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $usuario=User::findOrFail($id);
+        $usuario->activo=0;
+        $usuario->update();
+        return back()->with('mensaje','Se ha eliminado al usuario');
     }
 }

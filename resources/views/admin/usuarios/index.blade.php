@@ -16,9 +16,9 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Tabla de Usuarios Registrados</h3>
-          <button class="btn btn-secondary float-right">
+          <a href="{{route('admin.usuarios.create')}}" class="btn btn-secondary float-right">
           <i class="fa fa-plus"></i>Añadir Usuario
-          </button>
+          </a>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -49,13 +49,14 @@
                     <div class="dropdown-menu" role="menu">
                       <a class="dropdown-item" href="{{route('admin.usuarios.edit',Crypt::encryptString($usuario->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#"><i class="fas fa-user-times"></i> Eliminar</a>
+                      <a class="dropdown-item" data-target="#modal-destroy-{{$usuario->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
                       <div class="dropdown-divider"></div>
                     </div>
                   </div>
                   </center>
                 </td>
               </tr>
+              @include('admin.usuarios.destroy')
               @endforeach
             </tbody>
           </table>

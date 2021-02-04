@@ -24,6 +24,15 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+         $rules = [
+            'name'=>'required',
+            'email'=>['required',Rule::unique('users')] //Obtenemos del parametro de la ruta la id del usuario
+        ];
+        if ($this->filled('password')) {//Nos sirve para saber si esta lleno
+            $rules ['password'] = ['confirmed','min:6'];
+        }
+
+        if($this->method() === 'PUT'){ //Si es para actualizar
         $rules = [
             'name'=>'required',
             'email'=>['required',Rule::unique('users')->ignore($this->route('usuario')->id)] //Obtenemos del parametro de la ruta la id del usuario
@@ -31,6 +40,7 @@ class UserRequest extends FormRequest
         if ($this->filled('password')) {//Nos sirve para saber si esta lleno
             $rules ['password'] = ['confirmed','min:6'];
         }
+    }
         return $rules;
     }
     public function messages(){
