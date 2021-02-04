@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
     	User::truncate();
 
     	//Roles
-    	$administrador= Role::create(['name'=>'Administrador']);
-    	$recursosHumanos= Role::create(['name'=>'Recursos Humanos']);
+    	$administrador= Role::create(['name'=>'Administrador','description'=>'Se encarga de Administrar el Sistema']);
+    	$recursosHumanos= Role::create(['name'=>'Recursos Humanos','description'=>'Forma parte del departamento de Recursos Humanos']);
 
     	//Usuarios
     	$usuario=new User;

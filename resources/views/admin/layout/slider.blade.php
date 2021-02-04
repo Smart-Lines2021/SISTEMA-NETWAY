@@ -17,6 +17,7 @@
          with font-awesome or any other icon font library -->
 
             <li class="nav-header">Etiqueta Divisora</li>
+            @role('Administrador')
             <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-users-cog"></i>
@@ -33,19 +34,20 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/charts/flot.html" class="nav-link">
+                        <a href="{{route('admin.roles.index')}}" class="nav-link">
                             <i class="fas fa-user-tag"></i>
                             <p>Roles</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/charts/inline.html" class="nav-link">
+                        <a href="{{route('admin.permisos.index')}}" class="nav-link">
                            <i class="fas fa-unlock-alt"></i>
                             <p>Permisos</p>
                         </a>
                     </li>
                 </ul>
             </li>
+            @endrole
             <li class="nav-item">
             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
