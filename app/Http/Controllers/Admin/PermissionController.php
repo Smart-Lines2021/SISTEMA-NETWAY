@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PermisoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Permission;
@@ -20,26 +21,10 @@ class PermissionController extends Controller
         return view('admin.permisos.index',[
             'permisos'=>$permisos]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(PermisoRequest $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $permiso=Permission::create($request->validated());
+        return back()->with('mensaje','Se ha agregado un nuevo permiso');
     }
 
     /**
@@ -53,27 +38,10 @@ class PermissionController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(PermisoRequest $request, Permission $permiso)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $permiso->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el permiso correctamente');
     }
 
     /**

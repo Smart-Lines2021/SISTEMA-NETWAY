@@ -9,7 +9,7 @@
 </ol>
 @stop
 @section('content')
-<div class="row">
+<div class="row justify-content-center">
 	<div class="col-md-6">
 		<div class="card card-info">
 			<div class="card-header">
@@ -34,7 +34,7 @@
 						@include('admin.usuarios.checkboxes.roles')
 					</div>
 					<div class="form-group col-md-12">
-						@include('admin.usuarios.checkboxes.permisos')
+						@include('admin.usuarios.checkboxes.permisos',['model'=>$usuario])
 					</div>
 					<button class="btn btn-info btn-block">Crear Usuario</button>
 				</form>

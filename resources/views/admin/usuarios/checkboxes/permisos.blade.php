@@ -13,7 +13,10 @@
 			<div class="col-md-6">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" value="{{$name}}" {{$usuario->permissions->contains($id) ? 'checked' : ''}} name="permissions[]"> {{-- Comprobamos que roles tiene el usuario a traves del id y seleccionamos --}}
+						<input type="checkbox" value="{{$name}}"
+						{{collect(old('permissions'))->contains($name) ? 'checked' : ''}}
+						{{$model->permissions->contains($id) ? 'checked' : ''}}
+						name="permissions[]"> {{-- Comprobamos que roles tiene el usuario a traves del id y seleccionamos model es la variable que pasamos --}}
 						{{$name}}
 					</label>
 				</div>

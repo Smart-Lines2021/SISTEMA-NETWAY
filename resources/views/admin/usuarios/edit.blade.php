@@ -72,7 +72,7 @@
 							@method('PUT')
 
 
-							@include('admin.usuarios.checkboxes.permisos')
+							@include('admin.usuarios.checkboxes.permisos',['model'=>$usuario])
 							<button class="btn btn-info btn-block">Actualizar Permisos</button>
 
 						</div> {{-- Card-body --}}
