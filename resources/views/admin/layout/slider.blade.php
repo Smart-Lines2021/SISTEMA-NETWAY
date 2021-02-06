@@ -47,6 +47,7 @@
                     </li>
                 </ul>
             </li>
+            @endrole
             <li class="nav-item menu-is-opening">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
@@ -145,7 +146,7 @@
               </li>
             </ul>
           </li> {{-- Cierra catalogos --}}
-            @endrole
+
             <li class="nav-item">
             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
