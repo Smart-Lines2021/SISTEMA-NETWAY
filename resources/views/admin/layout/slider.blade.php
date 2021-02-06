@@ -47,6 +47,104 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item menu-is-opening">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-plus-square"></i>
+              <p>
+                Catálogos
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Ubicación Geográfica
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('admin.paises.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Paises</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.estados.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Estados</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.municipios.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Municipios</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Productos
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('admin.tipo_productos.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tipo de Productos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.categorias_productos.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Categorías de Productos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.marcas.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Marcas</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+                            <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Proveedores y vehiculos
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('admin.tipo_vehiculos.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tipo de Vehiculos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.gasolinerias.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Gasolinerias</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.categorias_proveedores.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Categorías de Proveedores</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li> {{-- Cierra catalogos --}}
             @endrole
             <li class="nav-item">
             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
