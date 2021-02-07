@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Admin\CategoriaProducto;
+use App\Http\Requests\Admin\CategoriaProductoRequest;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 
 class CategoriaProductoController extends Controller
@@ -14,28 +17,15 @@ class CategoriaProductoController extends Controller
      */
     public function index()
     {
-        return "Categorias de Productos";
+        $categoriasProductos=CategoriaProducto::where('activo','=',1)->get();
+        return view('admin.categorias_productos.index',[
+            'categoriasProductos'=>$categoriasProductos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(CategoriaProductoRequest $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $categoriaProducto=CategoriaProducto::create($request->validated());
+        return back()->with('mensaje','Se ha añadido una nueva categoría');
     }
 
     /**
@@ -67,9 +57,11 @@ class CategoriaProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoriaProductoRequest $request, $id)
     {
-        //
+        $categoriaProducto=CategoriaProducto::findOrFail($id);
+        $categoriaProducto->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado la categoría del producto');
     }
 
     /**
@@ -80,6 +72,10 @@ class CategoriaProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $categoriaProducto=CategoriaProducto::findOrFail($id);
+        $categoriaProducto->activo=0;
+        $categoriaProducto->update();
+        return back()->with('mensaje','Se ha eliminado la categoría del producto');
     }
 }
