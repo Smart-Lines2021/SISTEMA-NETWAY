@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\CategoriaProveedor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,9 @@ class CategoriaProveedorController extends Controller
      */
     public function index()
     {
-        return "Categorias de Proveedores";
-    }
+     $categoriasProveedores=CategoriaProveedor::where('activo','=',1)->get();
+     return view('admin.categorias_proveedores.index');
+ }
 
     /**
      * Show the form for creating a new resource.
