@@ -59,6 +59,7 @@ class CategoriaProductoController extends Controller
      */
     public function update(CategoriaProductoRequest $request, $id)
     {
+        $id= Crypt::decryptString($id);
         $categoriaProducto=CategoriaProducto::findOrFail($id);
         $categoriaProducto->update($request->validated());
         return back()->with('mensaje','Se ha actualizado la categoría del producto');

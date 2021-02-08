@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Marca;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MarcaRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class MarcaController extends Controller
 {
@@ -14,72 +17,28 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        return "Marcas";
+        $marcas=Marca::where('activo','=',1)->get();
+        return view('admin.marcas.index',[
+            'marcas'=>$marcas]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(MarcaRequest $request)
     {
-        //
+        $marca=Marca::create($request->validated());
+        return back()->with('mensaje','Se ha añadido una nueva marca');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(MarcaRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $marca=Marca::findOrFail($id);
+        $marca->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado la marca');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $marca=Marca::findOrFail($id);
+        $marca->activo=0;
+        $marca->update();
+        return back()->with('Se ha eliminado la marca');
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\TipoProducto;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\TipoProductoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class TipoProductoController extends Controller
 {
@@ -14,72 +17,28 @@ class TipoProductoController extends Controller
      */
     public function index()
     {
-        return "Tipos de productos";
+        $tipoProductos=TipoProducto::where('activo','=',1)->get();
+        return view('admin.tipo_productos.index',[
+            'tipoProductos'=>$tipoProductos]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(TipoProductoRequest $request)
     {
-        //
+        $tipoProducto=TipoProducto::create($request->validated());
+        return back()->with('mensaje','Se ha añadido un nuevo tipo de producto');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(TipoProductoRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $tipoProducto=TipoProducto::findOrFail($id);
+        $tipoProducto->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el tipo de producto');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $tipoProducto=TipoProducto::findOrFail($id);
+        $tipoProducto->activo=0;
+        $tipoProducto->update();
+        return back()->with('mensaje','Se ha eliminado el tipo de producto');
     }
 }

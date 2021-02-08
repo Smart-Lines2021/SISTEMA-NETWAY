@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Admin\CategoriaProveedor;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CategoriaProveedorRequest;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 
 class CategoriaProveedorController extends Controller
@@ -15,73 +17,29 @@ class CategoriaProveedorController extends Controller
      */
     public function index()
     {
-     $categoriasProveedores=CategoriaProveedor::where('activo','=',1)->get();
-     return view('admin.categorias_proveedores.index');
- }
+       $categoriasProveedores=CategoriaProveedor::where('activo','=',1)->get();
+       return view('admin.categorias_proveedores.index',[
+        'categoriasProveedores'=>$categoriasProveedores]);
+   }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+   public function store(CategoriaProveedorRequest $request)
+   {
+    $categoriaProveedor=CategoriaProveedor::create($request->validated());
+    return back()->with('mensaje','Se ha añadido una nueva categoría de proveedor');
+}
+    public function update(CategoriaProveedorRequest $request, $id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+       $id= Crypt::decryptString($id);
+       $categoriaProveedor=CategoriaProveedor::findOrFail($id);
+       $categoriaProveedor->update($request->validated());
+       return back()->with('mensaje','Se ha actualizado la categoría de proveedor');
+   }
     public function destroy($id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $categoriaProveedor=CategoriaProveedor::findOrFail($id);
+        $categoriaProveedor->activo=0;
+        $categoriaProveedor->update();
+        return back()->with('mensaje','Se ha elimiando la categoría del producto');
     }
 }

@@ -1,6 +1,6 @@
 @extends('admin.layout.layout')
 @section('title')
-<h1 class="m-0 text-dark">Categorías de Proveedores</h1>
+<h1 class="m-0 text-dark">Departamentos</h1>
 @endsection
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
@@ -14,11 +14,11 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Tabla de Categorías de Proveedores</h3>
+          <h3 class="card-title">Tabla de Departamentos</h3>
           <a class="btn btn-secondary float-right" style="color: white" data-target="#modal-create" data-toggle="modal">
-            <i class="fa fa-plus" role="button"></i> Añadir Categoría de Proveedor
+            <i class="fa fa-plus" role="button"></i> Añadir Departo
           </a>
-          @include('admin.categorias_proveedores.create')
+          @include('admin.departamentos.create')
         </div>
         <br>
         <br>
@@ -30,16 +30,14 @@
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Descripción</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($categoriasProveedores as $categoriaProveedor)
+              @foreach($departamentos as $departamento)
               <tr>
-                <td>{{$categoriaProveedor->id}}</td>
-                <td>{{$categoriaProveedor->nombre}}</td>
-                <td>{{$categoriaProveedor->descripcion}}</td>
+                <td>{{$departamento->id}}</td>
+                <td>{{$departamento->nombre}}</td>
                 <td>
                   <center>
                     <div class="btn-group">
@@ -48,17 +46,17 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" data-target="#modal-edit-{{$categoriaProveedor->id}}" data-toggle="modal"><i class="fas fa-user-edit"></i> Editar</a>
+                        <a class="dropdown-item" data-target="#modal-edit-{{$departamento->id}}" data-toggle="modal"><i class="fas fa-user-edit"></i> Editar</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" data-target="#modal-destroy-{{$categoriaProveedor->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
+                        <a class="dropdown-item" data-target="#modal-destroy-{{$departamento->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
                         <div class="dropdown-divider"></div>
                       </div>
                     </div>
                   </center>
                 </td>
               </tr>
-              @include('admin.categorias_proveedores.destroy')
-              @include('admin.categorias_proveedores.edit')
+              @include('admin.departamentos.destroy')
+              @include('admin.departamentos.edit')
               @endforeach
             </tbody>
           </table>

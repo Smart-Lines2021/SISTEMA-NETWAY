@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Departamento;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\DepartamentoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class DepartamentoController extends Controller
 {
@@ -14,72 +17,28 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        return "Departamentos";
+        $departamentos=Departamento::where('activo','=',1)->get();
+        return view('admin.departamentos.index',[
+            'departamentos'=>$departamentos]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(DepartamentoRequest $request)
     {
-        //
+        $departamento=Departamento::create($request->validated());
+        return back()->with('mensaje','Se ha añadido un nuevo departamento');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(DepartamentoRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $departamento=Departamento::findOrFail($id);
+        $departamento->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el departamento');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
-    }
+       $id=Crypt::decryptString($id);
+       $departamento=Departamento::findOrFail($id);
+       $departamento->activo=0;
+       $departamento->update();
+       return back()->with('mensaje','Se ha eliminado el departamento');
+   }
 }

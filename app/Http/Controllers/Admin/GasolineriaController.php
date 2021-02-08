@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Gasolineria;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Gasolineriarequest;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 
 class GasolineriaController extends Controller
@@ -14,72 +17,31 @@ class GasolineriaController extends Controller
      */
     public function index()
     {
-        return "Gasolinerias";
+        $gasolinerias=Gasolineria::where('activo','=',1)->get();
+        return view('admin.gasolinerias.index',[
+            'gasolinerias'=>$gasolinerias]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(GasolineriaRequest $request)
     {
-        //
+        $gasolineria=Gasolineria::create($request->validated());
+        return back()->with('mensaje','Se ha creado una nueva gasolineria');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(GasolineriaRequest $request, $id)
     {
-        //
+         $id= Crypt::decryptString($id);
+         $gasolineria=Gasolineria::findOrFail($id);
+         $gasolineria->update($request->validated());
+         return back()->with('mensaje','Se ha actualizado la gasolineria');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $gasolineria=Gasolineria::findOrFail($id);
+        $gasolineria->activo=0;
+        $gasolineria->update();
+        return back()->with('mensaje','Se ha eliminado la gasolineria');
     }
 }
