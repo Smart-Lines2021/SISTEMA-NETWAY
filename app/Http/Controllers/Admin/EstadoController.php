@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Admin\Estado;
+use App\Admin\Pais;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\EstadoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class EstadoController extends Controller
 {
@@ -14,62 +18,24 @@ class EstadoController extends Controller
      */
     public function index()
     {
-        return "Estados";
+        $paises = Pais::orderBy(DB::raw('FIELD(nombre, "México")'),'desc')->where('activo','=',1)->get(); //Mandamos primero México
+        $estados=Estado::where('activo','=',1)->get();
+        return view('admin.estados.index',[
+            'estados'=>$estados,
+            'paises'=>$paises]);
+    }
+    public function store(EstadoRequest $request)
+    {
+        $estado=Estado::create($request->validated());
+        return back()->with('mensaje','Se ha añadido un nuevo estado');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update(EstadoRequest $request, $id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $id=Crypt::decryptString($id);
+        $estado=Estado::findOrFail($id);
+        $estado->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el Estado');
     }
 
     /**
@@ -80,6 +46,10 @@ class EstadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $estado=Estado::findOrFail($id);
+        $estado->activo=0;
+        $estado->update();
+        return back()->with('mensaje','Se ha eliminado el pais');
     }
 }

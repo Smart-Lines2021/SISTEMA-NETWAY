@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
           <label for="description">Descripción:</label>
-          <input type="text" name="description" class="form-control" placeholder="Ingrese el nombre a mostrar del permiso" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,35}"
+          <input type="text" name="description" class="form-control" placeholder="Ingrese una breve descripción" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,35}"
           minlegth="2" maxlength="35"
           title="Solo se permiten letras. Tamaño mínimo: 2. Tamaño máximo: 35"
           value="{{old('description',$permiso->description)}}">
@@ -38,6 +38,7 @@
           <select name="category" class="form-control">
             <option value="{{old('category',$permiso->category)}}">{{old('category', $permiso->category)}}</option>
             <option value="Control de Usuarios">Control de Usuarios</option>
+            <option value="Ubicación Geografica">Ubicación Geografica</option>
           </select>
         </div>
         <div class="modal-footer">
