@@ -15,6 +15,7 @@ class CreatePersonasTable extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
+            $table->string('foto_perfil')->default('avatar.png');
             $table->string('nombre',40);
             $table->string('apellido',40);
             $table->string('curp',20);

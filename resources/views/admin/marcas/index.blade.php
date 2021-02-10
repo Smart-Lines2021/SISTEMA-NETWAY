@@ -30,6 +30,7 @@
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Categoría</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -38,6 +39,7 @@
               <tr>
                 <td>{{$marca->id}}</td>
                 <td>{{$marca->nombre}}</td>
+                <td>{{$marca->categoria}}</td>
                 <td>
                   <center>
                     <div class="btn-group">

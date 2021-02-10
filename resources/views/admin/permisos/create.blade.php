@@ -37,7 +37,7 @@
           <select name="category" class="form-control">
            <option value="{{old('category')}}">Seleccione una opción</option>
             <option value="Control de Usuarios" {{ old('category') == 'Control de Usuarios' ? 'selected' : '' }}>Control de Usuarios</option>
-            <option value="Ubicación Geografica" {{ old('category') == 'Ubicación Geografica' ? 'selected' : '' }}>Ubicación Geografica</option>
+            <option value="Ubicación Geográfica" {{ old('category') == 'Ubicación Geográfica' ? 'selected' : '' }}>Ubicación Geográfica</option>
           </select>
         </div>
         <div class="modal-footer">

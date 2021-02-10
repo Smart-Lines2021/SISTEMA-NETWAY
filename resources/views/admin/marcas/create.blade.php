@@ -18,6 +18,15 @@
           title="Solo se permiten letras. Tamaño mínimo: 2. Tamaño máximo: 40"
           value="{{old('nombre')}}">
         </div>
+         <div class="form-group">
+          <label for="categoria">Categoría:</label>
+          <select name="categoria" class="form-control">
+           <option value="{{old('categoria')}}">Seleccione una opción</option>
+            <option value="Proveedor" {{ old('categoria') == 'Proveedor' ? 'selected' : '' }}>Proveedor</option>
+            <option value="Producto" {{ old('categoria') == 'Producto' ? 'selected' : '' }}>Producto</option>
+             <option value="Vehiculo" {{ old('categoria') == 'Vehiculo' ? 'selected' : '' }}>Vehiculo</option>
+          </select>
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           <button class="btn btn-primary">Crear Marca</button>

@@ -1,10 +1,11 @@
 <?php
 
 namespace App;
-use Spatie\Permission\Traits\HasRoles; //Necesario para spatie
+use App\Admin\PersonaUsuario;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -36,4 +37,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function personasUsuarios(){
+        return $this->hasMany(PersonaUsuario::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
+    }
 }

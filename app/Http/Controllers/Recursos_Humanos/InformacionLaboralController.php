@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\RecursosHumanos;
+namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductoProveedorController extends Controller
+class InformacionLaboralController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProductoProveedorController extends Controller
      */
     public function index()
     {
-        return "Producto proveedor";
+        return "Información Laboral";
     }
 
     /**

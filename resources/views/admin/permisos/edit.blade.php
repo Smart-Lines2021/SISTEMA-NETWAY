@@ -38,7 +38,7 @@
           <select name="category" class="form-control">
             <option value="{{old('category',$permiso->category)}}">{{old('category', $permiso->category)}}</option>
             <option value="Control de Usuarios">Control de Usuarios</option>
-            <option value="Ubicación Geografica">Ubicación Geografica</option>
+            <option value="Ubicación Geográfica">Ubicación Geográfica</option>
           </select>
         </div>
         <div class="modal-footer">

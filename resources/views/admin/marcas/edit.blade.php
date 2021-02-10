@@ -19,6 +19,15 @@
           title="Solo se permiten letras. Tamaño mínimo: 2. Tamaño máximo: 40"
           value="{{old('nombre',$marca->nombre)}}">
         </div>
+        <div class="form-group">
+          <label for="categoria">Categoría:</label>
+          <select name="categoria" class="form-control">
+            <option value="{{old('categoria',$marca->categoria)}}">{{old('categoria', $marca->categoria)}}</option>
+            <option value="Proveedor">Proveedor</option>
+            <option value="Producto">Producto</option>
+            <option value="Vehiculo">Vehiculo</option>
+          </select>
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           <button class="btn btn-primary">Editar Marca</button>
