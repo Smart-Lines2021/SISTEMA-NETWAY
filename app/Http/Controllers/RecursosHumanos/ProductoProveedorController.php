@@ -14,7 +14,7 @@ class ProductoProveedorController extends Controller
      */
     public function index()
     {
-        //
+        return "Producto proveedor";
     }
 
     /**

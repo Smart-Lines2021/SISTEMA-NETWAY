@@ -14,7 +14,7 @@ class DomicilioClienteController extends Controller
      */
     public function index()
     {
-        //
+        return "Domicilio del Cliente";
     }
 
     /**

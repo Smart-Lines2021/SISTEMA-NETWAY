@@ -14,7 +14,7 @@ class PersonaUsuarioController extends Controller
      */
     public function index()
     {
-        //
+        return "Persona Usuario";
     }
 
     /**

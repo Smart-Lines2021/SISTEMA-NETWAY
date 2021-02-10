@@ -14,7 +14,7 @@ class InformacionLaboralController extends Controller
      */
     public function index()
     {
-        //
+        return "Información Laboral";
     }
 
     /**

@@ -14,7 +14,7 @@ class ContactoClienteController extends Controller
      */
     public function index()
     {
-        //
+        return "Contacto del cliente";
     }
 
     /**
