@@ -7,6 +7,7 @@
     background: -ms-linear-gradient(top,  rgba(36, 113, 163,1) 0%,rgba(127, 179, 213,1) 10%);
     background: linear-gradient(top,  rgba(36, 113, 163,1) 0%,rgba(127, 179, 213,1) 10%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2471A3', endColorstr='#7FB3D5',GradientType=0 );
+    height:100vh;
 }
 h1{ font-size:28px;}
 h2{ font-size:26px;}
