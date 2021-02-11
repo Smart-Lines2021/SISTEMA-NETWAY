@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Persona extends Model
 {
+    protected $table= "personas";
     protected $guarded = [];
     public function domiciliosPersonas(){
         return $this->hasMany(DomicilioPersona::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
