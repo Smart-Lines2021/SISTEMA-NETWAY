@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Http\Controllers\Controller;
+use App\Recursos_Humanos\Cliente;
+use App\Http\Requests\Admin\ClienteRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class ClienteController extends Controller
 {
@@ -14,7 +17,9 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return "Cliente";
+        $clientes=Cliente::where('activo','=',1)->get();
+        return view('recursos_humanos.clientes.index',[
+            'cliente'=>$clientes]);
     }
 
     /**
@@ -33,9 +38,10 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClienteRequest $request)
     {
-        //
+        $cliente=Cliente::create($request->validated());
+        return back()->with('mensaje','Se ha añadido un nuevo cliente');
     }
 
     /**
@@ -57,7 +63,7 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+       //
     }
 
     /**
@@ -67,9 +73,12 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClienteRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $cliente=Cliente::findOrFail($id);
+        $cliente->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el cliente');
     }
 
     /**
@@ -80,6 +89,10 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $cliente=Cliente::findOrFail($id);
+        $cliente->activo=0;
+        $cliente->update();
+        return back()->with('mensaje','Se ha eliminado el cliente');
     }
 }
