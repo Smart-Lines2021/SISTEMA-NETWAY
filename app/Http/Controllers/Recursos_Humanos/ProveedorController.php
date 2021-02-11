@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Recursos_Humanos\Proveedor;
+use App\Admin\CategoriaProveedor;
+use App\Http\Requests\Admin\ProveedorRequest;
+use Illuminate\Support\Facades\Crypt;
 
 class ProveedorController extends Controller
 {
@@ -14,7 +18,9 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        return "Proveedor";
+        $proveedores=Proveedor::where('activo','=',1)->get();
+        return view('recursos_humanos.proveedores.index',[
+            'proveedores'=>$proveedores]);
     }
 
     /**
@@ -24,7 +30,9 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        //
+       $categorias_proveedores=CategoriaProveedor::get()->all();
+       return view('recursos_humanos.proveedores.create',[
+        'categorias_proveedores'=>$categorias_proveedores]);
     }
 
     /**
@@ -33,9 +41,10 @@ class ProveedorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProveedorRequest $request)
     {
-        //
+         Proveedor::create($request->validated());
+        return redirect()->route('rh.proveedores.index')->with('mensaje','Se ha registrado un proveedor');
     }
 
     /**
@@ -57,7 +66,10 @@ class ProveedorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $proveedor=Proveedor::findOrFail($id);
+        return view('recursos_humanos.proveedores.edit',[
+            'proveedor'=>$proveedor]);
     }
 
     /**
@@ -67,9 +79,12 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProveedorRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $proveedor=Proveedor::findOrFail($id);
+        $proveedor->update($request->validated());
+        return redirect()->route('rh.proveedores.index')->with('mensaje','Se ha actualizado el proveedor');
     }
 
     /**
@@ -80,6 +95,10 @@ class ProveedorController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $id=Crypt::decryptString($id);
+       $proveedor=Proveedor::findOrFail($id);
+       $proveedor->activo=0;
+       $proveedor->update();
+       return redirect()->route('rh.proveedores.index')->with('mensaje','Se ha eliminado el proveedor');
     }
 }
