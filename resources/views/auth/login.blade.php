@@ -3,14 +3,19 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	@include('auth.diseño')
+    <link rel="stylesheet" type="text/css" href="{{asset('estilos_personalizados/login.css')}}">
+    <link rel="stylesheet" media="(max-width: 800px)"  />
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+{{--
+	@include('auth.diseño') --}}
 </head>
 <body>
 	<div class="container">
 		<section id="content">
 			<form method="POST" action="{{route('login')}}">
 				@csrf
-				<img src="images/logo.png"  width="90" height="90" align="">
+				<img src="{{asset('images/logo.png')}}"  width="90" height="90" align="">
 				<h1 align="center">Iniciar sesión</h1>
 				<div>
 					<input type="text" placeholder="Usuario" id="username" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus />

@@ -1,33 +1,29 @@
 <style>
-    @media all and (max-width: 600px){
-        div{
-            width:100%;
-            height:auto;
-            margin-left:10px;
-        }
-    }
-    @media all and (max-width: 1200px) {
-        a.menu {
-            display: inline-block;
-            padding:0px 6px;
-            margin:0px 4px;
-        }
-    }
-    @media all and (max-width: 840px) {
-        a.menu{
-            margin:0px;
-            padding:0px;
-            padding-left:5%;
-            display:block;
-            float:none;
-            text-align:left;
-        }
-    }
-    @media all and (max-width: 520px) {
-        a.menu{
-            padding-left:20%;
-        }
-    }
+   @media all and (max-width: 600px){
+    /*.contanier {
+        width:100%;
+        height:auto;
+        margin-left:10px;
+    }*/
+    .container { margin: 100px auto; position: relative; width: 900px; }
+
+}
+@media all and (max-width: 1200px){
+    .container { margin: 0px; margin-top: 800px; position: relative; width: auto; }
+     #content: { width: 800px;}
+
+}
+@media all and (max-width: 1400px){
+    .container { margin: 100px auto; position: relative; width: 900px; }
+}
+@media all and (max-width: 840px){
+    .container { margin: 0px; margin-top: 300px; position: relative; width: auto; }
+     #content: { width: 800px;}
+}
+@media all and (max-width: 520px){
+    .container { margin: 0px; margin-top: 150px; position: relative; width: auto; }
+     #content: { width: 800px;}
+}
     body {
         background:#7FB3D5 ;
         background: -moz-linear-gradient(top,  rgba(36, 113, 163,1) 0%, rgba(127, 179, 213,1) 10%);
@@ -35,6 +31,7 @@
         background: -o-linear-gradient(top,  rgba(36, 113, 163,1) 0%,rgba(127, 179, 213,1) 10%);
         background: -ms-linear-gradient(top,  rgba(36, 113, 163,1) 0%,rgba(127, 179, 213,1) 10%);
         background: linear-gradient(top,  rgba(36, 113, 163,1) 0%,rgba(127, 179, 213,1) 10%);
+      /*  background-repeat:no-repeat;*/
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2471A3', endColorstr='#7FB3D5',GradientType=0 );
         height:100vh;
     }
@@ -61,7 +58,7 @@
         clear: both;
         visibility: hidden;
     }
-    .container { margin: 100px auto; position: relative; width: 900px; }
+
     #content {
         background: #f9f9f9;
         background: -moz-linear-gradient(top,  rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);
