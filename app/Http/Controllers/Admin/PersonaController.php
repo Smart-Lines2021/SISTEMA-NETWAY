@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Estado;
 use App\Admin\Persona;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,7 +16,9 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        return "Persona";
+        $empleados = Persona::where('activo','=',1)->get();
+        return view('recursos_humanos.empleados.index',[
+            'empleados'=>$empleados]);
     }
 
     /**
@@ -25,7 +28,10 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        //
+        $estados = Estado::where('activo','=',1)->get();      
+        return view('recursos_humanos.empleados.create'
+        ,[
+            'estados'=>$estados]); 
     }
 
     /**

@@ -23,6 +23,7 @@ class CreatePersonasTable extends Migration
             $table->string('correo',80);
             $table->string('no_seguro',15);
             $table->string('carrera',30);
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }
