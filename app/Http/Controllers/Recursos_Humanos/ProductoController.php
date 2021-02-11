@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Recursos_Humanos;
 use App\Http\Controllers\Controller;
 use App\Recursos_Humanos\Producto;
 use Illuminate\Http\Request;
+use App\Admin\Marca;
+use App\Admin\CategoriaProducto;
+use App\Admin\TipoProducto;
+use App\Http\Requests\Admin\ProductoRequest;
+use Illuminate\Support\Facades\Crypt;
 
 class ProductoController extends Controller
 {
@@ -15,7 +20,9 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return "Producto";
+        $productos=Producto::where('activo','=',1)->get();
+        return view('recursos_humanos.productos.index',[
+            'productos'=>$productos]);
     }
 
     /**
@@ -25,7 +32,14 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+       $marcas=Marca::get()->all();
+       $categoriasProductos=CategoriaProducto::get()->all();
+       $tiposProductos=TipoProducto::get()->all();
+       return view('recursos_humanos.productos.create',[
+        'marcas'=>$marcas,
+        'categoriasProductos'=>$categoriasProductos,
+        'tiposProductos'=>$tiposProductos
+    ]);
     }
 
     /**
@@ -34,9 +48,10 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
-        //
+        Producto::create($request->validated());
+        return redirect()->route('rh.productos.index')->with('mensaje','Se ha registrado un producto');
     }
 
     /**
@@ -58,7 +73,10 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $producto=Producto::findOrFail($id);
+        return view('recursos_humanos.productos.edit',[
+            'producto'=>$producto]);
     }
 
     /**
@@ -68,9 +86,12 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductoRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $producto=Producto::findOrFail($id);
+        $producto->update($request->validated());
+        return redirect()->route('rh.productos.index')->with('mensaje','Se ha actualizado el producto');
     }
 
     /**
@@ -81,6 +102,10 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $id=Crypt::decryptString($id);
+       $producto=Producto::findOrFail($id);
+       $producto->activo=0;
+       $producto->update();
+       return redirect()->route('rh.productos.index')->with('mensaje','Se ha eliminado el producto');
     }
 }

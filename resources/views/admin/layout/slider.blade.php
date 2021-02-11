@@ -113,6 +113,12 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
+                    <a href="{{route('rh.productos.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Productos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
                     <a href="{{route('admin.tipo_productos.index')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tipo de Productos</p>
