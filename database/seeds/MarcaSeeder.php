@@ -29,5 +29,46 @@ class MarcaSeeder extends Seeder
         $marca->nombre = 'PowerLink';
         $marca->categoria = 'Redes';
         $marca->save();//Guardamos marca
+
+
+        $marca = new Marca; //Creamos marca
+        $marca->nombre = 'BMW';
+        $marca->categoria = 'Vehiculos';
+        $marca->save();//Guardamos marca
+
+        $marca = new Marca; //Creamos marca
+        $marca->nombre = 'Mercedes-Benz';
+        $marca->categoria = 'Vehiculos';
+        $marca->save();//Guardamos marca
+
+        $marca = new Marca; //Creamos marca
+        $marca->nombre = 'Audi';
+        $marca->categoria = 'Vehiculos';
+        $marca->save();//Guardamos marca
+
+        $marca = new Marca; //Creamos marca
+        $marca->nombre = 'Renault';
+        $marca->categoria = 'Vehiculos';
+        $marca->save();//Guardamos marca
+
+        $marca = new Marca; //Creamos marca
+        $marca->nombre = 'NISSAN';
+        $marca->categoria = 'Vehiculos';
+        $marca->save();//Guardamos marca
+
+        $marca = new Marca; //Creamos marca
+        $marca->nombre = 'FIAT';
+        $marca->categoria = 'Vehiculos';
+        $marca->save();//Guardamos marca
+
+        $marca = new Marca; //Creamos marca
+        $marca->nombre = 'FORD';
+        $marca->categoria = 'Vehiculos';
+        $marca->save();//Guardamos marca
+
+        $marca = new Marca; //Creamos marca
+        $marca->nombre = 'HONDA';
+        $marca->categoria = 'Vehiculos';
+        $marca->save();//Guardamos marca
     }
 }

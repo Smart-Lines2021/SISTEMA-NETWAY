@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoVehiculosTable extends Migration
+class CreateColoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTipoVehiculosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_vehiculos', function (Blueprint $table) {
+        Schema::create('colores', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',40);
-            $table->text('descripcion')->nullable($value = true);
-            $table->boolean('activo')->default(1);
+            $table->string("nombre");
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateTipoVehiculosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_vehiculos');
+        Schema::dropIfExists('colores');
     }
 }

@@ -35,6 +35,7 @@
                 <th>RFC</th>
                 <th>Telefono</th>
                 <th>Correo</th>
+                <th>Contacto</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -48,6 +49,7 @@
                 <td>{{$cliente->rfc}}</td>
                 <td>{{$cliente->telefono}}</td>
                 <td>{{$cliente->correo}}</td>
+                <td></td>
                 <td>
                   <center>
                     <div class="btn-group">

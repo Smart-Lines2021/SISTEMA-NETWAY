@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Departamento;
 use App\Admin\Estado;
 use App\Admin\Persona;
+use App\Admin\Cargo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -29,9 +31,14 @@ class PersonaController extends Controller
     public function create()
     {
         $estados = Estado::where('activo','=',1)->get();      
+        $departamentos = Departamento::where('activo','=',1)->get();
+        $cargos = Cargo::where('activo','=',1)->get();
         return view('recursos_humanos.empleados.create'
         ,[
-            'estados'=>$estados]); 
+            'estados'=>$estados,
+            'departamentos' => $departamentos,
+            'cargos' => $cargos
+            ]); 
     }
 
     /**

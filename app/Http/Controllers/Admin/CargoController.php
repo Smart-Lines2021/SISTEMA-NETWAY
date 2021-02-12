@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Recursos_Humanos;
+namespace App\Http\Controllers\Admin;
 
-use App\Admin\Color;
-use App\Recursos_Humanos\Vehiculo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Admin\Marca;
-use App\Admin\TipoVehiculo;
 
-
-class VehiculoController extends Controller
+class CargoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,13 +14,8 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-       
-        $vehiculos = Vehiculo::where('activo','=',1)->get();
-        return view('flotillas.vehiculos.index',
-        compact('vehiculos'));
+        
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -34,10 +24,7 @@ class VehiculoController extends Controller
      */
     public function create()
     {
-        $marcas = Marca::where('categoria', '=','Vehiculos')->where('activo','=',1)->get();
-        $tipos_vehiculos = TipoVehiculo::where('activo','=',1)->get();
-        $colores = Color::get();
-        return view('flotillas.vehiculos.create', compact('marcas','colores', 'tipos_vehiculos'));
+        //
     }
 
     /**

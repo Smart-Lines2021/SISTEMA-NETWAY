@@ -1,6 +1,6 @@
 @extends('admin.layout.layout')
 @section('title')
-<h1 class="m-0 text-dark">Alta Empleado</h1>
+<h1 class="m-0 text-dark">Alta Vehiculo</h1>
 @endsection
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
@@ -9,11 +9,12 @@
 </ol>
 @stop
 @section('content')
-<div class="container-fluid">
-    <div class="col-md-12">
+
+<div class="container-fluid-center justify-content-center"
+    <div class="col-md-8">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Nuevo Empleado</h3>
+                <h3 class="card-title">Nuevo Vehiculo</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                     </button>
@@ -22,20 +23,20 @@
             <div class="card-body" style="display: block;">
                 <form method="POST" action="{{route('admin.personas.store')}}">
                     @csrf
-                    <h4>Datos personales</h4>
+                
                     <div class="row">
 
 
-                        <div class="col-md-3 text-left-center">
+                        <div class="col-md-6 text-left-center">
                             <center>
-                                <img class="profile-user-img img-fluid img-circle" id="foto_perfil"
+                                <img class="profile-user-img img-fluid img-circle" id="foto"
                                     src="{{asset('assets/dist/img/user4-128x128.jpg')}}" alt="User profile picture">
                             </center>
                         </div>
 
-                        <div class="col-md-3 text-left-right">
+                        <div class="col-md-6 text-left-right">
                             <div class="form-group">
-                                <label for="exampleInputFile">Foto de empleado</label>
+                                <label for="exampleInputFile">Foto de Vehiculo</label>
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputFoto">
@@ -113,14 +114,7 @@
                             <div class="form-group">
                                 <label>Estado</label>
 
-                                <select class="form-control select2" id="estadoId"
-                                    data-placeholder="Selecciona un Estado" style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona un Estado</option>
-                                    @foreach ($estados as $estado)
-                                    <option value="{{$estado->nombre}}">{{$estado->nombre}} </option>
-                                    @endforeach
-
-                                </select>
+                              
                             </div>
                         </div>
 
@@ -206,10 +200,7 @@
                                 <select class="form-control select2" id="departamentos"
                                     data-placeholder="Selecciona un Departamento" style="width: 100%;">
                                     <option selected="selected" value="">Selecciona un Departamento</option>
-                                    @foreach ($departamentos as $departamento)
-                                    <option value="{{$departamento->id}}">{{$departamento->nombre}} </option>
-                                    @endforeach
-
+                                    
                                 </select>
                             </div>
                         </div>
@@ -220,9 +211,7 @@
                                 <select class="form-control select2" id="cargos" data-placeholder="Selecciona un Cargo"
                                     style="width: 100%;">
                                     <option selected="selected" value="">Selecciona un Cargo</option>
-                                    @foreach ($cargos as $cargo)
-                                    <option value="{{$cargo->id}}">{{$cargo->nombre}} </option>
-                                    @endforeach
+                                  
 
                                 </select>
                             </div>
@@ -284,7 +273,7 @@
     
     fr.onload = function(ev2) {
         console.dir(ev2);
-        $('#foto_perfil').attr('src', ev2.target.result);
+        $('#foto').attr('src', ev2.target.result);
     };
     
     fr.readAsDataURL(f);

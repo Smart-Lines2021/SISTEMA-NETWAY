@@ -19,6 +19,11 @@ class DatabaseSeeder extends Seeder
         $this->call(MarcaSeeder::class);//Ejecutamos el Seeder
         $this->call(CategoriaProductoSeeder::class);//Ejecutamos el Seeder
         $this->call(TipoProductoSeeder::class);//Ejecutamos el Seeder
+        $this->call(DepartamentoSeeder::class);//Ejecutamos el Seeder
+        $this->call(CargoSeeder::class);//Ejecutamos el Seeder
+        $this->call(TipoVehiculoSeeder::class);//Ejecutamos el Seeder
+        $this->call(CategoriaProveedorSeeder::class);//Ejecutamos el Seeder
+        $this->call(ColorSeeder::class);//Ejecutamos el Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

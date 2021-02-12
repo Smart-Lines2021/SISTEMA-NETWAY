@@ -16,7 +16,7 @@ class CreateCategoriasProveedoresTable extends Migration
         Schema::create('categorias_proveedores', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',40);
-            $table->string('descripcion',80);
+            $table->string('descripcion',80)->nullable($value = true);;
             $table->boolean('activo')->default(1);
             $table->timestamps();
         });

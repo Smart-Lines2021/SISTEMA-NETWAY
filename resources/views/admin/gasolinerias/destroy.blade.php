@@ -6,19 +6,19 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
              <div class="modal-header">
-              <h4 class="modal-title">Eliminar Gasolineria</h4>
+              <h4 class="modal-title">Eliminar Gasolinera</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
         </div>
         <div class="modal-body theme_color">
             <div class="form-group {{ $errors->has('nombre') ? 'has-error' : '' }}">
-                ¿Esta segúro que desea eliminar la Gasolineria?
+                ¿Esta segúro que desea eliminar la Gasolinera?
             </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button class="btn btn-danger">Eliminar Gasolineria</button>
+            <button class="btn btn-danger">Eliminar Gasolinera</button>
         </div>
     </div>
 </div>

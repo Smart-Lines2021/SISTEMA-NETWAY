@@ -111,32 +111,32 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('rh.productos.index')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Productos</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('admin.tipo_productos.index')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tipo de Productos</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('admin.categorias_productos.index')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Categorías de Productos</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{route('admin.marcas.index')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Marcas</p>
-                    </a>
-                  </li>
-                </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('rh.productos.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Productos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.tipo_productos.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tipo de Productos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.categorias_productos.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Categorías de Productos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.marcas.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Marcas</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -147,12 +147,6 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-             <li class="nav-item">
-              <a href="{{route('rh.proveedores.index')}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Proveedores</p>
-              </a>
-            </li>
               <li class="nav-item">
                 <a href="{{route('admin.tipo_vehiculos.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -162,7 +156,7 @@
               <li class="nav-item">
                 <a href="{{route('admin.gasolinerias.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Gasolinerias</p>
+                  <p>Gasolineras</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -179,23 +173,93 @@
       {{--Comienza--}}
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
-            <i class="fas fa-users"></i>
-            <p>
-              Recursos humanos
-                
-            </p>
+          <i class="fas fa-users"></i>
+          <p>
+            Recursos humanos
+
+          </p>
         </a>
         <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="{{route('admin.personas.index')}}" class="nav-link">
-                    <i class="fas fa-id-badge"></i>
-                    <p>Empleados</p>
-                </a>
-            </li>
-           
-         
+          <li class="nav-item">
+            <a href="{{route('admin.personas.index')}}" class="nav-link">
+              <i class="fas fa-id-badge"></i>
+              <p>Empleados</p>
+            </a>
+          </li>
+
+
         </ul>
-    </li> {{--Cierre de RH--}}
+      </li> {{--Cierre de RH--}}
+
+
+      {{--Flotillas--}}
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="fas fa-truck"></i>
+          <p>
+            Flotillas
+
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{route('rh.vehiculos.index')}}" class="nav-link">
+              <i class="fas fa-truck-moving"></i>
+              <p>
+                Vehículos
+              </p>
+            </a>
+          </li>
+
+
+        </ul>
+      </li> {{--Cierre de Flotillas--}}
+
+       {{--Proveedores--}}
+       <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="fas fa-store"></i>
+          <p>
+            Proveedores
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{route('rh.proveedores.index')}}" class="nav-link">
+              <i class="fas fa-store"></i>
+              <p>
+                Proveedores
+              </p>
+            </a>
+          </li>
+
+
+        </ul>
+      </li> {{--Cierre de clientes--}}
+
+
+       {{--Clientes--}}
+       <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="far fa-address-book"></i>
+          <p>
+            Clientes
+
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{route('rh.clientes.index')}}" class="nav-link">
+              <i class="far fa-address-book"></i>
+              <p>
+                Clientes
+              </p>
+            </a>
+          </li>
+
+
+        </ul>
+      </li> {{--Cierre de clientes--}}
 
       <li class="nav-item">
         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">

@@ -1,6 +1,6 @@
 @extends('admin.layout.layout')
 @section('title')
-<h1 class="m-0 text-dark">Gasolinerias</h1>
+<h1 class="m-0 text-dark">Gasolineras</h1>
 @endsection
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
@@ -14,9 +14,9 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Tabla de Gasolinerias</h3>
+          <h3 class="card-title">Tabla de Gasolineras</h3>
           <a class="btn btn-secondary float-right" style="color: white" data-target="#modal-create" data-toggle="modal">
-            <i class="fa fa-plus" role="button"></i> Añadir Gasolineria
+            <i class="fa fa-plus" role="button"></i> Añadir Gasolinera
           </a>
           @include('admin.gasolinerias.create')
         </div>

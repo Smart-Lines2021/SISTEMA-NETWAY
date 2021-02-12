@@ -19,9 +19,10 @@ class CreateInformacionesLaboralesTable extends Migration
             $table->foreign('persona_id')->references('id')->on('personas');
             $table->BigInteger('departamento_id')->unsigned();
             $table->foreign('departamento_id')->references('id')->on('departamentos');
-            $table->string('cargo',40);
-            $table->string('salario',10);
-            $table->string('fecha_comienzo',25);
+            $table->BigInteger('cargo_id')->unsigned();
+            $table->foreign('cargo_id')->references('id')->on('cargos');
+            $table->double('salario',8,2);
+            $table->date('fecha_comienzo');
             $table->timestamps();
         });
     }

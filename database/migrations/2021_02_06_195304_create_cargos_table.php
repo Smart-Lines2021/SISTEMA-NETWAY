@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoVehiculosTable extends Migration
+class CreateCargosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTipoVehiculosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_vehiculos', function (Blueprint $table) {
+        Schema::create('cargos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',40);
+            $table->string('nombre',80);
             $table->text('descripcion')->nullable($value = true);
             $table->boolean('activo')->default(1);
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateTipoVehiculosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_vehiculos');
+        Schema::dropIfExists('cargos');
     }
 }
