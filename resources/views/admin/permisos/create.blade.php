@@ -37,7 +37,10 @@
           <select name="category" class="form-control">
            <option value="{{old('category')}}">Seleccione una opción</option>
             <option value="Control de Usuarios" {{ old('category') == 'Control de Usuarios' ? 'selected' : '' }}>Control de Usuarios</option>
+            <option value="Recursos Humanos" {{ old('category') == 'Recursos Humanos' ? 'selected' : '' }}>Recursos Humanos</option>
             <option value="Ubicación Geográfica" {{ old('category') == 'Ubicación Geográfica' ? 'selected' : '' }}>Ubicación Geográfica</option>
+            <option value="Productos" {{ old('category') == 'Productos' ? 'selected' : '' }}>Productos</option>
+            <option value="Proveedores y Vehiculos" {{ old('category') == 'Proveedores y Vehiculos' ? 'selected' : '' }}>Proveedores y Vehiculos</option>
           </select>
         </div>
         <div class="modal-footer">

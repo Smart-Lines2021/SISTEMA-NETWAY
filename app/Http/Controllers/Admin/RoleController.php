@@ -36,9 +36,17 @@ class RoleController extends Controller
          //Aplicamos Politica de Acceso al metodo correspondiente
         $this->authorize('create',$role);
         $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
+        $permisosRecursosHumanos=Permission::where('category', 'Recursos Humanos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.roles.create',[
             'permisosControlUsuarios'=>$permisosControlUsuarios,
-            'role'=>$role]);
+            'role'=>$role,
+            'permisosRecursosHumanos'=>$permisosRecursosHumanos,
+            'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
+            'permisosProductos'=>$permisosProductos,
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
     }
 
     /**
@@ -53,10 +61,10 @@ class RoleController extends Controller
         $this->authorize('create',new Role);
         $rol=Role::create($request->validated());
         if ($request->has('permissions')) {
-           $rol->givePermissionTo($request->permissions);
-       }
-       return redirect()->route('admin.roles.index')->with('mensaje','Se ha registrado un nuevo rol');
-   }
+         $rol->givePermissionTo($request->permissions);
+     }
+     return redirect()->route('admin.roles.index')->with('mensaje','Se ha registrado un nuevo rol');
+ }
 
     /**
      * Display the specified resource.
@@ -77,15 +85,23 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-     $id= Crypt::decryptString($id);
-     $role=Role::findOrFail($id);
+       $id= Crypt::decryptString($id);
+       $role=Role::findOrFail($id);
        //Aplicamos Politica de Acceso al metodo correspondiente
-     $this->authorize('update',$role);
+       $this->authorize('update',$role);
          $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
-         return view('admin.roles.edit',[
+         $permisosRecursosHumanos=Permission::where('category', 'Recursos Humanos')->pluck('name','id'); //Clasificamos los permisos
+         $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
+         $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
+         $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
+        return view('admin.roles.edit',[
             'role'=>$role,
-            'permisosControlUsuarios'=>$permisosControlUsuarios]);
-     }
+            'permisosControlUsuarios'=>$permisosControlUsuarios,
+            'permisosRecursosHumanos'=>$permisosRecursosHumanos,
+            'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
+            'permisosProductos'=>$permisosProductos,
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -101,10 +117,10 @@ class RoleController extends Controller
         $role->update($request->validated());
         $role->permissions()->detach();
         if ($request->has('permissions')) {
-           $role->givePermissionTo($request->permissions);
-       }
-       return back()->with('mensaje','El rol fue actualizado correctamente');
-   }
+         $role->givePermissionTo($request->permissions);
+     }
+     return back()->with('mensaje','El rol fue actualizado correctamente');
+ }
 
     /**
      * Remove the specified resource from storage.
@@ -114,11 +130,11 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-       $id= Crypt::decryptString($id);
-       $rol=Role::findOrFail($id);
+     $id= Crypt::decryptString($id);
+     $rol=Role::findOrFail($id);
       //Aplicamos Politica de Acceso al metodo correspondiente
-       $this->authorize('delete',$rol);
-       $rol->delete();
-       return back()->with('mensaje','Se ha eliminado el rol');
-   }
+     $this->authorize('delete',$rol);
+     $rol->delete();
+     return back()->with('mensaje','Se ha eliminado el rol');
+ }
 }

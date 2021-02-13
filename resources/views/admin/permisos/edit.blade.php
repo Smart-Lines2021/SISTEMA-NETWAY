@@ -38,7 +38,10 @@
           <select name="category" class="form-control">
             <option value="{{old('category',$permiso->category)}}">{{old('category', $permiso->category)}}</option>
             <option value="Control de Usuarios">Control de Usuarios</option>
+            <option value="Recursos Humanos">Recursos Humanos</option>
             <option value="Ubicación Geográfica">Ubicación Geográfica</option>
+            <option value="Productos">Productos</option>
+            <option value="Proveedores y Vehiculos">Proveedores y Vehiculos</option>
           </select>
         </div>
         <div class="modal-footer">

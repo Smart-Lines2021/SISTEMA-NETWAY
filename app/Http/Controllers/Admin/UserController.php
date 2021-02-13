@@ -41,10 +41,18 @@ class UserController extends Controller
         $this->authorize('create', $usuario);
         $roles=Role::pluck('name','id');
         $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
+        $permisosRecursosHumanos=Permission::where('category', 'Recursos Humanos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.usuarios.create',[
             'usuario'=>$usuario,
             'roles'=>$roles,
-            'permisosControlUsuarios'=>$permisosControlUsuarios]);
+            'permisosControlUsuarios'=>$permisosControlUsuarios,
+            'permisosRecursosHumanos'=>$permisosRecursosHumanos,
+            'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
+            'permisosProductos'=>$permisosProductos,
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
     }
 
     /**
@@ -94,10 +102,18 @@ class UserController extends Controller
         $this->authorize('update', $usuario);
         $roles=Role::pluck('name','id');
         $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
+        $permisosRecursosHumanos=Permission::where('category', 'Recursos Humanos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.usuarios.edit',[
             'usuario'=>$usuario,
             'roles'=>$roles,
-            'permisosControlUsuarios'=>$permisosControlUsuarios]);
+            'permisosControlUsuarios'=>$permisosControlUsuarios,
+            'permisosRecursosHumanos'=>$permisosRecursosHumanos,
+            'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
+            'permisosProductos'=>$permisosProductos,
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
     }
 
     /**
