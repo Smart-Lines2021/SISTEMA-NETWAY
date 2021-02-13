@@ -64,22 +64,5 @@ class UserSeeder extends Seeder
     	$usuario->password=bcrypt('12345');
     	$usuario->save();
     	$usuario->assignRole($recursosHumanos);
-
-
-    	//Permisos Relacionados al Control de Usuarios
-    	$verUsuarios=Permission::create(['name'=>'Ver Usuarios','category'=>'Control de Usuarios']);
-    	$crearUsuarios=Permission::create(['name'=>'Crear Usuarios','category'=>'Control de Usuarios']);
-    	$actualizarUsuarios=Permission::create(['name'=>'Actualizar Usuarios','category'=>'Control de Usuarios']);
-    	$eliminarUsuarios=Permission::create(['name'=>'Eliminar Usuarios','category'=>'Control de Usuarios']);
-        $verPermisos=Permission::create(['name'=>'Ver Permisos','category'=>'Control de Usuarios']);
-        $crearPermisos=Permission::create(['name'=>'Crear Permisos','category'=>'Control de Usuarios']);
-        $actualizarPermisos=Permission::create(['name'=>'Actualizar Permisos','category'=>'Control de Usuarios']);
-        $eliminarPermisos=Permission::create(['name'=>'Eliminar Permisos','category'=>'Control de Usuarios']);
-        $verRoles=Permission::create(['name'=>'Ver Roles','category'=>'Control de Usuarios']);
-        $crearRoles=Permission::create(['name'=>'Crear Roles','category'=>'Control de Usuarios']);
-        $actualizarRoles=Permission::create(['name'=>'Actualizar Roles','category'=>'Control de Usuarios']);
-        $eliminarRoles=Permission::create(['name'=>'Eliminar Roles','category'=>'Control de Usuarios']);
-
-
     }
 }

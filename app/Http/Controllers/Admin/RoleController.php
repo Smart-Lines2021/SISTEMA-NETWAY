@@ -18,6 +18,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('view',new Role);
         $roles = Role::all();
         return view('admin.roles.index',[
             'roles'=>$roles]);
@@ -31,6 +33,8 @@ class RoleController extends Controller
     public function create()
     {
         $role=new Role;
+         //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',$role);
         $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.roles.create',[
             'permisosControlUsuarios'=>$permisosControlUsuarios,
@@ -45,6 +49,8 @@ class RoleController extends Controller
      */
     public function store(RolRequest $request)
     {
+         //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',new Role);
         $rol=Role::create($request->validated());
         if ($request->has('permissions')) {
            $rol->givePermissionTo($request->permissions);
@@ -71,8 +77,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-         $id= Crypt::decryptString($id);
-         $role=Role::findOrFail($id);
+     $id= Crypt::decryptString($id);
+     $role=Role::findOrFail($id);
+       //Aplicamos Politica de Acceso al metodo correspondiente
+     $this->authorize('update',$role);
          $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
          return view('admin.roles.edit',[
             'role'=>$role,
@@ -88,13 +96,15 @@ class RoleController extends Controller
      */
     public function update(RolRequest $request, Role $role)
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$role);
         $role->update($request->validated());
         $role->permissions()->detach();
         if ($request->has('permissions')) {
            $role->givePermissionTo($request->permissions);
        }
        return back()->with('mensaje','El rol fue actualizado correctamente');
-    }
+   }
 
     /**
      * Remove the specified resource from storage.
@@ -106,6 +116,8 @@ class RoleController extends Controller
     {
        $id= Crypt::decryptString($id);
        $rol=Role::findOrFail($id);
+      //Aplicamos Politica de Acceso al metodo correspondiente
+       $this->authorize('delete',$rol);
        $rol->delete();
        return back()->with('mensaje','Se ha eliminado el rol');
    }
