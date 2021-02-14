@@ -29,7 +29,7 @@
                         <div class="col-md-3 text-left-center">
                             <center>
                                 <img class="profile-user-img img-fluid img-circle" id="foto_perfil"
-                                    src="{{asset('assets/dist/img/user4-128x128.jpg')}}" alt="User profile picture">
+                                src="{{asset('assets/dist/img/user4-128x128.jpg')}}" alt="User profile picture">
                             </center>
                         </div>
 
@@ -38,10 +38,10 @@
                                 <label for="exampleInputFile">Foto de empleado</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputFoto">
+                                        <input type="file" class="custom-file-input" id="inputFoto" name="foto_perfil">
                                         <label class="custom-file-label" for="Foto de empleado">Elegir imagen</label>
                                     </div>
-                                  
+
                                 </div>
 
                             </div>
@@ -50,15 +50,15 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Nombre</label>
-                                <input type="text" name="name" value="{{old('nombre')}}" class="form-control">
+                                <label for="nombre">Nombre</label>
+                                <input type="text"  value="{{old('nombre')}}" class="form-control" name="nombre">
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Apellidos</label>
-                                <input type="text" name="name" value="{{old('apellidos')}}" class="form-control">
+                                <label for="apellido">Apellidos</label>
+                                <input type="text"  value="{{old('apellido')}}" class="form-control" name="apellido">
                             </div>
                             <!-- /.form-group -->
                         </div>
@@ -67,22 +67,22 @@
                     <div class="row">
                         <div class="col-md-3 text-left-center">
                             <div class="form-group">
-                                <label>CURP</label>
-                                <input type="text" name="name" value="{{old('curp')}}" class="form-control">
+                                <label for="curp">CURP</label>
+                                <input type="text" name="curp" value="{{old('curp')}}" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>RFC</label>
-                                <input type="text" name="name" value="{{old('rfc')}}" class="form-control">
+                                <label for="rfc">RFC</label>
+                                <input type="text" name="rfc" value="{{old('rfc')}}" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Correo electrónico</label>
-                                <input type="text" name="name" value="{{old('correo')}}" class="form-control">
+                                <label for="correo">Correo electrónico</label>
+                                <input type="email" name="correo" value="{{old('correo')}}" class="form-control">
                             </div>
                             <!-- /.form-group -->
                         </div>
@@ -91,15 +91,15 @@
                     <div class="row">
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
-                                <label>NSS</label>
-                                <input type="text" name="name" value="{{old('curp')}}" class="form-control">
+                                <label for="nss">NSS</label>
+                                <input type="text" name="nss" value="{{old('nss')}}" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Carrera</label>
-                                <input type="text" name="name" value="{{old('rfc')}}" class="form-control">
+                                <label for="carrera">Carrera</label>
+                                <input type="text" name="carrera" value="{{old('carrera')}}" class="form-control">
                             </div>
                         </div>
 
@@ -111,146 +111,144 @@
                     <div class="row">
                         <div class="col-md-4 text-left-center">
                             <div class="form-group">
-                                <label>Estado</label>
+                                <label for="estado">Estado</label>
 
                                 <select class="form-control select2" id="estadoId"
-                                    data-placeholder="Selecciona un Estado" style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona un Estado</option>
-                                    @foreach ($estados as $estado)
-                                    <option value="{{$estado->nombre}}">{{$estado->nombre}} </option>
-                                    @endforeach
+                                data-placeholder="Seleccione un Estado" style="width: 100%;" name="estado">
+                                <option selected="selected" value="">Seleccione un Estado</option>
+                                @foreach ($estados as $estado)
+                                <option value="{{$estado->nombre}}">{{$estado->nombre}} </option>
+                                @endforeach
 
-                                </select>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Municipio</label>
-                                <select class="select2" id="municipios" data-placeholder="Selecciona un Municipio"
-                                    style="width: 100%;">
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Código postal</label>
-                                <select class="select2" id="codigos_postales"
-                                    data-placeholder="Selecciona un Codigo Postal" style="width: 100%;">
-
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Colonias</label>
-                                <select class="select2" id="colonias" data-placeholder="Selecciona una colonia"
-                                    style="width: 100%;">
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Calle</label>
-                                <input type="text" name="name" value="{{old('nombre')}}" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Número exterior</label>
-                                <input type="text" name="name" value="{{old('nombre')}}" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Número interior</label>
-                                <input type="text" name="name" value="{{old('nombre')}}" class="form-control">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <h4>Informacion laboral</h4>
-
-                    <div class="row">
-                        <div class="col-md-3 text-left-center">
-                            <div class="form-group">
-                                <label>Fecha de ingreso laboral:</label>
-                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
-                                        data-target="#reservationdate" />
-                                    <div class="input-group-append" data-target="#reservationdate"
-                                        data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 text-left-center">
-
-                            <div class="form-group">
-                                <label>Departamento</label>
-
-                                <select class="form-control select2" id="departamentos"
-                                    data-placeholder="Selecciona un Departamento" style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona un Departamento</option>
-                                    @foreach ($departamentos as $departamento)
-                                    <option value="{{$departamento->id}}">{{$departamento->nombre}} </option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 text-left-center">
-                            <div class="form-group">
-                                <label>Salario</label>
-                                <select class="form-control select2" id="cargos" data-placeholder="Selecciona un Cargo"
-                                    style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona un Cargo</option>
-                                    @foreach ($cargos as $cargo)
-                                    <option value="{{$cargo->id}}">{{$cargo->nombre}} </option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Carrera</label>
-                                <input type="text" name="name" value="{{old('rfc')}}" class="form-control">
-                            </div>
+                            </select>
                         </div>
                     </div>
 
 
 
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="municipio">Municipio</label>
+                            <select class="select2" id="municipios" data-placeholder="Seleccione un Municipio"
+                            style="width: 100%;" name="municipio">
 
+                        </select>
+                    </div>
+                </div>
 
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="codigo_postal">Código postal</label>
+                        <select class="select2" id="codigos_postales"
+                        data-placeholder="Seleccione un Codigo Postal" style="width: 100%;" name="codigo_postal">
 
+                    </select>
+                </div>
             </div>
-
-
         </div>
 
+        <div class="row">
 
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="colonia">Colonias</label>
+                    <select class="select2" id="colonias" data-placeholder="Seleccione una colonia"
+                    style="width: 100%;" name="colonia">
 
-        </form>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="calle">Calle</label>
+                <input type="text"  value="{{old('calle')}}" class="form-control" name="calle">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="numero_exterior">Número exterior</label>
+                <input type="text"  value="{{old('numero_exterior')}}" class="form-control" name="numero_exterior">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="numero_interior">Número interior</label>
+                <input type="text"  value="{{old('numero_interior')}}" class="form-control" name="numero_interior">
+            </div>
+        </div>
 
     </div>
+
+    <h4>Informacion laboral</h4>
+
+    <div class="row">
+        <div class="col-md-3 text-left-center">
+            <div class="form-group">
+                <label for="fecha_ingreso">Fecha de ingreso laboral:</label>
+                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input"
+                    data-target="#reservationdate" name="fecha_ingreso" />
+                    <div class="input-group-append" data-target="#reservationdate"
+                    data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 text-left-center">
+
+        <div class="form-group">
+            <label for="departamento">Departamento</label>
+
+            <select class="form-control select2" id="departamentos"
+            data-placeholder="Seleccione un Departamento" style="width: 100%;" name="departamento">
+            <option selected="selected" value="">Seleccione un Departamento</option>
+            @foreach ($departamentos as $departamento)
+            <option value="{{$departamento->id}}">{{$departamento->nombre}} </option>
+            @endforeach
+
+        </select>
+    </div>
+</div>
+
+<div class="col-md-3 text-left-center">
+    <div class="form-group">
+        <label for="cargo">Cargo</label>
+        <select class="form-control select2" id="cargos" data-placeholder="Seleccione un Cargo"
+        style="width: 100%;" name="salario">
+        <option selected="selected" value="">Seleccione un Cargo</option>
+        @foreach ($cargos as $cargo)
+        <option value="{{$cargo->id}}">{{$cargo->nombre}} </option>
+        @endforeach
+
+    </select>
+</div>
+</div>
+
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="salario">Salario</label>
+        <input type="text"  value="{{old('salario')}}" class="form-control" name="salario">
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+</div>
+
+<button class="btn btn-info btn-block">Añadir Empleado</button>
+</div>
+
+</form>
+
+</div>
 </div>
 </div>
 </div>
@@ -271,23 +269,23 @@
 <script>
     $(function () {
     //Initialize Select2 Elements
-        $('.select2').select2()
-        $('#reservationdate').datetimepicker({
-            format: 'L'
-        });
-    })
+    $('.select2').select2()
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+})
 
 
     $('#inputFoto').on('change', function(ev) {
-    var f = ev.target.files[0];
-    var fr = new FileReader();
-    
-    fr.onload = function(ev2) {
-        console.dir(ev2);
-        $('#foto_perfil').attr('src', ev2.target.result);
-    };
-    
-    fr.readAsDataURL(f);
+        var f = ev.target.files[0];
+        var fr = new FileReader();
+
+        fr.onload = function(ev2) {
+            console.dir(ev2);
+            $('#foto_perfil').attr('src', ev2.target.result);
+        };
+
+        fr.readAsDataURL(f);
     });
 
     $(document).ready(function () {

@@ -30,7 +30,7 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        $estados = Estado::where('activo','=',1)->get();      
+        $estados = Estado::where('activo','=',1)->get();
         $departamentos = Departamento::where('activo','=',1)->get();
         $cargos = Cargo::where('activo','=',1)->get();
         return view('recursos_humanos.empleados.create'
@@ -38,7 +38,7 @@ class PersonaController extends Controller
             'estados'=>$estados,
             'departamentos' => $departamentos,
             'cargos' => $cargos
-            ]); 
+            ]);
     }
 
     /**
@@ -49,7 +49,7 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
