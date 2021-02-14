@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="card-body" style="display: block;">
-                <form method="POST" action="{{route('rh.vehiculos.store')}}">
+                <form method="POST" action="{{route('rh.vehiculos.store')}}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
@@ -167,12 +167,12 @@
     $('#inputFoto').on('change', function(ev) {
     var f = ev.target.files[0];
     var fr = new FileReader();
-    
+
     fr.onload = function(ev2) {
         console.dir(ev2);
         $('#foto_vehiculo').attr('src', ev2.target.result);
     };
-    
+
     fr.readAsDataURL(f);
     });
 

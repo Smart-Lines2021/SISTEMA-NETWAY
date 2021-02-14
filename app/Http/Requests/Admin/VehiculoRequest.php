@@ -28,7 +28,7 @@ class VehiculoRequest extends FormRequest
            'nombre' => 'required|string|max:40',
            'anio_modelo' => 'required|numeric',
            'kilometraje' => 'required|numeric',
-           'placa' => 'required|regex:[[A-Z 0-9]+]|max:30',
+           'placa' => 'required|regex:[[A-Z 0-9]+]|max:30',/*|unique:vehiculos*/
            'color' => 'required|integer',
            'no_serie' => 'required|regex:[[A-Z 0-9]+]|max:30',
            'marca_id' => 'required|integer',
@@ -49,6 +49,7 @@ class VehiculoRequest extends FormRequest
             'placa.required' => 'Es necesario ingresar la placa del vehículo',
             'placa.regex' => 'Solo se permiten numeros y letras en la placa del vehículo',
             'placa.max' => 'Solo se permiten 30 caracteres en la placa del vehiculo',
+            'placa.unique' => 'Un vehiculo ya ha sido registrado con esta placa',
             'color.required' => 'Es necesario seleccionar el color del vehículo',
             'no_serie.required' => 'Es necesario ingresar el número de serie del vehículo',
             'no_serie.regex' => 'Solo se permiten numeros y letras en el número de serie del vehículo',

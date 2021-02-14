@@ -20,15 +20,20 @@
                 </div>
             </div>
             <div class="card-body" style="display: block;">
-                <form method="POST" action="{{route('rh.vehiculos.update',Crypt::encryptString($vehiculo->id))}}">
+                <form method="POST" action="{{route('rh.vehiculos.update',Crypt::encryptString($vehiculo->id))}}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     @csrf
                     <div class="row">
                         <div class="col-md-4 text-left-center">
                             <center>
+                                @if($vehiculo->foto_vehiculo !== 'avatar_vehiculo.png')
                                 <img class="profile-user-img img-fluid img-circle" id="foto_vehiculo"
+                                    src="{{Storage::url($vehiculo->foto_vehiculo)}}" alt="User profile picture">
+                                @else
+                                    <img class="profile-user-img img-fluid img-circle" id="foto_vehiculo"
                                     src="{{ asset('images/avatar_vehiculo.png') }}" alt="User profile picture">
+                                @endif
                             </center>
                         </div>
 
@@ -168,12 +173,12 @@
     $('#inputFoto').on('change', function(ev) {
     var f = ev.target.files[0];
     var fr = new FileReader();
-    
+
     fr.onload = function(ev2) {
         console.dir(ev2);
         $('#foto_vehiculo').attr('src', ev2.target.result);
     };
-    
+
     fr.readAsDataURL(f);
     });
 
