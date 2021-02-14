@@ -15,9 +15,9 @@ class CreateVehiculosTable extends Migration
     {
         Schema::create('vehiculos', function (Blueprint $table) {
             $table->id();
+            $table->string('foto_vehiculo')->default('avatar_vehiculo.png');
             $table->string('nombre',40);
-            $table->string('modelo',30);
-            $table->integer('año');
+            $table->integer('anio_modelo');
             $table->double('kilometraje')->default(0.00);
             $table->string('placa',30);
             $table->string('color',30);
