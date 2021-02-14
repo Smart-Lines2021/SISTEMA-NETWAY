@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Admin\CategoriaProducto;
+use App\Admin\CategoriaProveedor;
+use App\Policies\Admin\CategoriaProductoPolicy;
+use App\Policies\Admin\CategoriaProveedorPolicy;
 use App\Policies\Admin\PermissionPolicy;
 use App\Policies\Admin\RolePolicy;
 use App\Policies\Admin\UserPolicy;
@@ -22,6 +26,8 @@ class AuthServiceProvider extends ServiceProvider
          User::class => UserPolicy::class, //Asociamos el modelo a la politica de acceso
          Permission::class => PermissionPolicy::class, //Asociamos el modelo a la politica de acceso
          Role::class => RolePolicy::class, //Asociamos el modelo a la politica de acceso
+         CategoriaProducto::class => CategoriaProductoPolicy::class, //Asociamos el modelo a la politica de acceso
+         CategoriaProveedor::class => CategoriaProveedorPolicy::class, //Asociamos el modelo a la politica de acceso
     ];
 
     /**
