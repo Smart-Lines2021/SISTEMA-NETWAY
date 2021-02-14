@@ -28,8 +28,12 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Modelo</th>
+                <th>Kilometraje</th>
                 <th>Placa</th>
                 <th>Color</th>
+                <th>Número de serie</th>
+                <th>Marca</th>
+                <th>Tipo de vehículo</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -38,9 +42,13 @@
               <tr>
                 <td>{{$vehiculo->id}}</td>
                 <td>{{$vehiculo->nombre}}</td>
-                <td>{{$vehiculo->modelo}}</td>
+                <td>{{$vehiculo->anio_modelo}}</td>
+                <td>{{$vehiculo->kilometraje}}</td>
                 <td>{{$vehiculo->placa}}</td>
-                <td>{{$vehiculo->color}}</td>
+                <td>{{$vehiculo->colorVehiculo->nombre}}</td>
+                <td>{{$vehiculo->no_serie}}</td>
+                <td>{{$vehiculo->marca->nombre}}</td>
+                <td>{{$vehiculo->tipoVehiculo->nombre}}</td>
                 <td>
                   <center>
                   <div class="btn-group">
@@ -49,7 +57,7 @@
                       <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" role="menu">
-                      <a class="dropdown-item" href="{{route('admin.vehiculos.edit',Crypt::encryptString($vehiculo->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
+                      <a class="dropdown-item" href="{{route('rh.vehiculos.edit',Crypt::encryptString($vehiculo->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" data-target="#modal-destroy-{{$vehiculo->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
                       <div class="dropdown-divider"></div>
@@ -58,7 +66,7 @@
                   </center>
                 </td>
               </tr>
-              @include('admin.vehiculos.destroy')
+              @include('flotillas.vehiculos.destroy')
               @endforeach
             </tbody>
           </table>
