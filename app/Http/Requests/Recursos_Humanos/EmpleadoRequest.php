@@ -31,17 +31,17 @@ class EmpleadoRequest extends FormRequest
             'rfc'=> ['required',Rule::unique('personas'),'regex:[[A-Z][0-9]+]','max:13'],
             'correo'=> ['required','email'],
             'nss'=> ['required','numeric','max:99999999999'],
-            'carrera'=> ['required','regex:/^[\pL\s]+$/u','max:40'],
+            'carrera'=> ['required','regex:/^[\pL\s]+$/u','max:30'],
         ];
         if($this->method() === 'PUT'){ //Si es para actualizar
         $rules = [
             'nombre'=> ['required','min:1','max:40','regex:/^[\pL\s]+$/u'],
             'apellido'=> ['required','min:1','max:40','regex:/^[\pL\s]+$/u'],
-            'curp'=> ['required',Rule::unique('personas')->ignore($this->route('persona')->id)],
-            'rfc'=> ['required',Rule::unique('personas')->ignore($this->route('persona')->id)],
+            'curp'=> ['required',Rule::unique('personas')->ignore($this->route('persona'))],
+            'rfc'=> ['required',Rule::unique('personas')->ignore($this->route('persona'))],
             'correo'=> ['required','email'],
             'nss'=> ['required','numeric','max:99999999999'],
-            'carrera'=> ['required','regex:/^[\pL\s]+$/u'],
+            'carrera'=> ['required','regex:/^[\pL\s]+$/u','max:30'],
         ];
 
     }
@@ -60,6 +60,8 @@ class EmpleadoRequest extends FormRequest
             'curp.regex' => 'La CURP solo debe tener mayusculas y numeros',
             'curp.min' => 'La CURP debe tener al menos 18 caracteres',
             'curp.max' => 'La CURP no debe de tener mas de 20 caracteres',
+            'curp.unique' => 'Lo sentimos ya has registrado un empleado con esta CURP',
+            'rfc.unique' => 'Lo sentimos ya has registrado un empleado con este RFC',
             'rfc.required' => 'Es necesario ingresar el RFC',
             'rfc.regex' => 'El RFC solo debe tener mayusculas y numeros',
             'rfc.min' => 'El RFC debe tener al menos 12 caracteres',
@@ -68,9 +70,10 @@ class EmpleadoRequest extends FormRequest
             'correo.email'=>'Es necesario ingresar el correo del empleado',
             'nss.required'=>'Es necesario ingresar el número de seguridad social',
             'nss.numeric'=>'El número de seguridad social debe ser de tipo numerico',
-            'nss.max'=>'El número de seguridad social no debe exceder los 11 caracteres',
+            'nss.max'=>'El número de seguridad social no debe exceder los 8 caracteres',
             'carrera.required'=>'Es necesario ingresar la carrera del empleado',
             'carrera.regex'=>'La carrera solamente debe incluir letras',
+            'carrera.max'=>'La carrera solamente debe menos de 30 caracteres',
         ];
     }
 }
