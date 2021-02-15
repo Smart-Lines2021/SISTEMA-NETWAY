@@ -58,7 +58,7 @@
                   </center>
                 </td>
               </tr>
-              @include('admin.empleados.destroy')
+             {{--  @include('admin.empleados.destroy') --}}
               @endforeach
             </tbody>
           </table>

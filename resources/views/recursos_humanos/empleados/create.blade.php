@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="card-body" style="display: block;">
-                <form method="POST" action="{{route('admin.personas.store')}}">
+                <form method="POST" action="{{route('admin.personas.store')}}" enctype="multipart/form-data">
                     @csrf
                     <h4>Datos personales</h4>
                     <div class="row">
@@ -29,7 +29,7 @@
                         <div class="col-md-3 text-left-center">
                             <center>
                                 <img class="profile-user-img img-fluid img-circle" id="foto_perfil"
-                                src="{{asset('assets/dist/img/user4-128x128.jpg')}}" alt="User profile picture">
+                                src="{{asset('images/empleados.jpg')}}" alt="User profile picture">
                             </center>
                         </div>
 
@@ -189,11 +189,12 @@
             <div class="form-group">
                 <label for="fecha_ingreso">Fecha de ingreso laboral:</label>
                 <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                    <input type="text" class="form-control datetimepicker-input"
-                    data-target="#reservationdate" name="fecha_ingreso" />
+                   {{--  <input type="text" class="form-control datetimepicker-input"
+                    data-target="#reservationdate" name="fecha_ingreso" /> --}}
+                    <input type="date" name="fecha_ingreso" class="form-control">
                     <div class="input-group-append" data-target="#reservationdate"
                     data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    {{-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> --}}
                 </div>
             </div>
         </div>
@@ -204,7 +205,7 @@
             <label for="departamento">Departamento</label>
 
             <select class="form-control select2" id="departamentos"
-            data-placeholder="Seleccione un Departamento" style="width: 100%;" name="departamento">
+            data-placeholder="Seleccione un Departamento" style="width: 100%;" name="departamento_id">
             <option selected="selected" value="">Seleccione un Departamento</option>
             @foreach ($departamentos as $departamento)
             <option value="{{$departamento->id}}">{{$departamento->nombre}} </option>
@@ -218,7 +219,7 @@
     <div class="form-group">
         <label for="cargo">Cargo</label>
         <select class="form-control select2" id="cargos" data-placeholder="Seleccione un Cargo"
-        style="width: 100%;" name="salario">
+        style="width: 100%;" name="cargo_id">
         <option selected="selected" value="">Seleccione un Cargo</option>
         @foreach ($cargos as $cargo)
         <option value="{{$cargo->id}}">{{$cargo->nombre}} </option>
