@@ -41,7 +41,7 @@
                                         <input type="file" class="custom-file-input" id="inputFoto">
                                         <label class="custom-file-label" for="Foto de empleado">Elegir imagen</label>
                                     </div>
-                                  
+
                                 </div>
 
                             </div>
@@ -82,7 +82,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Correo electrónico</label>
-                                <input type="text" name="name" value="{{old('correo')}}" class="form-control">
+                                <input type="email" name="name" value="{{old('correo')}}" class="form-control">
                             </div>
                             <!-- /.form-group -->
                         </div>
@@ -92,14 +92,14 @@
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label>NSS</label>
-                                <input type="text" name="name" value="{{old('curp')}}" class="form-control">
+                                <input type="text" name="name" value="{{old('no_seguro')}}" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Carrera</label>
-                                <input type="text" name="name" value="{{old('rfc')}}" class="form-control">
+                                <input type="text" name="name" value="{{old('carrera')}}" class="form-control">
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@
                             <div class="form-group">
                                 <label>Estado</label>
 
-                                <select class="form-control select2" id="estadoId"
+                                <select class="form-control select2" id="estadoId" name="estado_id"
                                     data-placeholder="Selecciona un Estado" style="width: 100%;">
                                     <option selected="selected" value="">Selecciona un Estado</option>
                                     @foreach ($estados as $estado)
@@ -129,8 +129,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Municipio</label>
-                                <select class="select2" id="municipios" data-placeholder="Selecciona un Municipio"
-                                    style="width: 100%;">
+                                <select class="select2" id="municipios" name="nombre_municipio"
+                                    data-placeholder="Selecciona un Municipio" style="width: 100%;">
 
                                 </select>
                             </div>
@@ -140,7 +140,8 @@
                             <div class="form-group">
                                 <label>Código postal</label>
                                 <select class="select2" id="codigos_postales"
-                                    data-placeholder="Selecciona un Codigo Postal" style="width: 100%;">
+                                    data-placeholder="Selecciona un Codigo Postal" name="codigo_postal"
+                                    style="width: 100%;">
 
                                 </select>
                             </div>
@@ -152,8 +153,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Colonias</label>
-                                <select class="select2" id="colonias" data-placeholder="Selecciona una colonia"
-                                    style="width: 100%;">
+                                <select class="select2" id="colonias" name="colonia"
+                                    data-placeholder="Selecciona una colonia" style="width: 100%;">
 
                                 </select>
                             </div>
@@ -162,14 +163,14 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Calle</label>
-                                <input type="text" name="name" value="{{old('nombre')}}" class="form-control">
+                                <input type="text" name="name" value="{{old('calle')}}" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Número exterior</label>
-                                <input type="text" name="name" value="{{old('nombre')}}" class="form-control">
+                                <input type="text" name="name" value="{{old('')}}" class="form-control">
                             </div>
                         </div>
 
@@ -190,8 +191,8 @@
                                 <label>Fecha de ingreso laboral:</label>
                                 <div class="input-group date" id="reservationdate" data-target-input="nearest">
                                     <input type="text" class="form-control datetimepicker-input"
-                                        data-target="#reservationdate" />
-                                    <div class="input-group-append" data-target="#reservationdate"
+                                        data-target="#fecha_comienzo" />
+                                    <div class="input-group-append" data-target="#fecha_comienzo"
                                         data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -204,7 +205,8 @@
                                 <label>Departamento</label>
 
                                 <select class="form-control select2" id="departamentos"
-                                    data-placeholder="Selecciona un Departamento" style="width: 100%;">
+                                    data-placeholder="Selecciona un Departamento" name="departamento_id"
+                                    style="width: 100%;">
                                     <option selected="selected" value="">Selecciona un Departamento</option>
                                     @foreach ($departamentos as $departamento)
                                     <option value="{{$departamento->id}}">{{$departamento->nombre}} </option>
@@ -216,9 +218,9 @@
 
                         <div class="col-md-3 text-left-center">
                             <div class="form-group">
-                                <label>Salario</label>
-                                <select class="form-control select2" id="cargos" data-placeholder="Selecciona un Cargo"
-                                    style="width: 100%;">
+                                <label>Cargo</label>
+                                <select class="form-control select2" name="cargo_id" id="cargos"
+                                    data-placeholder="Selecciona un Cargo" style="width: 100%;">
                                     <option selected="selected" value="">Selecciona un Cargo</option>
                                     @foreach ($cargos as $cargo)
                                     <option value="{{$cargo->id}}">{{$cargo->nombre}} </option>
@@ -230,8 +232,9 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Carrera</label>
-                                <input type="text" name="name" value="{{old('rfc')}}" class="form-control">
+                                <label>Salario</label>
+                                <input type="text" onkeypress=" return soloNumeros(event);" name="salario"
+                                    value="{{old('salario')}}" class="form-control input-numeral">
                             </div>
                         </div>
                     </div>
@@ -263,8 +266,10 @@
 @endpush
 @push('scripts')
 {{-- Incluimos js de select2 --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
 <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+<script src="{{asset('js/auxiliar_input.js')}}"></script>
 @include('auxiliares.scripts-design-datetime')
 
 <script src="{{asset('js/api_sepomex.js')}}"></script>
@@ -272,7 +277,7 @@
     $(function () {
     //Initialize Select2 Elements
         $('.select2').select2()
-        $('#reservationdate').datetimepicker({
+        $('#fecha_comienzo').datetimepicker({
             format: 'L'
         });
     })
@@ -293,6 +298,13 @@
     $(document).ready(function () {
         bsCustomFileInput.init();
     });
+
+   
+    var cleaveNumeral = new Cleave('.input-numeral', {
+    numeral: true,
+    numeralThousandsGroupStyle: 'thousand'
+    });
+
 </script>
 
 

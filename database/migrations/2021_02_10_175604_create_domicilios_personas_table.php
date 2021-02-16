@@ -17,8 +17,7 @@ class CreateDomiciliosPersonasTable extends Migration
             $table->id();
             $table->string('calle',40);
             $table->string('colonia',40);
-            $table->string('numero',5);
-            $table->BigInteger('pais_id')->unsigned();
+            $table->BigInteger('pais_id')->unsigned()->default(117);;
             $table->foreign('pais_id')->references('id')->on('paises');
             $table->BigInteger('estado_id')->unsigned();
             $table->foreign('estado_id')->references('id')->on('estados');
@@ -27,6 +26,8 @@ class CreateDomiciliosPersonasTable extends Migration
             $table->BigInteger('persona_id')->unsigned();
             $table->foreign('persona_id')->references('id')->on('personas');
             $table->boolean('activo')->default(1);
+            $table->string('numero_exterior',5);
+            $table->string('numero_interior',5);
             $table->timestamps();
         });
     }

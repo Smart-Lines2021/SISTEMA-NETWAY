@@ -17,7 +17,7 @@ class CreateVehiculosTable extends Migration
             $table->id();
             $table->string('nombre',40);
             $table->string('modelo',30);
-            $table->integer('año');
+            $table->yea('año');
             $table->double('kilometraje')->default(0.00);
             $table->string('placa',30);
             $table->string('color',30);

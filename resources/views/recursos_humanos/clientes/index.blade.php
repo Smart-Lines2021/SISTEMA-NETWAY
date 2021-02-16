@@ -49,7 +49,7 @@
                 <td>{{$cliente->rfc}}</td>
                 <td>{{$cliente->telefono}}</td>
                 <td>{{$cliente->correo}}</td>
-                <td></td>
+                <td>   <button type="button" class="btn btn-block btn-primary">Contacto</button></td>
                 <td>
                   <center>
                     <div class="btn-group">

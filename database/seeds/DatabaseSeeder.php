@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoVehiculoSeeder::class);//Ejecutamos el Seeder
         $this->call(CategoriaProveedorSeeder::class);//Ejecutamos el Seeder
         $this->call(ColorSeeder::class);//Ejecutamos el Seeder
+        $this->call(TipoServicioVehiculo::class);//Ejecutamos el Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

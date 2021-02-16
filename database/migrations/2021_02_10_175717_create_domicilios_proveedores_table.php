@@ -18,7 +18,7 @@ class CreateDomiciliosProveedoresTable extends Migration
             $table->string('calle',40);
             $table->string('colonia',40);
             $table->string('numero',5);
-            $table->BigInteger('pais_id')->unsigned();
+            $table->BigInteger('pais_id')->unsigned()->default(117);;
             $table->foreign('pais_id')->references('id')->on('paises');
             $table->BigInteger('estado_id')->unsigned();
             $table->foreign('estado_id')->references('id')->on('estados');
