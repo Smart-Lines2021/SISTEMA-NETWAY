@@ -32,9 +32,9 @@ class ProductoController extends Controller
      */
     public function create()
     {
-       $marcas=Marca::get()->all();
-       $categoriasProductos=CategoriaProducto::get()->all();
-       $tiposProductos=TipoProducto::get()->all();
+       $marcas=Marca::where('activo','=',1)->where('categoria','!=','Vehiculos')->get();
+       $categoriasProductos=CategoriaProducto::where('activo','=',1)->get();
+       $tiposProductos=TipoProducto::where('activo','=',1)->get();
        return view('recursos_humanos.productos.create',[
         'marcas'=>$marcas,
         'categoriasProductos'=>$categoriasProductos,
