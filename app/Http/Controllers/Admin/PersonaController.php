@@ -103,6 +103,10 @@ class PersonaController extends Controller
     }
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $persona=Persona::findOrFail($id);
+        $persona->activo=0;
+        $persona->update();
+        return back()->with('mensaje','Se ha eliminado al empleado');
     }
 }
