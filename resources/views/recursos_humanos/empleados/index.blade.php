@@ -53,6 +53,8 @@
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" data-target="#modal-destroy-{{$empleado->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
                       <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="{{route('admin.personas.show',Crypt::encryptString($empleado->id))}}"><i class="fas fa-user-edit"></i> Cargar Documentos</a>
+                      <div class="dropdown-divider"></div>
                     </div>
                   </div>
                   </center>

@@ -29,6 +29,17 @@ class PersonaController extends Controller
         return view('recursos_humanos.empleados.index',[
             'empleados'=>$empleados]);
     }
+    public function show($id)
+    {
+        $id=Crypt::decryptString($id);
+        $persona=Persona::findOrFail($id);
+        $domicilio=$persona->domiciliosPersonas->last();
+        $informacionLaboral=$persona->informacionesLaborales->last();
+        return view('recursos_humanos.documentos.cargar_documentos',[
+            'persona'=>$persona,
+            'domicilio'=>$domicilio,
+            'informacionLaboral'=>$informacionLaboral]);
+    }
 
     /**
      * Show the form for creating a new resource.
