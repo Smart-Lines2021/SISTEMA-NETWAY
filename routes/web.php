@@ -52,3 +52,17 @@ Route::resource('administracion/roles','Admin\RoleController')->parameters(['rol
 Route::resource('administracion/permisos','Admin\PermissionController')->parameters(['permiso'=>'permiso'])->names('admin.permisos');
 Route::put('administracion/usuarios/{usuario}/roles','Admin\UserRoleController@update')->name('admin.usuarios.roles.update');
 Route::put('administracion/usuarios/{usuario}/permisos','Admin\UserPermissionController@update')->name('admin.usuarios.permisos.update');
+
+
+//Rutas relacionadas a la subida/control de documentos
+//SUBIR INE
+Route::post('documentos/{persona_id}/constancias_seguros', 'Documentos\ConstanciaSeguroController@store')->name('documentos.constancias_seguros.store');
+/*Route::get('solicitudes/ines/{persona_id}/show', 'Solicitante\IdentificacionOficialController@show')->name('solicitudes.ines.show');
+Route::put('solicitudes/ines/{persona_id}/update', 'Solicitante\IdentificacionOficialController@update')->name('solicitudes.ines.update');*/
+Route::post('documentos/{persona_id}/ines', 'Documentos\IdentificacionOficialController@store')->name('documentos.ines.store');
+
+Route::post('documentos/{persona_id}/curps', 'Documentos\CurpController@store')->name('documentos.curps.store');
+
+Route::post('documentos/{persona_id}/certificados_alturas', 'Documentos\CertificadoAlturaController@store')->name('documentos.certificados_alturas.store');
+
+Route::post('documentos/{persona_id}/pcr', 'Documentos\PcrController@store')->name('documentos.pcr.store');

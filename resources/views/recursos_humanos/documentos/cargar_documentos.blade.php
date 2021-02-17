@@ -234,32 +234,32 @@
   								<h3 class="timeline-header">Subir Documentos de <a href="#">{{$persona->nombre}}</a></h3>
 
   								<div class="timeline-body">
-
+  									<div class="dropzone"  id="actaNacimiento2" style="display: none"></div>
   									<div class="row">
   										<div class="col-lg-4 col-6">
   											<label>Constancia del Seguro</label>
-  											<div class="dropzone" id="testimonial"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarTestimonial();">Subir</a>
+  											<div class="dropzone" id="constanciaSeguro"></div>
+  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarConstanciaSeguro();">Subir</a>
   										</div>
   										<div class="col-lg-4 col-6">
   											<label>Credencial INE</label>
   											<div class="dropzone" id="testimonial"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarTestimonial();">Subir</a>
+  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" {{-- onclick="enviarTestimonial();" --}}>Subir</a>
   										</div>
   										<div class="col-lg-4 col-6">
   											<label>Curp</label>
   											<div class="dropzone" id="testimonial"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarTestimonial();">Subir</a>
+  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" {{-- onclick="enviarTestimonial();" --}}>Subir</a>
   										</div>
   										<div class="col-lg-4 col-6">
   											<label>Certificados de Altura</label>
   											<div class="dropzone" id="testimonial"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarTestimonial();">Subir</a>
+  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" {{-- onclick="enviarTestimonial();" --}}>Subir</a>
   										</div>
   										<div class="col-lg-4 col-6">
   											<label>PCR</label>
   											<div class="dropzone" id="testimonial"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarTestimonial();">Subir</a>
+  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" {{-- onclick="enviarTestimonial();" --}}>Subir</a>
   										</div>
   									</div>
 
@@ -336,7 +336,33 @@
 </section>
 @endsection
 @push('styles')
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
-
+@endpush
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"> </script>
+<script type="text/javascript">
+//Enviar Constancia de Seguro
+function enviarConstanciaSeguro(){
+	var myDropzone = new Dropzone("#constanciaSeguro", {
+		url: '/documentos/{{$persona->id}}/constancias_seguros',
+		acceptedFiles: 'image/*,.pdf',
+		maxFiles: 1,
+		addRemoveLinks: false,
+		maxFilesize: 1,
+		paramName: 'constanciaSeguro',
+		headers: {
+			'X-CSRF-TOKEN': '{{ csrf_token() }}'
+		},
+		dictDefaultMessage: 'Arrastre la constancia del seguro para subirla',
+		dictFileTooBig: 'El archivo es mayor a 1MB, por favor suba uno mas ligero',
+		dictInvalidFileType: 'Solamente se permite subir archivos de tipo imagen y pdf',
+		dictMaxFilesExceeded: 'Solamente puedes subir un archivo',
+	});
+	myDropzone.on('error', function(file, res){
+		var msg = "La " + res.errors.identificacion[0];
+		$('.dz-error-message:last > span').text(msg);
+	});
+	Dropzone.autoDiscover = false;
+}
+</script>
 @endpush
