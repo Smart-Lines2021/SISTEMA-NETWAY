@@ -65,4 +65,4 @@ Route::post('documentos/{persona_id}/curps', 'Documentos\CurpController@store')-
 
 Route::post('documentos/{persona_id}/certificados_alturas', 'Documentos\CertificadoAlturaController@store')->name('documentos.certificados_alturas.store');
 
-Route::post('documentos/{persona_id}/pcr', 'Documentos\PcrController@store')->name('documentos.pcr.store');
+Route::post('documentos/{persona_id}/pcrs', 'Documentos\PcrController@store')->name('documentos.pcr.store');
