@@ -26,6 +26,7 @@ Route::resource('administracion/categorias_productos','Admin\CategoriaProductoCo
 Route::resource('administracion/gasolinerias','Admin\GasolineriaController')->parameters(['gasolineria'=>'gasolineria'])->names('admin.gasolinerias');
 Route::resource('administracion/marcas','Admin\MarcaController')->parameters(['marca'=>'marca'])->names('admin.marcas');
 Route::resource('administracion/colores','Admin\ColorController')->parameters(['color'=>'color'])->names('admin.colores');
+Route::resource('administracion/cargos','Admin\CargoController')->parameters(['cargo'=>'cargo'])->names('admin.cargos');
 
 //Para el perfil
 Route::resource('perfil/personas','Admin\PersonaController')->parameters(['persona'=>'persona'])->names('admin.personas');

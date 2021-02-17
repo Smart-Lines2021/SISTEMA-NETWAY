@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Cargo;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CargoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class CargoController extends Controller
 {
@@ -14,7 +17,9 @@ class CargoController extends Controller
      */
     public function index()
     {
-        
+        $cargos=Cargo::where('activo','=',1)->get();
+        return view('admin.cargos.index',[
+            'cargos'=>$cargos]);
     }
 
     /**
@@ -33,9 +38,10 @@ class CargoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CargoRequest $request)
     {
-        //
+        $cargo=Cargo::create($request->validated());
+        return back()->with('mensaje','Se ha añadido un nuevo cargo');
     }
 
     /**
@@ -67,9 +73,12 @@ class CargoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CargoRequest $request, $id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $cargo=Cargo::findOrFail($id);
+        $cargo->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el cargo');
     }
 
     /**
@@ -80,6 +89,10 @@ class CargoController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $id= Crypt::decryptString($id);
+       $cargo=Cargo::findOrFail($id);
+       $cargo->activo=0;
+       $cargo->update();
+       return back()->with('mensaje','Se ha eliminado el cargo');
     }
 }
