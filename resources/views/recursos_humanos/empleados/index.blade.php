@@ -49,16 +49,18 @@
                       <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" role="menu">
-                      <a class="dropdown-item" href="{{route('admin.usuarios.edit',Crypt::encryptString($empleado->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
+                      <a class="dropdown-item" href="{{route('admin.personas.edit',Crypt::encryptString($empleado->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" data-target="#modal-destroy-{{$empleado->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
+                      <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="{{route('admin.personas.show',Crypt::encryptString($empleado->id))}}"><i class="fas fa-user-edit"></i> Cargar Documentos</a>
                       <div class="dropdown-divider"></div>
                     </div>
                   </div>
                   </center>
                 </td>
               </tr>
-              @include('admin.empleados.destroy')
+              @include('recursos_humanos.empleados.destroy')
               @endforeach
             </tbody>
           </table>

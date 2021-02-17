@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="card-body" style="display: block;">
-                <form method="POST" action="{{route('admin.personas.store')}}">
+                <form method="POST" action="{{route('admin.personas.store')}}" enctype="multipart/form-data">
                     @csrf
                     <h4>Datos personales</h4>
                     <div class="row">
@@ -29,7 +29,7 @@
                         <div class="col-md-3 text-left-center">
                             <center>
                                 <img class="profile-user-img img-fluid img-circle" id="foto_perfil"
-                                    src="{{asset('assets/dist/img/user4-128x128.jpg')}}" alt="User profile picture">
+                                src="{{asset('images/empleados.jpg')}}" alt="User profile picture">
                             </center>
                         </div>
 
@@ -38,7 +38,7 @@
                                 <label for="exampleInputFile">Foto de empleado</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputFoto">
+                                        <input type="file" class="custom-file-input" id="inputFoto" name="foto_perfil">
                                         <label class="custom-file-label" for="Foto de empleado">Elegir imagen</label>
                                     </div>
 
@@ -50,15 +50,15 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Nombre</label>
-                                <input type="text" name="name" value="{{old('nombre')}}" class="form-control">
+                                <label for="nombre">Nombre</label>
+                                <input type="text"  value="{{old('nombre')}}" class="form-control" name="nombre" minlength="2" maxlength="25" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,25}" title="Solamente se aceptan letras. Tamaño mínimo: 2. Tamaño máximo: 25." placeholder="Ingrese el nombre del empleado">
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Apellidos</label>
-                                <input type="text" name="name" value="{{old('apellidos')}}" class="form-control">
+                                <label for="apellido">Apellidos</label>
+                                <input type="text"  value="{{old('apellido')}}" class="form-control" name="apellido" minlength="2" maxlength="40" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,40}" title="Solamente se aceptan letras. Tamaño mínimo: 2. Tamaño máximo: 40." placeholder="Ingrese el apellido del empleado">
                             </div>
                             <!-- /.form-group -->
                         </div>
@@ -67,39 +67,56 @@
                     <div class="row">
                         <div class="col-md-3 text-left-center">
                             <div class="form-group">
-                                <label>CURP</label>
-                                <input type="text" name="name" value="{{old('curp')}}" class="form-control">
+                                <label for="curp">CURP</label>
+                                <input type="text" name="curp" value="{{old('curp')}}" class="form-control" minlength="18" maxlength="18"
+                                required pattern="([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)" placeholder="Ingrese la CURP del empleado" title="El formato debe ser como en la credencial.">
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>RFC</label>
-                                <input type="text" name="name" value="{{old('rfc')}}" class="form-control">
+                                <label for="rfc">RFC</label>
+                                <input type="text" name="rfc" value="{{old('rfc')}}" class="form-control" required
+                                pattern="([A-Z,Ñ,&]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\d]{3})"
+                                min="12" max="13" placeholder="Ingrese el RFC del empleado" title="El formato debe ser como en el Registro Federal de Contribuyentes.">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
+<<<<<<< HEAD
                                 <label>Correo electrónico</label>
                                 <input type="email" name="name" value="{{old('correo')}}" class="form-control">
+=======
+                                <label for="correo">Correo electrónico</label>
+                                <input type="email" name="correo" value="{{old('correo')}}" class="form-control" required placeholder="Ingrese el correo electronico del empleado">
+>>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
                             </div>
-                            <!-- /.form-group -->
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
+<<<<<<< HEAD
                                 <label>NSS</label>
                                 <input type="text" name="name" value="{{old('no_seguro')}}" class="form-control">
+=======
+                                <label for="nss">NSS</label>
+                                <input type="text" name="nss" value="{{old('nss')}}" class="form-control" minlength="8" maxlength="8" required pattern="[0-9]{8,8}" title="Solamente se aceptan números. Tamaño mínimo: 8. Tamaño máximo: 8." placeholder="Ingrese el NSS del empleado">
+>>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
+<<<<<<< HEAD
                                 <label>Carrera</label>
                                 <input type="text" name="name" value="{{old('carrera')}}" class="form-control">
+=======
+                                <label for="carrera">Carrera</label>
+                                <input type="text" name="carrera" value="{{old('carrera')}}" class="form-control" minlength="2" maxlength="30" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,30}" title="Solamente se aceptan letras. Tamaño mínimo: 2. Tamaño máximo: 30." placeholder="Ingrese la escolaridad del empleado">
+>>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
                             </div>
                         </div>
 
@@ -111,8 +128,9 @@
                     <div class="row">
                         <div class="col-md-4 text-left-center">
                             <div class="form-group">
-                                <label>Estado</label>
+                                <label for="estado">Estado</label>
 
+<<<<<<< HEAD
                                 <select class="form-control select2" id="estadoId" name="estado_id"
                                     data-placeholder="Selecciona un Estado" style="width: 100%;">
                                     <option selected="selected" value="">Selecciona un Estado</option>
@@ -155,11 +173,22 @@
                                 <label>Colonias</label>
                                 <select class="select2" id="colonias" name="colonia"
                                     data-placeholder="Selecciona una colonia" style="width: 100%;">
+=======
+                                <select class="form-control select2" id="estadoId"
+                                data-placeholder="Seleccione un Estado" style="width: 100%;" name="estado" required>
+                                <option selected="selected" value="">Seleccione un Estado</option>
+                                @foreach ($estados as $estado)
+                                <option {{ old('estado') == $estado->nombre ? "selected" : "" }} value="{{$estado->nombre}}">{{$estado->nombre}} </option>
+                                @endforeach
 
-                                </select>
-                            </div>
+                            </select>
                         </div>
+                    </div>
 
+>>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
+
+
+<<<<<<< HEAD
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Calle</label>
@@ -173,18 +202,62 @@
                                 <input type="text" name="name" value="{{old('')}}" class="form-control">
                             </div>
                         </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Número interior</label>
-                                <input type="text" name="name" value="{{old('nombre')}}" class="form-control">
-                            </div>
-                        </div>
-
+=======
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="municipio">Municipio</label>
+                            <select class="select2" id="municipios" data-placeholder="Seleccione un Municipio"
+                            style="width: 100%;" name="municipio" required>
+                            @if($errors->any())
+                            <option {{old('municipio')}}>{{old('municipio')}}</option>
+                            @endif
+                        </select>
                     </div>
+                </div>
 
-                    <h4>Informacion laboral</h4>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="codigo_postal">Código postal</label>
+                        <select class="select2" id="codigos_postales"
+                        data-placeholder="Seleccione un Codigo Postal" style="width: 100%;" name="codigo_postal" required>
+                        @if($errors->any())
+                        <option {{old('codigo_postal')}}>{{old('codigo_postal')}}</option>
+                        @endif
+                    </select>
+                </div>
+            </div>
+        </div>
+>>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="colonia">Colonias</label>
+                    <select class="select2" id="colonias" data-placeholder="Seleccione una colonia"
+                    style="width: 100%;" name="colonia" required>
+                    @if($errors->any())
+                    <option {{old('colonia')}}>{{old('colonia')}}</option>
+                    @endif
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="calle">Calle</label>
+                <input type="text"  value="{{old('calle')}}" class="form-control" name="calle" minlength="2" maxlength="40" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,40}" title="Solamente se aceptan letras. Tamaño mínimo: 2. Tamaño máximo: 40." placeholder="Ingrese la calle del domicilio del empleado">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="numero_exterior">Número exterior</label>
+                <input type="text"  value="{{old('numero_exterior')}}" class="form-control" name="numero_exterior" minlength="1" maxlength="5" required pattern="[0-9]{1,5}" title="Solamente se aceptan números. Tamaño mínimo: 1. Tamaño máximo: 5." placeholder="Ingrese número exterior del domicilio">
+            </div>
+        </div>
+
+<<<<<<< HEAD
                     <div class="row">
                         <div class="col-md-3 text-left-center">
                             <div class="form-group">
@@ -200,10 +273,18 @@
                             </div>
                         </div>
                         <div class="col-md-3 text-left-center">
+=======
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="numero_interior">Número interior</label>
+                <input type="text"  value="{{old('numero_interior')}}" class="form-control" name="numero_interior" minlength="1" maxlength="5" required pattern="[0-9]{1,5}" title="Solamente se aceptan números. Tamaño mínimo: 1. Tamaño máximo: 5." placeholder="Ingrese número interior del domicilio">
+            </div>
+        </div>
+>>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
-                            <div class="form-group">
-                                <label>Departamento</label>
+    </div>
 
+<<<<<<< HEAD
                                 <select class="form-control select2" id="departamentos"
                                     data-placeholder="Selecciona un Departamento" name="departamento_id"
                                     style="width: 100%;">
@@ -211,11 +292,20 @@
                                     @foreach ($departamentos as $departamento)
                                     <option value="{{$departamento->id}}">{{$departamento->nombre}} </option>
                                     @endforeach
+=======
+    <h4>Informacion laboral</h4>
+>>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
-                                </select>
-                            </div>
-                        </div>
+    <div class="row">
+        <div class="col-md-3 text-left-center">
+            <div class="form-group">
+                <label for="fecha_ingreso">Fecha de ingreso laboral:</label>
+                <input value="{{old('fecha_ingreso')}}" type="date" name="fecha_ingreso" class="form-control" required>
+            </div>
+        </div>
+        <div class="col-md-3 text-left-center">
 
+<<<<<<< HEAD
                         <div class="col-md-3 text-left-center">
                             <div class="form-group">
                                 <label>Cargo</label>
@@ -238,22 +328,57 @@
                             </div>
                         </div>
                     </div>
+=======
+            <div class="form-group">
+                <label for="departamento_id">Departamento</label>
 
+                <select class="form-control select2" id="departamentos"
+                data-placeholder="Seleccione un Departamento" style="width: 100%;" name="departamento_id" required>
+                <option selected="selected" value="">Seleccione un Departamento</option>
+                @foreach ($departamentos as $departamento)
+                <option {{ old('departamento_id') == $departamento->id ? "selected" : "" }}  value="{{$departamento->id}}">{{$departamento->nombre}} </option>
+                @endforeach
+>>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
-
-
-
-
-            </div>
-
-
+            </select>
         </div>
-
-
-
-        </form>
-
     </div>
+
+    <div class="col-md-3 text-left-center">
+        <div class="form-group">
+            <label for="cargo_id">Cargo</label>
+            <select class="form-control select2" id="cargos" data-placeholder="Seleccione un Cargo"
+            style="width: 100%;" name="cargo_id" required>
+            <option selected="selected" value="">Seleccione un Cargo</option>
+            @foreach ($cargos as $cargo)
+            <option {{ old('cargo_id') == $cargo->id ? "selected" : "" }} value="{{$cargo->id}}">{{$cargo->nombre}} </option>
+            @endforeach
+
+        </select>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="form-group">
+        <label for="salario">Salario</label>
+        <input type="text"  value="{{old('salario')}}" class="form-control" name="salario" minlength="1" maxlength="5" required pattern="[0-9]{1,5}" title="Solamente se aceptan números. Tamaño mínimo: 1. Tamaño máximo: 5." placeholder="Ingrese el monto del salario del empleado">
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+</div>
+
+<button class="btn btn-info btn-block">Añadir Empleado</button>
+</div>
+
+</form>
+
+</div>
 </div>
 </div>
 </div>
@@ -276,23 +401,31 @@
 <script>
     $(function () {
     //Initialize Select2 Elements
+<<<<<<< HEAD
         $('.select2').select2()
         $('#fecha_comienzo').datetimepicker({
             format: 'L'
         });
     })
+=======
+    $('.select2').select2()
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+})
+>>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
 
     $('#inputFoto').on('change', function(ev) {
-    var f = ev.target.files[0];
-    var fr = new FileReader();
-    
-    fr.onload = function(ev2) {
-        console.dir(ev2);
-        $('#foto_perfil').attr('src', ev2.target.result);
-    };
-    
-    fr.readAsDataURL(f);
+        var f = ev.target.files[0];
+        var fr = new FileReader();
+
+        fr.onload = function(ev2) {
+            console.dir(ev2);
+            $('#foto_perfil').attr('src', ev2.target.result);
+        };
+
+        fr.readAsDataURL(f);
     });
 
     $(document).ready(function () {

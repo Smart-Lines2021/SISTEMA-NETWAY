@@ -1,6 +1,6 @@
 @extends('admin.layout.layout')
 @section('title')
-<h1 class="m-0 text-dark">Crear Proveedor</h1>
+<h1 class="m-0 text-dark">Crear Vehículo</h1>
 @endsection
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
@@ -13,77 +13,71 @@
     <div class="col-md-8">
         <div class="card card-info">
             <div class="card-header">
-                <h3 class="card-title">Nuevo Vehiculo</h3>
+                <h3 class="card-title">Nuevo Vehículo</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                     </button>
                 </div>
             </div>
             <div class="card-body" style="display: block;">
-                <form method="POST" action="{{route('rh.vehiculos.store')}}">
+                <form method="POST" action="{{route('rh.vehiculos.store')}}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
                         <div class="col-md-4 text-left-center">
                             <center>
-                                <img class="profile-user-img img-fluid img-circle" id="foto"
-                                    src="{{asset('assets/dist/img/user4-128x128.jpg')}}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" id="foto_vehiculo"
+                                    src="{{ asset('images/avatar_vehiculo.png') }}" alt="User profile picture">
                             </center>
                         </div>
 
                         <div class="col-md-8 text-left">
                             <div class="form-group">
-                                <label for="exampleInputFile">Foto de Vehiculo</label>
+                                <label for="foto_vehiculo">Foto del Vehículo</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputFoto">
-                                        <label class="custom-file-label" for="Foto de empleado">Elegir imagen</label>
+                                        <input type="file" name="foto_vehiculo" value="{{old('foto_vehiculo')}}" class="custom-file-input" id="inputFoto">
+                                        <label class="custom-file-label" for="foto_vehiculo">Elegir imagen</label>
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
-                                <label for="no_proveedor">Modelo de vehiculo:</label>
-                                <input type="text" name="no_proveedor" value="{{old('no_proveedor')}}"
-                                    class="form-control" placeholder="Ingrese el modelo de vehiculo" required
-                                    minlegth="1" maxlength="10"
-                                    title="Solo se permiten numeros. Tamaño mínimo: 1. Tamaño máximo: 10">
+                                <label for="nombre">Nombre del vehículo: </label>
+                                <input type="text" name="nombre" value="{{old('nombre')}}" class="form-control" placeholder="Ingrese el nombre del vehículo" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,40}" minlegth="2" maxlength="40" title="Solo se permiten letras. Tamaño mínimo: 2. Tamaño máximo: 40">
                             </div>
                         </div>
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
-                                <label for="no_proveedor">Año del vehiculo:</label>
-                                <input type="number" name="no_proveedor" value="{{old('no_proveedor')}}"
-                                    class="form-control" placeholder="Ingrese año del vehiculo" required pattern="[0-9]"
-                                    minlegth="1" maxlength="10"
-                                    title="Solo se permiten numeros. Tamaño mínimo: 1. Tamaño máximo: 10">
+                                <label for="anio_modelo">Año del modelo del vehiculo:</label>
+                                <input type="number" name="anio_modelo" value="{{old('anio_modelo')}}"
+                                class="form-control" placeholder="Ingrese año del vehiculo" required pattern="[0-9]"
+                                minlegth="2" maxlength="4"
+                                title="Solo se permiten numeros. Tamaño mínimo: 2. Tamaño máximo: 4. Ejemplo: 1998">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 text-left-center">
-                            <div class="form-group">
-                                <label for="no_proveedor">Kilometraje:</label>
-                                <input type="text" name="no_proveedor" value="{{old('no_proveedor')}}"
-                                    class="form-control" placeholder="Ingrese el modelo de vehiculo" required
-                                    minlegth="1" maxlength="10"
-                                    title="Solo se permiten numeros. Tamaño mínimo: 1. Tamaño máximo: 10">
+                             <div class="form-group">
+                                <label for="kilometraje">Kilometraje:</label>
+                                <input type="number" name="kilometraje" value="{{old('kilometraje')}}"
+                                class="form-control" placeholder="Ingrese el kilometraje del vehiculo (km ó mi)" required pattern="[0-9]"
+                                minlegth="1" maxlength="10"
+                                title="Solo se permiten numeros. Tamaño mínimo: 1. Tamaño máximo: 10. Ejemplo: 15000">
                             </div>
                         </div>
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
-                                <label for="no_proveedor">Placa:</label>
-                                <input type="number" name="no_proveedor" value="{{old('no_proveedor')}}"
-                                    class="form-control" placeholder="Ingrese placa del vehiculo" required pattern="[0-9]"
-                                    minlegth="1" maxlength="10"
-                                    title="Solo se permiten numeros. Tamaño mínimo: 1. Tamaño máximo: 10">
+                                <label for="placa">Placa:</label>
+                                <input type="text" name="placa" value="{{old('placa')}}"
+                                    class="form-control" placeholder="Ingrese la placa del vehículo"required pattern="[A-Z 1-9]+"
+                                    minlegth="1" maxlength="30"
+                                    title="Solo se permiten numeros y letras. Tamaño mínimo: 1. Tamaño máximo: 30">
                             </div>
                         </div>
                     </div>
@@ -92,25 +86,22 @@
 
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
-                                <label>Color</label>
-
-                                <select class="form-control select2" id="departamentos"
-                                    data-placeholder="Selecciona un Departamento" style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona un color</option>
+                                <label for="color">Color:</label>
+                                <select id="color" name="color" class="form-control select2" required title="Por favor, seleccione el color del vehículo.">
+                                    <option value="">Seleccione un color</option>
                                     @foreach ($colores as $color)
-                                    <option value="{{$color->id}}">{{$color->nombre}} </option>
+                                    <option value="{{ $color->id }}" {{ old('color') == $color->id ? 'selected' : '' }}>{{ $color->nombre }}</option>
                                     @endforeach
-
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
-                                <label for="no_proveedor">Número de serie:</label>
-                                <input type="text" name="no_proveedor" value="{{old('no_proveedor')}}"
-                                    class="form-control" placeholder="Ingrese número de serie de vehiculo" required
-                                    minlegth="1" maxlength="10"
-                                    title="Solo se permiten numeros. Tamaño mínimo: 1. Tamaño máximo: 10">
+                                <label for="no_serie">Número de serie:</label>
+                                <input type="text" name="no_serie" value="{{old('no_serie')}}"
+                                    class="form-control" placeholder="Ingrese el número de serie del vehículo"required pattern="[A-Z 1-9]+"
+                                    minlegth="1" maxlength="30"
+                                    title="Solo se permiten numeros y letras. Tamaño mínimo: 1. Tamaño máximo: 30">
                             </div>
                         </div>
 
@@ -120,41 +111,28 @@
 
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
-                                <label>Marca</label>
-
-                                <select class="form-control select2" id="departamentos"
-                                    data-placeholder="Selecciona un tipo de vehiculo" style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona marca</option>
+                                <label for="marca_id">Marca:</label>
+                                <select id="marca_id" name="marca_id" class="form-control select2" required title="Por favor, seleccione la marca del vehículo.">
+                                    <option value="">Seleccione una marca</option>
                                     @foreach ($marcas as $marca)
-                                    <option value="{{$marca->id}}">{{$marca->nombre}} </option>
+                                    <option value="{{ $marca->id }}" {{ old('marca_id') == $marca->id ? 'selected' : '' }}>{{ $marca->nombre }}</option>
                                     @endforeach
-
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
-                                <label>Tipos de vehiculos </label>
-
-                                <select class="form-control select2" id="departamentos"
-                                    data-placeholder="Selecciona un Departamento" style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona tipo de vehiculo</option>
+                                <label for="tipo_vehiculo_id">Tipo de vehículo:</label>
+                                <select id="tipo_vehiculo_id" name="tipo_vehiculo_id" class="form-control select2" required title="Por favor, seleccione el tipo del vehículo.">
+                                    <option value="">Seleccione un tipo</option>
                                     @foreach ($tipos_vehiculos as $tipo_vehiculo)
-                                    <option value="{{$tipo_vehiculo->id}}">{{$tipo_vehiculo->nombre}} </option>
+                                    <option value="{{ $tipo_vehiculo->id }}" {{ old('tipo_vehiculo_id') == $tipo_vehiculo->id ? 'selected' : '' }}>{{ $tipo_vehiculo->nombre }}</option>
                                     @endforeach
-
                                 </select>
                             </div>
                         </div>
-
-
                     </div>
-
-
-
-
-
                     <button class="btn btn-info btn-block">Crear Vehiculo</button>
                 </form>
             </div>
@@ -189,12 +167,12 @@
     $('#inputFoto').on('change', function(ev) {
     var f = ev.target.files[0];
     var fr = new FileReader();
-    
+
     fr.onload = function(ev2) {
         console.dir(ev2);
-        $('#foto').attr('src', ev2.target.result);
+        $('#foto_vehiculo').attr('src', ev2.target.result);
     };
-    
+
     fr.readAsDataURL(f);
     });
 
@@ -203,8 +181,5 @@
     });
 </script>
 
-
-
-
-
 @endpush
+

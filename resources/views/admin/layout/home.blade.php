@@ -17,7 +17,7 @@
             <span class="info-box-icon bg-warning"><i class="far fa-money-bill-alt"></i></span>
 
             <div class="info-box-content ">
-                <span class="info-box-text">1 dólar estadounidense Es igual a</span>
+                <span class="info-box-text">1 dólar es igual a</span>
             <span class="info-box-number">{{$precioDelDolar}}</span> <span class="info-box-text"> peso mexicano</span>
             </div>
             <!-- /.info-box-content -->

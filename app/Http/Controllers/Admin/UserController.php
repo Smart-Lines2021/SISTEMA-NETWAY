@@ -22,6 +22,8 @@ class UserController extends Controller
     }
     public function index()
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('view',new User);
         $usuarios = User::where('activo','=',1)->get();
         return view('admin.usuarios.index',[
             'usuarios'=>$usuarios]);
@@ -35,12 +37,22 @@ class UserController extends Controller
     public function create()
     {
         $usuario=new User;
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create', $usuario);
         $roles=Role::pluck('name','id');
         $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
+        $permisosRecursosHumanos=Permission::where('category', 'Recursos Humanos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.usuarios.create',[
             'usuario'=>$usuario,
             'roles'=>$roles,
-            'permisosControlUsuarios'=>$permisosControlUsuarios]);
+            'permisosControlUsuarios'=>$permisosControlUsuarios,
+            'permisosRecursosHumanos'=>$permisosRecursosHumanos,
+            'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
+            'permisosProductos'=>$permisosProductos,
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
     }
 
     /**
@@ -51,6 +63,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create', new User);
         $usuario = User::create($request->validated());
         //asignamos roles
         if ($request->filled('roles')) {
@@ -84,12 +98,22 @@ class UserController extends Controller
     {
         $id= Crypt::decryptString($id);
         $usuario=User::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update', $usuario);
         $roles=Role::pluck('name','id');
         $permisosControlUsuarios=Permission::where('category', 'Control de Usuarios')->pluck('name','id'); //Clasificamos los permisos
+        $permisosRecursosHumanos=Permission::where('category', 'Recursos Humanos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.usuarios.edit',[
             'usuario'=>$usuario,
             'roles'=>$roles,
-            'permisosControlUsuarios'=>$permisosControlUsuarios]);
+            'permisosControlUsuarios'=>$permisosControlUsuarios,
+            'permisosRecursosHumanos'=>$permisosRecursosHumanos,
+            'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
+            'permisosProductos'=>$permisosProductos,
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
     }
 
     /**
@@ -101,6 +125,8 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $usuario)
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update', $usuario);
         $usuario->update($request->validated());
         return back()->with('mensaje','Se ha Actualizado el usuario');
     }
@@ -115,6 +141,8 @@ class UserController extends Controller
     {
         $id= Crypt::decryptString($id);
         $usuario=User::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('delete', $usuario);
         $usuario->activo=0;
         $usuario->update();
         return back()->with('mensaje','Se ha eliminado al usuario');

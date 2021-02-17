@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Crypt;
 
 class ProductoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+      $this->middleware('auth');
+  }
     public function index()
     {
+         //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('view',new Producto);
         $productos=Producto::where('activo','=',1)->get();
         return view('recursos_humanos.productos.index',[
             'productos'=>$productos]);
@@ -32,78 +32,49 @@ class ProductoController extends Controller
      */
     public function create()
     {
-       $marcas=Marca::get()->all();
-       $categoriasProductos=CategoriaProducto::get()->all();
-       $tiposProductos=TipoProducto::get()->all();
+       //Aplicamos Politica de Acceso al metodo correspondiente
+       $this->authorize('create',new Producto);
+       $marcas=Marca::where('activo','=',1)->where('categoria','!=','Vehiculos')->get();
+       $categoriasProductos=CategoriaProducto::where('activo','=',1)->get();
+       $tiposProductos=TipoProducto::where('activo','=',1)->get();
        return view('recursos_humanos.productos.create',[
         'marcas'=>$marcas,
         'categoriasProductos'=>$categoriasProductos,
         'tiposProductos'=>$tiposProductos
     ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ProductoRequest $request)
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',new Producto);
         Producto::create($request->validated());
         return redirect()->route('rh.productos.index')->with('mensaje','Se ha registrado un producto');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $id=Crypt::decryptString($id);
         $producto=Producto::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$producto);
         return view('recursos_humanos.productos.edit',[
             'producto'=>$producto]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ProductoRequest $request, $id)
     {
         $id=Crypt::decryptString($id);
         $producto=Producto::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$producto);
         $producto->update($request->validated());
         return redirect()->route('rh.productos.index')->with('mensaje','Se ha actualizado el producto');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
        $id=Crypt::decryptString($id);
        $producto=Producto::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+       $this->authorize('delete',$producto);
        $producto->activo=0;
        $producto->update();
        return redirect()->route('rh.productos.index')->with('mensaje','Se ha eliminado el producto');

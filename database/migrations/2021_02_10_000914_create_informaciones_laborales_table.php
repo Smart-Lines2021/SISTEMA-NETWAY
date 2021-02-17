@@ -22,7 +22,7 @@ class CreateInformacionesLaboralesTable extends Migration
             $table->BigInteger('cargo_id')->unsigned();
             $table->foreign('cargo_id')->references('id')->on('cargos');
             $table->double('salario',8,2);
-            $table->date('fecha_comienzo');
+            $table->date('fecha_ingreso');
             $table->timestamps();
         });
     }

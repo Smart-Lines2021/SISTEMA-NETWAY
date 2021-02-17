@@ -16,8 +16,13 @@ class EstadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function __construct(){
+      $this->middleware('auth');
+  }
+  public function index()
+  {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('view',new Estado);
         $paises = Pais::orderBy(DB::raw('FIELD(nombre, "México")'),'desc')->where('activo','=',1)->get(); //Mandamos primero México
         $estados=Estado::where('activo','=',1)->get();
         return view('admin.estados.index',[
@@ -26,6 +31,8 @@ class EstadoController extends Controller
     }
     public function store(EstadoRequest $request)
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',new Estado);
         $estado=Estado::create($request->validated());
         return back()->with('mensaje','Se ha añadido un nuevo estado');
     }
@@ -34,6 +41,8 @@ class EstadoController extends Controller
     {
         $id=Crypt::decryptString($id);
         $estado=Estado::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$estado);
         $estado->update($request->validated());
         return back()->with('mensaje','Se ha actualizado el Estado');
     }
@@ -48,6 +57,8 @@ class EstadoController extends Controller
     {
         $id=Crypt::decryptString($id);
         $estado=Estado::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('delete',$estado);
         $estado->activo=0;
         $estado->update();
         return back()->with('mensaje','Se ha eliminado el pais');

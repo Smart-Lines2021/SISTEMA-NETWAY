@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Admin\Color;
-use App\Recursos_Humanos\Vehiculo;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Admin\Marca;
 use App\Admin\TipoVehiculo;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\VehiculoRequest;
+use App\Recursos_Humanos\Vehiculo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 
 
 class VehiculoController extends Controller
@@ -19,7 +22,7 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-       
+
         $vehiculos = Vehiculo::where('activo','=',1)->get();
         return view('flotillas.vehiculos.index',
         compact('vehiculos'));
@@ -46,9 +49,14 @@ class VehiculoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VehiculoRequest $request)
     {
-        //
+        $vehiculo=Vehiculo::create($request->validated());
+        if ($request->hasFile('foto_vehiculo')) {
+        $vehiculo->foto_vehiculo=$request->file('foto_vehiculo')->store('public/vehiculos/'.$vehiculo->placa."/");//Guarda la imagen en la carpeta storage/app/public, y el link o ubicacion de la imagen se guarda a foto_vehiculo y a su vez se guarda en la variable $persona
+    }
+        $vehiculo->save();//Se guradan los datos en la BD.
+        return redirect()->route('rh.vehiculos.index')->with('mensaje','Se ha registrado un vehículo');
     }
 
     /**
@@ -70,7 +78,10 @@ class VehiculoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $vehiculo=Vehiculo::findOrFail($id);
+        return view('flotillas.vehiculos.edit',[
+            'vehiculo'=>$vehiculo]);
     }
 
     /**
@@ -80,9 +91,16 @@ class VehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VehiculoRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $vehiculo=Vehiculo::findOrFail($id);
+        if ($request->hasFile('foto_vehiculo')) {
+        Storage::delete($vehiculo->foto_vehiculo);
+        $vehiculo->foto_vehiculo=$request->file('foto_vehiculo')->store('public/vehiculos/'.$vehiculo->placa."/");//Guarda la imagen en la carpeta storage/app/public, y el link o ubicacion de la imagen se guarda a foto_vehiculo y a su vez se guarda en la variable $persona
+    }
+    $vehiculo->update($request->validated());
+        return redirect()->route('rh.vehiculos.index')->with('mensaje','Se ha actualizado el vehículo');
     }
 
     /**
@@ -93,6 +111,10 @@ class VehiculoController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $id=Crypt::decryptString($id);
+       $vehiculo=Vehiculo::findOrFail($id);
+       $vehiculo->activo=0;
+       $vehiculo->update();
+       return redirect()->route('rh.vehiculos.index')->with('mensaje','Se ha eliminado el vehículo');
     }
 }
