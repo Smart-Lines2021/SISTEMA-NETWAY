@@ -25,8 +25,6 @@ class CreateDomiciliosPersonasTable extends Migration
             $table->BigInteger('persona_id')->unsigned();
             $table->foreign('persona_id')->references('id')->on('personas');
             $table->boolean('activo')->default(1);
-            $table->string('numero_exterior',5);
-            $table->string('numero_interior',5);
             $table->timestamps();
         });
     }
