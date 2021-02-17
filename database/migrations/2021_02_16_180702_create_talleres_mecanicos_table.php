@@ -16,7 +16,8 @@ class CreateTalleresMecanicosTable extends Migration
         Schema::create('talleres_mecanicos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',120);
-            $table->string('telefono',15)->nullable($value=true);;
+            $table->string('telefono',15)->nullable($value=true);
+            $table->string('telefono',15)->nullable($value=true);
             $table->text('direccion')->nullable($value=true);;
             $table->string('persona_contacto')->nullable($value=true);
             $table->string('correo_electronico')->nullable($value=true);

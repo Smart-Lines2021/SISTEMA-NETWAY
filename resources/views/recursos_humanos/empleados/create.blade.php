@@ -84,13 +84,8 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-<<<<<<< HEAD
-                                <label>Correo electrónico</label>
-                                <input type="email" name="name" value="{{old('correo')}}" class="form-control">
-=======
                                 <label for="correo">Correo electrónico</label>
                                 <input type="email" name="correo" value="{{old('correo')}}" class="form-control" required placeholder="Ingrese el correo electronico del empleado">
->>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
                             </div>
                         </div>
                     </div>
@@ -98,25 +93,15 @@
                     <div class="row">
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
-<<<<<<< HEAD
-                                <label>NSS</label>
-                                <input type="text" name="name" value="{{old('no_seguro')}}" class="form-control">
-=======
                                 <label for="nss">NSS</label>
                                 <input type="text" name="nss" value="{{old('nss')}}" class="form-control" minlength="8" maxlength="8" required pattern="[0-9]{8,8}" title="Solamente se aceptan números. Tamaño mínimo: 8. Tamaño máximo: 8." placeholder="Ingrese el NSS del empleado">
->>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-<<<<<<< HEAD
-                                <label>Carrera</label>
-                                <input type="text" name="name" value="{{old('carrera')}}" class="form-control">
-=======
                                 <label for="carrera">Carrera</label>
                                 <input type="text" name="carrera" value="{{old('carrera')}}" class="form-control" minlength="2" maxlength="30" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,30}" title="Solamente se aceptan letras. Tamaño mínimo: 2. Tamaño máximo: 30." placeholder="Ingrese la escolaridad del empleado">
->>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
                             </div>
                         </div>
 
@@ -130,50 +115,6 @@
                             <div class="form-group">
                                 <label for="estado">Estado</label>
 
-<<<<<<< HEAD
-                                <select class="form-control select2" id="estadoId" name="estado_id"
-                                    data-placeholder="Selecciona un Estado" style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona un Estado</option>
-                                    @foreach ($estados as $estado)
-                                    <option value="{{$estado->nombre}}">{{$estado->nombre}} </option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Municipio</label>
-                                <select class="select2" id="municipios" name="nombre_municipio"
-                                    data-placeholder="Selecciona un Municipio" style="width: 100%;">
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Código postal</label>
-                                <select class="select2" id="codigos_postales"
-                                    data-placeholder="Selecciona un Codigo Postal" name="codigo_postal"
-                                    style="width: 100%;">
-
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Colonias</label>
-                                <select class="select2" id="colonias" name="colonia"
-                                    data-placeholder="Selecciona una colonia" style="width: 100%;">
-=======
                                 <select class="form-control select2" id="estadoId"
                                 data-placeholder="Seleccione un Estado" style="width: 100%;" name="estado" required>
                                 <option selected="selected" value="">Seleccione un Estado</option>
@@ -185,24 +126,8 @@
                         </div>
                     </div>
 
->>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
 
-<<<<<<< HEAD
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Calle</label>
-                                <input type="text" name="name" value="{{old('calle')}}" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Número exterior</label>
-                                <input type="text" name="name" value="{{old('')}}" class="form-control">
-                            </div>
-                        </div>
-=======
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="municipio">Municipio</label>
@@ -227,7 +152,6 @@
                 </div>
             </div>
         </div>
->>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
         <div class="row">
 
@@ -257,44 +181,16 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-                    <div class="row">
-                        <div class="col-md-3 text-left-center">
-                            <div class="form-group">
-                                <label>Fecha de ingreso laboral:</label>
-                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
-                                        data-target="#fecha_comienzo" />
-                                    <div class="input-group-append" data-target="#fecha_comienzo"
-                                        data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 text-left-center">
-=======
         <div class="col-md-2">
             <div class="form-group">
                 <label for="numero_interior">Número interior</label>
                 <input type="text"  value="{{old('numero_interior')}}" class="form-control" name="numero_interior" minlength="1" maxlength="5" required pattern="[0-9]{1,5}" title="Solamente se aceptan números. Tamaño mínimo: 1. Tamaño máximo: 5." placeholder="Ingrese número interior del domicilio">
             </div>
         </div>
->>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
     </div>
 
-<<<<<<< HEAD
-                                <select class="form-control select2" id="departamentos"
-                                    data-placeholder="Selecciona un Departamento" name="departamento_id"
-                                    style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona un Departamento</option>
-                                    @foreach ($departamentos as $departamento)
-                                    <option value="{{$departamento->id}}">{{$departamento->nombre}} </option>
-                                    @endforeach
-=======
     <h4>Informacion laboral</h4>
->>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
     <div class="row">
         <div class="col-md-3 text-left-center">
@@ -305,30 +201,6 @@
         </div>
         <div class="col-md-3 text-left-center">
 
-<<<<<<< HEAD
-                        <div class="col-md-3 text-left-center">
-                            <div class="form-group">
-                                <label>Cargo</label>
-                                <select class="form-control select2" name="cargo_id" id="cargos"
-                                    data-placeholder="Selecciona un Cargo" style="width: 100%;">
-                                    <option selected="selected" value="">Selecciona un Cargo</option>
-                                    @foreach ($cargos as $cargo)
-                                    <option value="{{$cargo->id}}">{{$cargo->nombre}} </option>
-                                    @endforeach
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Salario</label>
-                                <input type="text" onkeypress=" return soloNumeros(event);" name="salario"
-                                    value="{{old('salario')}}" class="form-control input-numeral">
-                            </div>
-                        </div>
-                    </div>
-=======
             <div class="form-group">
                 <label for="departamento_id">Departamento</label>
 
@@ -338,7 +210,6 @@
                 @foreach ($departamentos as $departamento)
                 <option {{ old('departamento_id') == $departamento->id ? "selected" : "" }}  value="{{$departamento->id}}">{{$departamento->nombre}} </option>
                 @endforeach
->>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
 
             </select>
         </div>
@@ -391,53 +262,31 @@
 @endpush
 @push('scripts')
 {{-- Incluimos js de select2 --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
 <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
-<script src="{{asset('js/auxiliar_input.js')}}"></script>
 @include('auxiliares.scripts-design-datetime')
 
 <script src="{{asset('js/api_sepomex.js')}}"></script>
 <script>
     $(function () {
     //Initialize Select2 Elements
-<<<<<<< HEAD
-        $('.select2').select2()
-        $('#fecha_comienzo').datetimepicker({
-            format: 'L'
-        });
-    })
-=======
     $('.select2').select2()
     $('#reservationdate').datetimepicker({
         format: 'L'
     });
 })
->>>>>>> 2a1dea07f231d47add9a598b7f4bcc60ebd44b05
-
-
     $('#inputFoto').on('change', function(ev) {
         var f = ev.target.files[0];
         var fr = new FileReader();
-
         fr.onload = function(ev2) {
             console.dir(ev2);
             $('#foto_perfil').attr('src', ev2.target.result);
         };
-
         fr.readAsDataURL(f);
     });
-
     $(document).ready(function () {
         bsCustomFileInput.init();
     });
-
-   
-    var cleaveNumeral = new Cleave('.input-numeral', {
-    numeral: true,
-    numeralThousandsGroupStyle: 'thousand'
-    });
-
 </script>
 
 

@@ -17,6 +17,11 @@ class CreatePolizaVehiculosTable extends Migration
             $table->id();
             $table->BigInteger('vehiculo_id')->unsigned();
             $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
+            $table->BigInteger('aseguradora_id')->unsigned();
+            $table->foreign('aseguradora_id')->references('id')->on('aseguradoras');
+            $table->string('poliza',30);
+            $table->date('vigencia_poliza');
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }
