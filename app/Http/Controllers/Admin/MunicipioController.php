@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
+use App\Admin\Municipio;
+use App\Admin\Estado;
+use App\Admin\Pais;
+use App\Http\Requests\Admin\MunicipioRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class MunicipioController extends Controller
 {
@@ -14,62 +19,27 @@ class MunicipioController extends Controller
      */
     public function index()
     {
-        return "Municipios";
+        $estados = Estado::orderBy(DB::raw('FIELD(nombre, "Zacatecas")'),'desc')->where('activo','=',1)->get(); //Mandamos primero México
+        $municipios=Municipio::where('activo','=',1)->get();
+        return view('admin.municipios.index',[
+            'municipios'=>$municipios,
+            'estados'=>$estados]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    
+    public function store(MunicipioRequest $request)
     {
-        //
+        $municipio=Municipio::create($request->validated());
+        return back()->with('mensaje','Se ha añadido un nuevo municipio');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+   
+    public function update(MunicipioRequest $request, $id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+         $id=Crypt::decryptString($id);
+        $municipio=Municipio::findOrFail($id);
+        $municipio->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el Municipio');
     }
 
     /**
@@ -80,6 +50,10 @@ class MunicipioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $municipio=Municipio::findOrFail($id);
+        $municipio->activo=0;
+        $municipio->update();
+        return back()->with('mensaje','Se ha eliminado el municipio');
     }
 }

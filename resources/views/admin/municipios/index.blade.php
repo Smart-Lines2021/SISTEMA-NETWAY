@@ -1,11 +1,11 @@
 @extends('admin.layout.layout')
 @section('title')
-<h1 class="m-0 text-dark">Clientes</h1>
+<h1 class="m-0 text-dark">Municipios</h1>
 @endsection
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
   <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
-  <li class="breadcrumb-item active">Recursos Humanos</li>
+  <li class="breadcrumb-item active">Administración</li>
 </ol>
 @stop
 @section('content')
@@ -14,11 +14,11 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Tabla de Clientes</h3>
+          <h3 class="card-title">Tabla de Municipios</h3>
           <a class="btn btn-secondary float-right" style="color: white" data-target="#modal-create" data-toggle="modal">
-            <i class="fa fa-plus" role="button"></i> Añadir Cliente
+            <i class="fa fa-plus" role="button"></i> Añadir Municipio
           </a>
-          @include('recursos_humanos.clientes.create')
+          @include('admin.municipios.create')
         </div>
         <br>
         <br>
@@ -29,27 +29,15 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>No_Cliente</th>
-                <th>Nombre de la Empresa</th>
-                <th>Iniciales</th>
-                <th>RFC</th>
-                <th>Telefono</th>
-                <th>Correo</th>
-                <th>Contacto</th>
+                <th>Nombre</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($cliente as $cliente)
+              @foreach($municipios as $municipio)
               <tr>
-                <td>{{$cliente->id}}</td>
-                <td>{{$cliente->no_cliente}}</td>
-                <td>{{$cliente->nombre_empresa}}</td>
-                <td>{{$cliente->iniciales}}</td>
-                <td>{{$cliente->rfc}}</td>
-                <td>{{$cliente->telefono}}</td>
-                <td>{{$cliente->correo}}</td>
-                <td>   <button type="button" class="btn btn-block btn-primary">Contacto</button></td>
+                <td>{{$municipio->id}}</td>
+                <td>{{$municipio->nombre}}</td>
                 <td>
                   <center>
                     <div class="btn-group">
@@ -58,17 +46,17 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" data-target="#modal-edit-{{$cliente->id}}" data-toggle="modal"><i class="fas fa-user-edit"></i> Editar</a>
+                        <a class="dropdown-item" data-target="#modal-edit-{{$municipio->id}}" data-toggle="modal"><i class="fas fa-user-edit"></i> Editar</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" data-target="#modal-destroy-{{$cliente->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
+                        <a class="dropdown-item" data-target="#modal-destroy-{{$municipio->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
                         <div class="dropdown-divider"></div>
                       </div>
                     </div>
                   </center>
                 </td>
               </tr>
-              @include('recursos_humanos.clientes.destroy')
-              @include('recursos_humanos.clientes.edit')
+              @include('admin.municipios.destroy')
+              @include('admin.municipios.edit')
               @endforeach
             </tbody>
           </table>
