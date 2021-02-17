@@ -133,6 +133,43 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+
+                      
+                        <div class="col-md-6 text-left-center">
+                            <div class="form-group">
+                                <label for="no_serie">Póliza de seguro::</label>
+                                <input type="text" name="poliza" value="{{old('poliza')}}"
+                                    class="form-control" placeholder="Ingrese el número de poliza del vehículo"required pattern="[A-Z 1-9]+"
+                                    minlegth="1" maxlength="30"
+                                    title="Solo se permiten numeros y letras. Tamaño mínimo: 1. Tamaño máximo: 30">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 text-left-center">
+                            <div class="form-group">
+                                <label for="aseguradora_id">Aseguradora:</label>
+                                <select id="aseguradora_id" name="aseguradora_id" class="form-control select2" required title="Por favor, seleccione aseguradora.">
+                                    <option value="">Seleccione aseguradora</option>
+                                    @foreach ($aseguradoras as $aseguradora)
+                                    <option value="{{ $aseguradora->id }}" {{ old('aseguradora_id') == $tipo_vehiculo->id ? 'selected' : '' }}>{{ $aseguradora->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 text-left-center">
+                            <div class="form-group">
+                                <label for="vigencia_poliza">Fecha de vigencia de póliza::</label>
+                                <input value="{{old('vigencia_poliza')}}" type="date" name="vigencia_poliza" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <button class="btn btn-info btn-block">Crear Vehiculo</button>
                 </form>
             </div>
