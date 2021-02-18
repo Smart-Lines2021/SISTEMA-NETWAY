@@ -1,6 +1,6 @@
 @extends('admin.layout.layout')
 @section('title')
-<h1 class="m-0 text-dark">Clientes</h1>
+<h1 class="m-0 text-dark">Contactos de {{$cliente->nombre_empresa}}</h1>
 @endsection
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
@@ -14,11 +14,8 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Tabla de Clientes</h3>
-          <a class="btn btn-secondary float-right" style="color: white" data-target="#modal-create" data-toggle="modal">
-            <i class="fa fa-plus" role="button"></i> Añadir Cliente
-          </a>
-          @include('recursos_humanos.clientes.create')
+          <h3 class="card-title">Tabla de Contactos del cliente {{$cliente->nombre_empresa}}</h3>
+          <a class="btn btn-secondary float-right" href="{{route('rh.clientes.show',Crypt::encryptString($cliente->id))}}"><i class="fa fa-plus"></i> Añadir Contacto</a>
         </div>
         <br>
         <br>
@@ -29,30 +26,23 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>No_Cliente</th>
-                <th>Nombre de la Empresa</th>
-                <th>Iniciales</th>
-                <th>RFC</th>
-                <th>Telefono</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
                 <th>Correo</th>
-                <th>Contactos</th>
+                <th>Telefono</th>
+                <th>Fecha de nacimiento</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($cliente as $cliente)
+              @foreach($contactosClientes as $contacto)
               <tr>
-                <td>{{$cliente->id}}</td>
-                <td>{{$cliente->no_cliente}}</td>
-                <td>{{$cliente->nombre_empresa}}</td>
-                <td>{{$cliente->iniciales}}</td>
-                <td>{{$cliente->rfc}}</td>
-                <td>{{$cliente->telefono}}</td>
-                <td>{{$cliente->correo}}</td>
-                <td>
-                  <a href="{{route('rh.contactos_clientes.show',Crypt::encryptString($cliente->id))}}" class="btn btn-primary btn-sm"><i class="fa fa-address-card"
-                    role="button" ></i> Contactos</a>
-                </td>
+                <td>{{$contacto->id}}</td>
+                <td>{{$contacto->nombre}}</td>
+                <td>{{$contacto->apellido}}</td>
+                <td>{{$contacto->correo}}</td>
+                <td>{{$contacto->telefono}}</td>
+                <td>{{$contacto->cumpleaños}}</td>
                 <td>
                   <center>
                     <div class="btn-group">
@@ -61,17 +51,16 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" data-target="#modal-edit-{{$cliente->id}}" data-toggle="modal"><i class="fas fa-user-edit"></i> Editar</a>
+                        <a class="dropdown-item" href="{{route('rh.contactos_clientes.edit',Crypt::encryptString($contacto->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" data-target="#modal-destroy-{{$cliente->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
+                        <a class="dropdown-item" data-target="#modal-destroy-{{$contacto->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
                         <div class="dropdown-divider"></div>
                       </div>
                     </div>
                   </center>
                 </td>
               </tr>
-              @include('recursos_humanos.clientes.destroy')
-              @include('recursos_humanos.clientes.edit')
+              @include('recursos_humanos.contactos_clientes.destroy')
               @endforeach
             </tbody>
           </table>

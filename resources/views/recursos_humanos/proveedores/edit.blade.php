@@ -47,7 +47,7 @@
                     <label for="categoria_proveedor_id">Categoría del proveedor:</label>
                     <select id="categoria_proveedor_id" name="categoria_proveedor_id" class="form-control" required title="Por favor, seleccione la categoría del proveedor.">
                         <option value="{{ $proveedor->categoriaProveedor->id }}">{{ $proveedor->categoriaProveedor->nombre }}</option>
-                        @foreach ($proveedor->categoriaProveedor->all() as $categoria_proveedor)
+                        @foreach ($categorias_proveedores as $categoria_proveedor)
                         <option value="{{ $categoria_proveedor->id }}">{{ $categoria_proveedor->nombre }}</option>
                         @endforeach
                     </select>

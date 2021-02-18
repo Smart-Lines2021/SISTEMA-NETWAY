@@ -32,10 +32,11 @@ public function create()
 {
         //Aplicamos Politica de Acceso al metodo correspondiente
    $this->authorize('create',new Proveedor);
-   $categorias_proveedores=CategoriaProveedor::get()->all();
+   $categorias_proveedores=CategoriaProveedor::where('activo','=',1)->get();
    return view('recursos_humanos.proveedores.create',[
     'categorias_proveedores'=>$categorias_proveedores]);
 }
+
 public function store(ProveedorRequest $request)
 {
         //Aplicamos Politica de Acceso al metodo correspondiente
@@ -46,11 +47,14 @@ public function store(ProveedorRequest $request)
 public function edit($id)
 {
     $id=Crypt::decryptString($id);
+    $categorias_proveedores=CategoriaProveedor::where('activo','=',1)->get();
     $proveedor=Proveedor::findOrFail($id);
         //Aplicamos Politica de Acceso al metodo correspondiente
     $this->authorize('update',$proveedor);
     return view('recursos_humanos.proveedores.edit',[
-        'proveedor'=>$proveedor]);
+        'proveedor'=>$proveedor,
+        'categorias_proveedores'=>$categorias_proveedores
+      ]);
 }
 public function update(ProveedorRequest $request, $id)
 {

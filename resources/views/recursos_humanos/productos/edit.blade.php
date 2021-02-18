@@ -39,7 +39,7 @@
                     <label for="marca_id">Marca del producto:</label>
                     <select id="marca_id" name="marca_id" class="form-control" required title="Por favor, seleccione la marca del producto.">
                         <option value="{{ $producto->marca->id }}">{{ $producto->marca->nombre }}</option>
-                        @foreach ($producto->marca->all() as $marca)
+                        @foreach ($marcas as $marca)
                         <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
                         @endforeach
                     </select>
@@ -48,7 +48,7 @@
                     <label for="categoria_producto_id">Categoría del producto:</label>
                     <select id="categoria_producto_id" name="categoria_producto_id" class="form-control" required title="Por favor, seleccione la categoría del producto.">
                         <option value="{{ $producto->categoriaProducto->id }}">{{ $producto->categoriaProducto->nombre }}</option>
-                        @foreach ($producto->categoriaProducto->all() as $categoriaProducto)
+                        @foreach ($categoriasProductos as $categoriaProducto)
                         <option value="{{ $categoriaProducto->id }}">{{ $categoriaProducto->nombre }}</option>
                         @endforeach
                     </select>
@@ -57,7 +57,7 @@
                     <label for="tipo_producto_id">Tipo del producto:</label>
                     <select id="tipo_producto_id" name="tipo_producto_id" class="form-control" required title="Por favor, seleccione la categoría del producto.">
                         <option value="{{ $producto->tipoProducto->id }}">{{ $producto->tipoProducto->nombre }}</option>
-                        @foreach ($producto->tipoProducto->all() as $tipoProducto)
+                        @foreach ($tiposProductos as $tipoProducto)
                         <option value="{{ $tipoProducto->id }}">{{ $tipoProducto->nombre }}</option>
                         @endforeach
                     </select>
