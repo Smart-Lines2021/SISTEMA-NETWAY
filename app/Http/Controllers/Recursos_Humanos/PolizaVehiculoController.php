@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Recursos_Humanos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DomicilioProveedorController extends Controller
+class PolizaVehiculoController extends Controller
 {
-      /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return "Domicilio del Proveedor";
+        return "Poliza de vehiculo";
     }
 
     /**

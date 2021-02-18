@@ -27,6 +27,11 @@ Route::resource('administracion/gasolinerias','Admin\GasolineriaController')->pa
 Route::resource('administracion/marcas','Admin\MarcaController')->parameters(['marca'=>'marca'])->names('admin.marcas');
 Route::resource('administracion/colores','Admin\ColorController')->parameters(['color'=>'color'])->names('admin.colores');
 Route::resource('administracion/cargos','Admin\CargoController')->parameters(['cargo'=>'cargo'])->names('admin.cargos');
+Route::resource('administracion/aseguradoras','Admin\AseguradoraController')->parameters(['aseguradora'=>'aseguradora'])->names('admin.aseguradoras');
+Route::resource('administracion/tipos_servicios_vehiculos','Admin\TipoServicioVehiculoController')->parameters(['tipoServicioVehiculo'=>'tipoServicioVehiculo'])->names('admin.tipos_servicios_vehiculos');
+Route::resource('administracion/talleres_mecanicos','Admin\TallerMecanicoController')->parameters(['tallerMecanico'=>'tallerMecanico'])->names('admin.talleres_mecanicos');
+Route::resource('administracion/bancos','Admin\BancoController')->parameters(['banco'=>'banco'])->names('admin.bancos');
+Route::resource('administracion/cuentas_bancarias_talleres','Admin\CuentaBancariaTallerController')->parameters(['cuentaBancaria'=>'cuentaBancaria'])->names('admin.cuentas_bancarias_talleres');
 
 //Para el perfil
 Route::resource('perfil/personas','Admin\PersonaController')->parameters(['persona'=>'persona'])->names('admin.personas');
@@ -43,6 +48,8 @@ Route::resource('recursos_humanos/domicilios_clientes','Recursos_Humanos\Domicil
 Route::resource('recursos_humanos/contactos_clientes','Recursos_Humanos\ContactoClienteController')->parameters(['contactoCliente'=>'contactoCliente'])->names('rh.contactos_clientes');
 Route::resource('recursos_humanos/informaciones_laborales','Recursos_Humanos\InformacionLaboralController')->parameters(['informacionLaboral'=>'informacionLaboral'])->names('rh.informaciones_laborales');
 Route::resource('recursos_humanos/domicilios_proveedores','Recursos_Humanos\DomicilioProveedorController')->parameters(['domicilioProveedor'=>'domicilioProveedor'])->names('rh.domicilios_proveedores');
+Route::resource('recursos_humanos/servicios_vehiculos','Recursos_Humanos\ServicioVehiculoController')->parameters(['servicioVehiculo'=>'servicioVehiculo'])->names('rh.servicios_vehiculos');
+Route::resource('recursos_humanos/polizas_vehiculos','Recursos_Humanos\PolizaVehiculoController')->parameters(['polizaVehiculo'=>'polizaVehiculo'])->names('rh.polizas_vehiculos');
 
 
 //Control de Sesiones y de usuarios
