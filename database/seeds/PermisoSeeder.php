@@ -39,6 +39,16 @@ class PermisoSeeder extends Seeder
     	$actualizarClientes=Permission::create(['name'=>'Actualizar Clientes','category'=>'Recursos Humanos']);
     	$eliminarClientes=Permission::create(['name'=>'Eliminar Clientes','category'=>'Recursos Humanos']);
 
+        $verDomiciliosClientes=Permission::create(['name'=>'Ver Domicilios de Clientes','category'=>'Recursos Humanos']);
+        $crearDomiciliosClientes=Permission::create(['name'=>'Crear Domicilios de Clientes','category'=>'Recursos Humanos']);
+        $actualizarDomiciliosClientes=Permission::create(['name'=>'Actualizar Domicilios de Clientes','category'=>'Recursos Humanos']);
+        $eliminarDomiciliosClientes=Permission::create(['name'=>'Eliminar Domicilios de Clientes','category'=>'Recursos Humanos']);
+
+        $verContactosClientes=Permission::create(['name'=>'Ver Contactos de Clientes','category'=>'Recursos Humanos']);
+        $crearContactosClientes=Permission::create(['name'=>'Crear Contactos de Clientes','category'=>'Recursos Humanos']);
+        $actualizarContactosClientes=Permission::create(['name'=>'Actualizar Contactos de Clientes','category'=>'Recursos Humanos']);
+        $eliminarContactosClientes=Permission::create(['name'=>'Eliminar Contactos de Clientes','category'=>'Recursos Humanos']);
+
     	$verEmpleados=Permission::create(['name'=>'Ver Empleados','category'=>'Recursos Humanos']);
     	$crearEmpleados=Permission::create(['name'=>'Crear Empleados','category'=>'Recursos Humanos']);
     	$actualizarEmpleados=Permission::create(['name'=>'Actualizar Empleados','category'=>'Recursos Humanos']);
@@ -105,5 +115,49 @@ class PermisoSeeder extends Seeder
     	$crearProveedores=Permission::create(['name'=>'Crear Proveedores','category'=>'Proveedores y Vehiculos']);
     	$actualizarProveedores=Permission::create(['name'=>'Actualizar Proveedores','category'=>'Proveedores y Vehiculos']);
     	$eliminarProveedores=Permission::create(['name'=>'Eliminar Proveedores','category'=>'Proveedores y Vehiculos']);
+
+        $verDomiciliosProveedores=Permission::create(['name'=>'Ver Domicilios de Proveedores','category'=>'Proveedores y Vehiculos']);
+        $crearDomiciliosProveedores=Permission::create(['name'=>'Crear Domicilios de Proveedores','category'=>'Proveedores y Vehiculos']);
+        $actualizarDomiciliosProveedores=Permission::create(['name'=>'Actualizar Domicilios de Proveedores','category'=>'Proveedores y Vehiculos']);
+        $eliminarDomiciliosProveedores=Permission::create(['name'=>'Eliminar Domicilios de Proveedores','category'=>'Proveedores y Vehiculos']);
+
+        $verTalleres=Permission::create(['name'=>'Ver Talleres','category'=>'Proveedores y Vehiculos']);
+        $crearTalleres=Permission::create(['name'=>'Crear Talleres','category'=>'Proveedores y Vehiculos']);
+        $actualizarTalleres=Permission::create(['name'=>'Actualizar Talleres','category'=>'Proveedores y Vehiculos']);
+        $eliminarTalleres=Permission::create(['name'=>'Eliminar Talleres','category'=>'Proveedores y Vehiculos']);
+
+        $verAseguradoras=Permission::create(['name'=>'Ver Aseguradoras','category'=>'Proveedores y Vehiculos']);
+        $crearAseguradoras=Permission::create(['name'=>'Crear Aseguradoras','category'=>'Proveedores y Vehiculos']);
+        $actualizarAseguradoras=Permission::create(['name'=>'Actualizar Aseguradoras','category'=>'Proveedores y Vehiculos']);
+        $eliminarAseguradoras=Permission::create(['name'=>'Eliminar Aseguradoras','category'=>'Proveedores y Vehiculos']);
+
+        $verTiposServiciosVehiculos=Permission::create(['name'=>'Ver Tipos de Servicios de Vehiculos','category'=>'Proveedores y Vehiculos']);
+        $crearTiposServiciosVehiculos=Permission::create(['name'=>'Crear Tipos de Servicios de Vehiculos','category'=>'Proveedores y Vehiculos']);
+        $actualizarTiposServiciosVehiculos=Permission::create(['name'=>'Actualizar Tipos de Servicios de Vehiculos','category'=>'Proveedores y Vehiculos']);
+        $eliminarTiposServiciosVehiculos=Permission::create(['name'=>'Eliminar Tipos de Servicios de Vehiculos','category'=>'Proveedores y Vehiculos']);
+
+        //Gastos e información bancaria
+        $verBancos=Permission::create(['name'=>'Ver Bancos','category'=>'Gastos e Información Bancaria']);
+        $crearBancos=Permission::create(['name'=>'Crear Bancos','category'=>'Gastos e Información Bancaria']);
+        $actualizarBancos=Permission::create(['name'=>'Actualizar Bancos','category'=>'Gastos e Información Bancaria']);
+        $eliminarBancos=Permission::create(['name'=>'Eliminar Bancos','category'=>'Gastos e Información Bancaria']);
+
+        $verCuentasBancarias=Permission::create(['name'=>'Ver Cuentas Bancarias','category'=>'Gastos e Información Bancaria']);
+        $crearCuentasBancarias=Permission::create(['name'=>'Crear Cuentas Bancarias','category'=>'Gastos e Información Bancaria']);
+        $actualizarCuentasBancarias=Permission::create(['name'=>'Actualizar Cuentas Bancarias','category'=>'Gastos e Información Bancaria']);
+        $eliminarCuentasBancarias=Permission::create(['name'=>'Eliminar Cuentas Bancarias','category'=>'Gastos e Información Bancaria']);
+
+        $verServiciosVehiculos=Permission::create(['name'=>'Ver Servicios de Vehiculos','category'=>'Gastos e Información Bancaria']);
+        $crearServiciosVehiculos=Permission::create(['name'=>'Crear Servicios de Vehiculos','category'=>'Gastos e Información Bancaria']);
+        $actualizarServiciosVehiculos=Permission::create(['name'=>'Actualizar Servicios de Vehiculos','category'=>'Gastos e Información Bancaria']);
+        $eliminarServiciosVehiculos=Permission::create(['name'=>'Eliminar Servicios de Vehiculos','category'=>'Gastos e Información Bancaria']);
+
+        $verPolizasVehiculos=Permission::create(['name'=>'Ver Polizas de Vehiculos','category'=>'Gastos e Información Bancaria']);
+        $crearPolizasVehiculos=Permission::create(['name'=>'Crear Polizas de Vehiculos','category'=>'Gastos e Información Bancaria']);
+        $actualizarPolizasVehiculos=Permission::create(['name'=>'Actualizar Polizas de Vehiculos','category'=>'Gastos e Información Bancaria']);
+        $eliminarPolizasVehiculos=Permission::create(['name'=>'Eliminar Polizas de Vehiculos','category'=>'Gastos e Información Bancaria']);
+
+
+
     }
 }

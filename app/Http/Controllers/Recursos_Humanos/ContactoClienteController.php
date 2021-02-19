@@ -16,8 +16,13 @@ class ContactoClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+      $this->middleware('auth');
+  }
     public function index()
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('view',new ContactoCliente);
         return view('recursos_humanos.contactos_clientes.index');
     }
 
@@ -25,7 +30,10 @@ class ContactoClienteController extends Controller
     {
         $id=Crypt::decryptString($id);
         $cliente=Cliente::findOrFail($id);
+
         $contactosClientes=ContactoCliente::where([['cliente_id',$cliente->id],['activo',1]])->get();
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('view',$cliente);
         return view('recursos_humanos.contactos_clientes.index',[
             'cliente'=>$cliente,
             'contactosClientes'=>$contactosClientes
@@ -39,6 +47,8 @@ class ContactoClienteController extends Controller
      */
     public function create()
     {
+         //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',new ContactoCliente);
        return view('recursos_humanos.contactos_clientes.create');
     }
 
@@ -50,6 +60,8 @@ class ContactoClienteController extends Controller
      */
     public function store(ContactoClienteRequest $request)
     {
+         //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',new ContactoCliente);
         ContactoCliente::create($request->validated());
         return redirect()->route('rh.clientes.index')->with('mensaje','Se ha registrado el contacto del cliente');
     }
@@ -58,6 +70,8 @@ class ContactoClienteController extends Controller
     {
         $id=Crypt::decryptString($id);
         $contacto=ContactoCliente::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$contacto);
         $cliente=Cliente::where('id','=',$contacto->cliente_id)->first();
         return view('recursos_humanos.contactos_clientes.edit',[
             'contacto'=>$contacto,
@@ -76,6 +90,8 @@ class ContactoClienteController extends Controller
     {
         $id=Crypt::decryptString($id);
         $contacto=ContactoCliente::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$contacto);
         $contacto->update($request->validated());
         return redirect()->route('rh.clientes.index')->with('mensaje','Se ha actualizado el contacto del cliente');
     }
@@ -90,6 +106,8 @@ class ContactoClienteController extends Controller
     {
        $id=Crypt::decryptString($id);
        $contacto=ContactoCliente::findOrFail($id);
+       //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('delete',$contacto);
        $contacto->activo=0;
        $contacto->update();
        return redirect()->route('rh.clientes.index')->with('mensaje','Se ha eliminado el contacto del cliente');

@@ -28,13 +28,13 @@ class PermisoRequest extends FormRequest
         'name' => 'required|unique:permissions',
         'display_name' => 'required|unique:permissions',
         'description' => 'required|string|max:254',
-        'category'=>'required|in:Control de Usuarios,Ubicación Geográfica,Recursos Humanos,Productos,Proveedores y Vehiculos',
+        'category'=>'required|in:Control de Usuarios,Ubicación Geográfica,Recursos Humanos,Productos,Proveedores y Vehiculos,Gastos e Información Bancaria',
     ];
         if($this->method() === 'PUT'){ //Si es para actualizar
             $rules = [
             'display_name'=>['required',Rule::unique('permissions')->ignore($this->route('permiso'))], //Obtenemos del parametro de la ruta la id del permiso
             'description' => 'required|string|max:254',
-             'category'=>'required|in:Control de Usuarios,Ubicación Geográfica,Recursos Humanos,Productos,Proveedores y Vehiculos',
+             'category'=>'required|in:Control de Usuarios,Ubicación Geográfica,Recursos Humanos,Productos,Proveedores y Vehiculos,Gastos e Información Bancaria',
         ];
     }
     return $rules;

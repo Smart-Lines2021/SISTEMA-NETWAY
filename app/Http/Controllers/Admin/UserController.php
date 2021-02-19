@@ -45,6 +45,7 @@ class UserController extends Controller
         $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
         $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
         $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosGastos=Permission::where('category', 'Gastos e Información Bancaria')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.usuarios.create',[
             'usuario'=>$usuario,
             'roles'=>$roles,
@@ -52,7 +53,8 @@ class UserController extends Controller
             'permisosRecursosHumanos'=>$permisosRecursosHumanos,
             'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
             'permisosProductos'=>$permisosProductos,
-            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos,
+            'permisosGastos'=>$permisosGastos]);
     }
 
     /**
@@ -106,6 +108,7 @@ class UserController extends Controller
         $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
         $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
         $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosGastos=Permission::where('category', 'Gastos e Información Bancaria')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.usuarios.edit',[
             'usuario'=>$usuario,
             'roles'=>$roles,
@@ -113,7 +116,8 @@ class UserController extends Controller
             'permisosRecursosHumanos'=>$permisosRecursosHumanos,
             'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
             'permisosProductos'=>$permisosProductos,
-            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos,
+            'permisosGastos'=>$permisosGastos]);
     }
 
     /**

@@ -17,20 +17,22 @@ class CuentaBancariaTallerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+      $this->middleware('auth');
+  }
     public function index()
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('view',new CuentaBancariaTaller);
         $cuentasBancariasTalleres=CuentaBancariaTaller::where('activo','=',1)->get();
         return view('admin.cuentas_bancarias_talleres.index',[
             'cuentasBancariasTalleres'=>$cuentasBancariasTalleres]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',new CuentaBancariaTaller);
         $talleresMecanicos=TallerMecanico::where('activo','=',1)->get();
         $bancos=Banco::where('activo','=',1)->get();
         return view('admin.cuentas_bancarias_talleres.create',[
@@ -38,39 +40,19 @@ class CuentaBancariaTallerController extends Controller
             'talleresMecanicos'=>$talleresMecanicos]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CuentaBancariaTallerRequest $request)
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',new CuentaBancariaTaller);
         $cuentaBancariaTaller = CuentaBancariaTaller::create($request->validated());
         return redirect()->route('admin.cuentas_bancarias_talleres.index')->with('mensaje','Se ha creado una nueva cuenta bancaria de taller');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $id=Crypt::decryptString($id);
         $cuentaBancariaTaller=CuentaBancariaTaller::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$cuentaBancariaTaller);
         $talleresMecanicos=TallerMecanico::where('activo','=',1)->get();
         $bancos=Banco::where('activo','=',1)->get();
         return view('admin.cuentas_bancarias_talleres.edit',[
@@ -79,31 +61,21 @@ class CuentaBancariaTallerController extends Controller
             'talleresMecanicos'=>$talleresMecanicos]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(CuentaBancariaTallerRequest $request, $id)
     {
         $id=Crypt::decryptString($id);
         $cuentaBancariaTaller=CuentaBancariaTaller::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$cuentaBancariaTaller);
         $cuentaBancariaTaller->update($request->validated());
         return back()->with('mensaje','Se ha actualizado la cuenta bancaria del taller');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $id=Crypt::decryptString($id);
         $cuentaBancariaTaller=CuentaBancariaTaller::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('delete',$cuentaBancariaTaller);
         $cuentaBancariaTaller->activo=0;
         $cuentaBancariaTaller->update();
         return back()->with('mensaje','Se ha eliminado la cuenta bancaria del taller');

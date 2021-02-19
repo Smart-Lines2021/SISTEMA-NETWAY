@@ -42,6 +42,7 @@
             <option value="Ubicación Geográfica">Ubicación Geográfica</option>
             <option value="Productos">Productos</option>
             <option value="Proveedores y Vehiculos">Proveedores y Vehiculos</option>
+            <option value="Gastos e Información Bancaria">Gastos e Información Bancaria</option>
           </select>
         </div>
         <div class="modal-footer">
