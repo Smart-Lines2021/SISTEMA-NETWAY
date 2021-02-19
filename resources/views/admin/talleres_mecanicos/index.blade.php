@@ -31,6 +31,7 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Teléfono</th>
+                <th>Dirección</th>
                 <th>Nombre de la persona a contactar</th>
                 <th>Correo Electrónico</th>
                 <th>Observaciones</th>
@@ -43,6 +44,7 @@
                 <td>{{$tallerMecanico->id}}</td>
                 <td>{{$tallerMecanico->nombre}}</td>
                 <td>{{$tallerMecanico->telefono}}</td>
+                <td>{{$tallerMecanico->direccion}}</td>
                 <td>{{$tallerMecanico->persona_contacto}}</td>
                 <td>{{$tallerMecanico->correo_electronico}}</td>
                 <td>{{$tallerMecanico->observaciones}}</td>
