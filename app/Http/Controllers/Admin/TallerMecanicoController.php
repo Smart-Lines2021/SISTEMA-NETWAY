@@ -2,84 +2,48 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\TallerMecanico;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\TallerMecanicoRequest;
+use Illuminate\Support\Facades\Crypt;
+
 
 class TallerMecanicoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        return "Taller Mecanico";
+        $talleresMecanicos=TallerMecanico::where('activo','=',1)->get();
+         return view('admin.talleres_mecanicos.index',[
+        'talleresMecanicos'=>$talleresMecanicos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+   
+    public function store(TallerMecanicoRequest $request)
     {
-        //
+         $tallerMecanico=TallerMecanico::create($request->validated());
+        return back()->with('mensaje','Se ha añadido un nuevo taller mecanico');
+
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+   
+    public function update(TallerMecanicoRequest $request, $id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $tallerMecanico=TallerMecanico::findOrFail($id);
+        $tallerMecanico->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el taller mecanico');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $tallerMecanico=TallerMecanico::findOrFail($id);
+        $tallerMecanico->activo=0;
+        $tallerMecanico->update();
+        return back()->with('mensaje','Se ha eliminado el taller mecanico');
     }
 }

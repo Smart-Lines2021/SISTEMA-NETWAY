@@ -25,7 +25,7 @@ class MunicipioRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string|max:20|min:5',
-            'numero' => 'required|regex:[[0-9]+]|max:4|min:1'
+            'numero' => 'required|regex:[[0-9]+]|max:4|min:1',
             'estado_id' => 'required|integer',
         ];
     }

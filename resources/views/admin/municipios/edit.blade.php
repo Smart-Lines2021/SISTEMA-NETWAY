@@ -14,7 +14,7 @@
       <div class="modal-body">
        <div class="form-group">
           <label for="nombre">Nombre:</label>
-          <input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre del estado" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,20}"
+          <input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre del municipio" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,20}"
           minlegth="2" maxlength="20"
           title="Solo se permiten letras. Tamaño mínimo: 2. Tamaño máximo: 20"
           value="{{old('nombre',$municipio->nombre)}}">
@@ -23,10 +23,10 @@
           <div class="col-6">
         <div class="form-group">
           <label for="numero">Número:</label>
-          <input type="text" name="numero" class="form-control" placeholder="Ingrese la variable del número" required pattern="[0-9]{1,4}"
+          <input type="text" name="numero" class="form-control" placeholder="Ingrese el número del municipio" required pattern="[0-9]{1,4}"
           minlegth="1" maxlength="4"
           title="Solo se permiten números. Tamaño mínimo: 1. Tamaño máximo: 4"
-          value="{{old('variable',$municipio->numero)}}">
+          value="{{old('numero',$municipio->numero)}}">
         </div>
         </div>
       

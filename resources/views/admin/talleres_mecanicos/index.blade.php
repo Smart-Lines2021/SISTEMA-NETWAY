@@ -1,6 +1,6 @@
 @extends('admin.layout.layout')
 @section('title')
-<h1 class="m-0 text-dark">Municipios</h1>
+<h1 class="m-0 text-dark">Talleres Mecanicos</h1>
 @endsection
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
@@ -14,11 +14,11 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Tabla de Municipios</h3>
+          <h3 class="card-title">Tabla de Talleres Mecanicos</h3>
           <a class="btn btn-secondary float-right" style="color: white" data-target="#modal-create" data-toggle="modal">
-            <i class="fa fa-plus" role="button"></i> Añadir Municipio
+            <i class="fa fa-plus" role="button"></i> Añadir Taller Mecanico
           </a>
-          @include('admin.municipios.create')
+          @include('admin.talleres_mecanicos.create')
         </div>
         <br>
         <br>
@@ -30,16 +30,23 @@
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Estado</th>
+                <th>Teléfono</th>
+                <th>Nombre de la persona a contactar</th>
+                <th>Correo Electrónico</th>
+                <th>Observaciones</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($municipios as $municipio)
+              @foreach($talleresMecanicos as $tallerMecanico)
               <tr>
-                <td>{{$municipio->id}}</td>
-                <td>{{$municipio->nombre}}</td>
-                <td>{{$municipio->estado_id}}</td>
+                <td>{{$tallerMecanico->id}}</td>
+                <td>{{$tallerMecanico->nombre}}</td>
+                <td>{{$tallerMecanico->telefono}}</td>
+                <td>{{$tallerMecanico->persona_contacto}}</td>
+                <td>{{$tallerMecanico->correo_electronico}}</td>
+                <td>{{$tallerMecanico->observaciones}}</td>
+                
                 <td>
                   <center>
                     <div class="btn-group">
@@ -48,17 +55,17 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" data-target="#modal-edit-{{$municipio->id}}" data-toggle="modal"><i class="fas fa-user-edit"></i> Editar</a>
+                        <a class="dropdown-item" data-target="#modal-edit-{{$tallerMecanico->id}}" data-toggle="modal"><i class="fas fa-user-edit"></i> Editar</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" data-target="#modal-destroy-{{$municipio->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
+                        <a class="dropdown-item" data-target="#modal-destroy-{{$tallerMecanico->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
                         <div class="dropdown-divider"></div>
                       </div>
                     </div>
                   </center>
                 </td>
               </tr>
-              @include('admin.municipios.destroy')
-              @include('admin.municipios.edit')
+              @include('admin.talleres_mecanicos.destroy')
+              @include('admin.talleres_mecanicos.edit')
               @endforeach
             </tbody>
           </table>
