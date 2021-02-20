@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Banco;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BancoRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class BancoController extends Controller
 {
@@ -14,7 +17,9 @@ class BancoController extends Controller
      */
     public function index()
     {
-        return "Banco";
+      $bancos=Banco::where('activo','=',1)->get();
+    return view('admin.bancos.index',[
+        'bancos'=>$bancos]);
     }
 
     /**
@@ -27,59 +32,26 @@ class BancoController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(BancoRequest $request)
     {
-        //
+        $banco=Banco::create($request->validated());
+        return back()->with('mensaje','Se ha añadido un nuevo banco');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update(BancoRequest $request, $id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $banco=Banco::findOrFail($id);
+        $banco->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el banco');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+         $id=Crypt::decryptString($id);
+        $banco=Banco::findOrFail($id);
+        $banco->delete();
+        $banco->update();
+        return back()->with('mensaje','Se ha eliminado el banco');
     }
 }
