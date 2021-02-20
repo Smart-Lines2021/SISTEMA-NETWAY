@@ -5,7 +5,7 @@
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
   <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
-  <li class="breadcrumb-item active">Administración</li>
+  <li class="breadcrumb-item active">Recursos Humanos</li>
 </ol>
 @stop
 @section('content')

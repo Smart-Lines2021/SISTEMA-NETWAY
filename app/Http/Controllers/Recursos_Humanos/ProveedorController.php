@@ -8,6 +8,7 @@ use App\Recursos_Humanos\Proveedor;
 use App\Admin\CategoriaProveedor;
 use App\Http\Requests\Admin\ProveedorRequest;
 use Illuminate\Support\Facades\Crypt;
+use App\Admin\Estado;
 
 class ProveedorController extends Controller
 {
@@ -27,6 +28,17 @@ class ProveedorController extends Controller
     return view('recursos_humanos.proveedores.index',[
         'proveedores'=>$proveedores]);
 }
+
+public function show($id)
+    {
+        $id=Crypt::decryptString($id);
+        $proveedor=Proveedor::findOrFail($id);
+        $estados = Estado::where('activo','=',1)->get();
+        return view('recursos_humanos.domicilios_proveedores.create',[
+            'proveedor'=>$proveedor,
+            'estados'=>$estados
+        ]);
+    }
 
 public function create()
 {

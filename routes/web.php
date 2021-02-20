@@ -45,6 +45,8 @@ Route::resource('recursos_humanos/productos_proveedores','Recursos_Humanos\Produ
 Route::resource('recursos_humanos/vehiculos','Recursos_Humanos\VehiculoController')->parameters(['vehiculo'=>'vehiculo'])->names('rh.vehiculos');
 Route::resource('recursos_humanos/clientes','Recursos_Humanos\ClienteController')->parameters(['cliente'=>'cliente'])->names('rh.clientes');
 Route::resource('recursos_humanos/domicilios_clientes','Recursos_Humanos\DomicilioClienteController')->parameters(['domicilioCliente'=>'domicilioCliente'])->names('rh.domicilios_clientes');
+Route::get('recursos_humanos/ver_domicilios_clientes/{id_cliente}', 'Recursos_Humanos\DomicilioClienteController@verDomiciliosClientes')
+->name('ver.domicilios_clientes');
 Route::resource('recursos_humanos/contactos_clientes','Recursos_Humanos\ContactoClienteController')->parameters(['contactoCliente'=>'contactoCliente'])->names('rh.contactos_clientes');
 Route::resource('recursos_humanos/informaciones_laborales','Recursos_Humanos\InformacionLaboralController')->parameters(['informacionLaboral'=>'informacionLaboral'])->names('rh.informaciones_laborales');
 Route::resource('recursos_humanos/domicilios_proveedores','Recursos_Humanos\DomicilioProveedorController')->parameters(['domicilioProveedor'=>'domicilioProveedor'])->names('rh.domicilios_proveedores');

@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Admin\Estado;
+use App\Recursos_Humanos\Proveedor;
+use App\Recursos_Humanos\DomicilioProveedor;
+use App\Http\Requests\Recursos_Humanos\DomicilioProveedorRequest;
+use Illuminate\Support\Facades\Crypt;
 
 class DomicilioProveedorController extends Controller
 {
@@ -14,7 +19,7 @@ class DomicilioProveedorController extends Controller
      */
     public function index()
     {
-        return "Domicilio del Proveedor";
+       
     }
 
     /**
@@ -24,7 +29,7 @@ class DomicilioProveedorController extends Controller
      */
     public function create()
     {
-        //
+      
     }
 
     /**
@@ -33,9 +38,10 @@ class DomicilioProveedorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DomicilioProveedorRequest $request)
     {
-        //
+        DomicilioProveedor::create($request->validated());
+        return redirect()->route('rh.proveedores.index')->with('mensaje','Se ha registrado el domicilio del proveedor');
     }
 
     /**
@@ -46,7 +52,15 @@ class DomicilioProveedorController extends Controller
      */
     public function show($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $proveedor=Proveedor::findOrFail($id);
+        $estados = Estado::where('activo','=',1)->get();
+        $domiciliosProveedores=DomicilioProveedor::where([['proveedor_id',$proveedor->id],['activo',1]])->get();
+        return view('recursos_humanos.domicilios_proveedores.index',[
+            'proveedor'=>$proveedor,
+            'domiciliosProveedores'=>$domiciliosProveedores,
+            'estados'=>$estados
+        ]);
     }
 
     /**
@@ -57,7 +71,15 @@ class DomicilioProveedorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $domicilio=DomicilioProveedor::findOrFail($id);
+        $proveedor=Proveedor::where('id','=',$domicilio->proveedor_id)->first();
+        $estados = Estado::where('activo','=',1)->get();
+        return view('recursos_humanos.domicilios_proveedores.edit',[
+            'domicilio'=>$domicilio,
+            'proveedor'=>$proveedor,
+            'estados'=>$estados
+        ]);
     }
 
     /**
@@ -67,9 +89,12 @@ class DomicilioProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DomicilioProveedorRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $domicilio=DomicilioProveedor::findOrFail($id);
+        $domicilio->update($request->validated());
+        return redirect()->route('rh.proveedores.index')->with('mensaje','Se ha actualizado el domicilio del proveedor');
     }
 
     /**
@@ -80,6 +105,10 @@ class DomicilioProveedorController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $id=Crypt::decryptString($id);
+       $domicilio=DomicilioProveedor::findOrFail($id);
+       $domicilio->activo=0;
+       $domicilio->update();
+       return redirect()->route('rh.proveedores.index')->with('mensaje','Se ha eliminado el domicilio del proveedor');
     }
 }
