@@ -13,7 +13,7 @@
         </div>
         <div class="modal-body theme_color">
             <div class="form-group {{ $errors->has('nombre') ? 'has-error' : '' }}">
-                ¿Esta segúro que desea eliminar el banco
+                ¿Esta segúro que desea eliminar el Banco?
             </div>
         </div>
         <div class="modal-footer">
@@ -21,3 +21,6 @@
             <button class="btn btn-danger">Eliminar Banco</button>
         </div>
     </div>
+</div>
+</form>
+</div>

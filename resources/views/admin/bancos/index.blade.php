@@ -16,7 +16,7 @@
         <div class="card-header">
           <h3 class="card-title">Tabla de Bancos</h3>
           <a class="btn btn-secondary float-right" style="color: white" data-target="#modal-create" data-toggle="modal">
-            <i class="fa fa-plus" role="button"></i> Añadir Bancos
+            <i class="fa fa-plus" role="button"></i> Añadir Banco
           </a>
           @include('admin.bancos.create')
         </div>
@@ -57,7 +57,7 @@
                   </center>
                 </td>
               </tr>
-              {{--@include('admin.bancos.destroy')--}}
+              @include('admin.bancos.destroy')
               @include('admin.bancos.edit')
               @endforeach
             </tbody>

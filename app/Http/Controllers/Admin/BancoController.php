@@ -48,9 +48,9 @@ class BancoController extends Controller
 
     public function destroy($id)
     {
-         $id=Crypt::decryptString($id);
+        $id=Crypt::decryptString($id);
         $banco=Banco::findOrFail($id);
-        $banco->delete();
+        $banco->activo=0;
         $banco->update();
         return back()->with('mensaje','Se ha eliminado el banco');
     }
