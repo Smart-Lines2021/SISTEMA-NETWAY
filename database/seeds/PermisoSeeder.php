@@ -54,6 +54,11 @@ class PermisoSeeder extends Seeder
     	$actualizarEmpleados=Permission::create(['name'=>'Actualizar Empleados','category'=>'Recursos Humanos']);
     	$eliminarEmpleados=Permission::create(['name'=>'Eliminar Empleados','category'=>'Recursos Humanos']);
 
+        $verCargos=Permission::create(['name'=>'Ver Cargos','category'=>'Recursos Humanos']);
+        $crearCargos=Permission::create(['name'=>'Crear Cargos','category'=>'Recursos Humanos']);
+        $actualizarCargos=Permission::create(['name'=>'Actualizar Cargos','category'=>'Recursos Humanos']);
+        $eliminarCargos=Permission::create(['name'=>'Eliminar Cargos','category'=>'Recursos Humanos']);
+
     	//Permisos Relacionados a Ubicación Geografica
     	$verMunicipios=Permission::create(['name'=>'Ver Municipios','category'=>'Ubicación Geográfica']);
     	$crearMunicipios=Permission::create(['name'=>'Crear Municipios','category'=>'Ubicación Geografica']);
@@ -125,6 +130,11 @@ class PermisoSeeder extends Seeder
         $crearTalleres=Permission::create(['name'=>'Crear Talleres','category'=>'Proveedores y Vehiculos']);
         $actualizarTalleres=Permission::create(['name'=>'Actualizar Talleres','category'=>'Proveedores y Vehiculos']);
         $eliminarTalleres=Permission::create(['name'=>'Eliminar Talleres','category'=>'Proveedores y Vehiculos']);
+
+        $verColores=Permission::create(['name'=>'Ver Colores','category'=>'Proveedores y Vehiculos']);
+        $crearColores=Permission::create(['name'=>'Crear Colores','category'=>'Proveedores y Vehiculos']);
+        $actualizarColores=Permission::create(['name'=>'Actualizar Colores','category'=>'Proveedores y Vehiculos']);
+        $eliminarColores=Permission::create(['name'=>'Eliminar Colores','category'=>'Proveedores y Vehiculos']);
 
         $verAseguradoras=Permission::create(['name'=>'Ver Aseguradoras','category'=>'Proveedores y Vehiculos']);
         $crearAseguradoras=Permission::create(['name'=>'Crear Aseguradoras','category'=>'Proveedores y Vehiculos']);

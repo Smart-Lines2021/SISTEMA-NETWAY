@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Admin\Banco;
+use App\Admin\Cargo;
 use App\Admin\CategoriaProducto;
 use App\Admin\CategoriaProveedor;
+use App\Admin\Color;
 use App\Admin\CuentaBancariaTaller;
 use App\Admin\Departamento;
 use App\Admin\Estado;
@@ -15,12 +18,17 @@ use App\Admin\Persona;
 use App\Admin\TallerMecanico;
 use App\Admin\TipoProducto;
 use App\Admin\TipoVehiculo;
+use App\Policies\Admin\BancoPolicy;
+use App\Policies\Admin\CargoPolicy;
 use App\Policies\Admin\CategoriaProductoPolicy;
 use App\Policies\Admin\CategoriaProveedorPolicy;
 use App\Policies\Admin\ClientePolicy;
+use App\Policies\Admin\ColorPolicy;
 use App\Policies\Admin\ContactoClientePolicy;
 use App\Policies\Admin\CuentaBancariaPolicy;
 use App\Policies\Admin\DepartamentoPolicy;
+use App\Policies\Admin\DomicilioClientePolicy;
+use App\Policies\Admin\DomicilioProveedorPolicy;
 use App\Policies\Admin\EmpleadoPolicy;
 use App\Policies\Admin\EstadoPolicy;
 use App\Policies\Admin\GasolineriaPolicy;
@@ -37,6 +45,8 @@ use App\Policies\Admin\TipoVehiculoPolicy;
 use App\Policies\Admin\UserPolicy;
 use App\Recursos_Humanos\Cliente;
 use App\Recursos_Humanos\ContactoCliente;
+use App\Recursos_Humanos\DomicilioCliente;
+use App\Recursos_Humanos\DomicilioProveedor;
 use App\Recursos_Humanos\Producto;
 use App\Recursos_Humanos\Proveedor;
 use App\User;
@@ -73,6 +83,11 @@ class AuthServiceProvider extends ServiceProvider
          CuentaBancariaTaller::class => CuentaBancariaPolicy::class, //Asociamos el modelo a la politica de acceso
          TallerMecanico::class => TallerPolicy::class, //Asociamos el modelo a la politica de acceso
          Municipio::class => MunicipioPolicy::class, //Asociamos el modelo a la politica de acceso
+         Banco::class => BancoPolicy::class, //Asociamos el modelo a la politica de acceso
+         Color::class => ColorPolicy::class, //Asociamos el modelo a la politica de acceso
+         Cargo::class => CargoPolicy::class, //Asociamos el modelo a la politica de acceso
+         DomicilioCliente::class => DomicilioClientePolicy::class, //Asociamos el modelo a la politica de acceso
+         DomicilioProveedor::class => DomicilioProveedorPolicy::class, //Asociamos el modelo a la politica de acceso
     ];
 
     /**

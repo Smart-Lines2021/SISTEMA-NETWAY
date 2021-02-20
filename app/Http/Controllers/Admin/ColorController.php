@@ -16,71 +16,33 @@ class ColorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $colores=Color::all();
-        return view('admin.colores.index',[
-            'colores'=>$colores]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ColorRequest $request)
-    {
-        $color=Color::create($request->validated());
-        return back()->with('mensaje','Se ha añadido un nuevo color');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(ColorRequest $request, $id)
-    {
-        $id= Crypt::decryptString($id);
-        $color=Color::findOrFail($id);
-        $color->update($request->validated());
-        return back()->with('mensaje','Se ha actualizado el color');
-    }
+    public function __construct(){
+      $this->middleware('auth');
+  }
+  public function index()
+  {
+    //Aplicamos Politica de Acceso al metodo correspondiente
+    $this->authorize('view',new Color);
+    $colores=Color::all();
+    return view('admin.colores.index',[
+        'colores'=>$colores]);
+}
+public function store(ColorRequest $request)
+{
+        //Aplicamos Politica de Acceso al metodo correspondiente
+    $this->authorize('create',new Color);
+    $color=Color::create($request->validated());
+    return back()->with('mensaje','Se ha añadido un nuevo color');
+}
+public function update(ColorRequest $request, $id)
+{
+    $id= Crypt::decryptString($id);
+    $color=Color::findOrFail($id);
+    //Aplicamos Politica de Acceso al metodo correspondiente
+    $this->authorize('update',$color);
+    $color->update($request->validated());
+    return back()->with('mensaje','Se ha actualizado el color');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -92,8 +54,10 @@ class ColorController extends Controller
     {
        $id= Crypt::decryptString($id);
        $color=Color::findOrFail($id);
+     //Aplicamos Politica de Acceso al metodo correspondiente
+       $this->authorize('delete',$color);
        $color->delete();
        $color->update();
        return back()->with('mensaje','Se ha eliminado el color');
-    }
+   }
 }
