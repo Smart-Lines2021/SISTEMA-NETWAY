@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Aseguradora;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AseguradoraRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class AseguradoraController extends Controller
 {
@@ -14,7 +17,9 @@ class AseguradoraController extends Controller
      */
     public function index()
     {
-       return "Aseguradora";
+        $aseguradoras=Aseguradora::where('activo','=',1)->get();
+        return view('admin.aseguradoras.index',[
+            'aseguradoras'=>$aseguradoras]);
    }
 
     /**
@@ -33,9 +38,10 @@ class AseguradoraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AseguradoraRequest $request)
     {
-        //
+        $aseguradora=Aseguradora::create($request->validated());
+        return back()->with('mensaje','Se ha añadido una nueva aseguradora');
     }
 
     /**
@@ -67,9 +73,12 @@ class AseguradoraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AseguradoraRequest $request, $id)
     {
-        //
+        $id= Crypt::decryptString($id);
+        $aseguradora=Aseguradora::findOrFail($id);
+        $aseguradora->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado la aseguradora');
     }
 
     /**
@@ -80,6 +89,10 @@ class AseguradoraController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $id= Crypt::decryptString($id);
+       $aseguradora=Aseguradora::findOrFail($id);
+       $aseguradora->activo=0;
+       $aseguradora->update();
+       return back()->with('mensaje','Se ha eliminado la aseguradora');
     }
 }
