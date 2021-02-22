@@ -57,7 +57,7 @@
                       <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" role="menu">
-                      <a class="dropdown-item" href="{{route('rh.vehiculos.show',Crypt::encryptString($vehiculo->id))}}"><i class="fas fa-user-edit"></i>Detalles</a>
+                      <a class="dropdown-item" href="{{route('rh.vehiculos.show',Crypt::encryptString($vehiculo->id))}}"><i class="fas fa-eye"></i> Ver detalles</a>
                       <a class="dropdown-item" href="{{route('rh.vehiculos.edit',Crypt::encryptString($vehiculo->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" data-target="#modal-destroy-{{$vehiculo->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
