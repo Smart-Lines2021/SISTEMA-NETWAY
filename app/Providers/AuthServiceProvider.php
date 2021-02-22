@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Admin\Aseguradora;
 use App\Admin\Banco;
 use App\Admin\Cargo;
 use App\Admin\CategoriaProducto;
@@ -17,7 +18,9 @@ use App\Admin\Pais;
 use App\Admin\Persona;
 use App\Admin\TallerMecanico;
 use App\Admin\TipoProducto;
+use App\Admin\TipoServicioVehiculo;
 use App\Admin\TipoVehiculo;
+use App\Policies\Admin\AseguradoraPolicy;
 use App\Policies\Admin\BancoPolicy;
 use App\Policies\Admin\CargoPolicy;
 use App\Policies\Admin\CategoriaProductoPolicy;
@@ -41,6 +44,7 @@ use App\Policies\Admin\ProveedorPolicy;
 use App\Policies\Admin\RolePolicy;
 use App\Policies\Admin\TallerPolicy;
 use App\Policies\Admin\TipoProductoPolicy;
+use App\Policies\Admin\TipoServicioVehiculoPolicy;
 use App\Policies\Admin\TipoVehiculoPolicy;
 use App\Policies\Admin\UserPolicy;
 use App\Recursos_Humanos\Cliente;
@@ -88,6 +92,8 @@ class AuthServiceProvider extends ServiceProvider
          Cargo::class => CargoPolicy::class, //Asociamos el modelo a la politica de acceso
          DomicilioCliente::class => DomicilioClientePolicy::class, //Asociamos el modelo a la politica de acceso
          DomicilioProveedor::class => DomicilioProveedorPolicy::class, //Asociamos el modelo a la politica de acceso
+         Aseguradora::class => AseguradoraPolicy::class, //Asociamos el modelo a la politica de acceso
+         TipoServicioVehiculo::class => TipoServicioVehiculoPolicy::class, //Asociamos el modelo a la politica de acceso
     ];
 
     /**
