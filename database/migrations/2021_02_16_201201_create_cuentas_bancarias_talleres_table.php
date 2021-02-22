@@ -19,8 +19,8 @@ class CreateCuentasBancariasTalleresTable extends Migration
             $table->foreign('taller_id')->references('id')->on('talleres_mecanicos');
             $table->BigInteger('banco_id')->unsigned();
             $table->foreign('banco_id')->references('id')->on('bancos');
-            $table->string('no_cuenta',20);
-            $table->string('clabe_interbancaria',20);
+            $table->string('no_cuenta',24);
+            $table->string('clabe_interbancaria',18);
             $table->boolean('activo')->default(1);
             $table->timestamps();
         });

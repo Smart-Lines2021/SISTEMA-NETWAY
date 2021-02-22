@@ -23,8 +23,13 @@ class PersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+      $this->middleware('auth');
+  }
     public function index()
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('view',new Persona);
         $empleados = Persona::where('activo','=',1)->get();
         return view('recursos_humanos.empleados.index',[
             'empleados'=>$empleados]);
@@ -33,6 +38,8 @@ class PersonaController extends Controller
     {
         $id=Crypt::decryptString($id);
         $persona=Persona::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('view',$persona);
         $domicilio=$persona->domiciliosPersonas->last();
         $informacionLaboral=$persona->informacionesLaborales->last();
         return view('recursos_humanos.documentos.cargar_documentos',[
@@ -48,6 +55,8 @@ class PersonaController extends Controller
      */
     public function create()
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',new Persona);
         $estados = Estado::where('activo','=',1)->get();
         $departamentos = Departamento::where('activo','=',1)->get();
         $cargos = Cargo::where('activo','=',1)->get();
@@ -67,6 +76,8 @@ class PersonaController extends Controller
      */
     public function store(EmpleadoRequest $request, DomicilioPersonaRequest $domicilioRequest, InformacionLaboralRequest $informacionLaboralRequest)
     {
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('create',new Persona);
         $persona=Persona::create($request->validated());
     //En caso de ser necesario se agrega la foto del usuario
         if ($request->hasFile('foto_perfil')) {
@@ -86,6 +97,8 @@ class PersonaController extends Controller
     {
         $id = Crypt::decryptString($id);
         $persona=Persona::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$persona);
         $domicilio=$persona->domiciliosPersonas->last();
         $informacionLaboral=$persona->informacionesLaborales->last();
         $estados = Estado::where('activo','=',1)->get();
@@ -101,6 +114,8 @@ class PersonaController extends Controller
     }
     public function update(EmpleadoRequest $request, DomicilioPersonaRequest $domicilioRequest, InformacionLaboralRequest $informacionLaboralRequest, $id){
         $persona=Persona::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('update',$persona);
         if ($request->hasFile('foto_perfil')) {
         Storage::delete($persona->foto_perfil);
         $persona->foto_perfil=$request->file('foto_perfil')->store('public/Empleados/'.$persona->curp."/");
@@ -116,6 +131,8 @@ class PersonaController extends Controller
     {
         $id=Crypt::decryptString($id);
         $persona=Persona::findOrFail($id);
+        //Aplicamos Politica de Acceso al metodo correspondiente
+        $this->authorize('delete',$persona);
         $persona->activo=0;
         $persona->update();
         return back()->with('mensaje','Se ha eliminado al empleado');

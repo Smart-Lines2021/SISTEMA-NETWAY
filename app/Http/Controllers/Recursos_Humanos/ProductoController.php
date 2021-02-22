@@ -53,11 +53,18 @@ class ProductoController extends Controller
     public function edit($id)
     {
         $id=Crypt::decryptString($id);
+        $marcas=Marca::where('activo','=',1)->where('categoria','!=','Vehiculos')->get();
+        $categoriasProductos=CategoriaProducto::where('activo','=',1)->get();
+        $tiposProductos=TipoProducto::where('activo','=',1)->get();
         $producto=Producto::findOrFail($id);
         //Aplicamos Politica de Acceso al metodo correspondiente
         $this->authorize('update',$producto);
         return view('recursos_humanos.productos.edit',[
-            'producto'=>$producto]);
+            'producto'=>$producto,
+            'marcas'=>$marcas,
+            'categoriasProductos'=>$categoriasProductos,
+            'tiposProductos'=>$tiposProductos
+          ]);
     }
 
     public function update(ProductoRequest $request, $id)

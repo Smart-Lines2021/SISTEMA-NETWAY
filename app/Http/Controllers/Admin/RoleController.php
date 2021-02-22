@@ -40,13 +40,15 @@ class RoleController extends Controller
         $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
         $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
         $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
+        $permisosGastos=Permission::where('category', 'Gastos e Información Bancaria')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.roles.create',[
             'permisosControlUsuarios'=>$permisosControlUsuarios,
             'role'=>$role,
             'permisosRecursosHumanos'=>$permisosRecursosHumanos,
             'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
             'permisosProductos'=>$permisosProductos,
-            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos,
+            'permisosGastos'=>$permisosGastos]);
     }
 
     /**
@@ -94,13 +96,15 @@ class RoleController extends Controller
          $permisosUbicacionesGeograficas=Permission::where('category', 'Ubicación Geográfica')->pluck('name','id'); //Clasificamos los permisos
          $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
          $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
+          $permisosGastos=Permission::where('category', 'Gastos e Información Bancaria')->pluck('name','id'); //Clasificamos los permisos
         return view('admin.roles.edit',[
             'role'=>$role,
             'permisosControlUsuarios'=>$permisosControlUsuarios,
             'permisosRecursosHumanos'=>$permisosRecursosHumanos,
             'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
             'permisosProductos'=>$permisosProductos,
-            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos]);
+            'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos,
+            'permisosGastos'=>$permisosGastos]);
     }
 
     /**

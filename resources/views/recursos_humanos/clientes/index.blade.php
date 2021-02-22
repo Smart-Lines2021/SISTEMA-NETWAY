@@ -35,7 +35,7 @@
                 <th>RFC</th>
                 <th>Telefono</th>
                 <th>Correo</th>
-                <th>Contacto</th>
+                <th>Ver y añadir...</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -49,7 +49,26 @@
                 <td>{{$cliente->rfc}}</td>
                 <td>{{$cliente->telefono}}</td>
                 <td>{{$cliente->correo}}</td>
-                <td>   <button type="button" class="btn btn-block btn-primary">Contacto</button></td>
+                <td>
+                  <center>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-info btn-flat"><i class="fa fa-address-book"
+                          role="button" ></i> <i class="fa fa-address-card"
+                          role="button" ></i></button>
+                      <button type="button" class="btn btn-info btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <div class="dropdown-menu" role="menu">
+                        <a href="{{route('rh.contactos_clientes.show',Crypt::encryptString($cliente->id))}}" class="dropdown-item"><i class="fa fa-address-book"
+                          role="button" ></i> Contactos</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{route('rh.domicilios_clientes.show',Crypt::encryptString($cliente->id))}}" class="dropdown-item"><i class="fa fa-address-card"
+                          role="button" ></i> Domicilios</a>
+                        <div class="dropdown-divider"></div>
+                      </div>
+                    </div>
+                  </center>
+                </td>
                 <td>
                   <center>
                     <div class="btn-group">

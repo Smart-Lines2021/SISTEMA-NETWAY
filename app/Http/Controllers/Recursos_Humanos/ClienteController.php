@@ -27,6 +27,15 @@ class ClienteController extends Controller
             'cliente'=>$clientes]);
     }
 
+     public function show($id)
+    {
+        $id=Crypt::decryptString($id);
+        $cliente=Cliente::findOrFail($id);
+        return view('recursos_humanos.contactos_clientes.create',[
+            'cliente'=>$cliente,
+        ]);
+    }
+
     public function store(ClienteRequest $request)
     {
         //Aplicamos Politica de Acceso al metodo correspondiente

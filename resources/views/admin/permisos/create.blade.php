@@ -41,6 +41,7 @@
             <option value="Ubicación Geográfica" {{ old('category') == 'Ubicación Geográfica' ? 'selected' : '' }}>Ubicación Geográfica</option>
             <option value="Productos" {{ old('category') == 'Productos' ? 'selected' : '' }}>Productos</option>
             <option value="Proveedores y Vehiculos" {{ old('category') == 'Proveedores y Vehiculos' ? 'selected' : '' }}>Proveedores y Vehiculos</option>
+             <option value="Gastos e Información Bancaria" {{ old('category') == 'Gastos e Información Bancaria' ? 'selected' : '' }}>Gastos e Información Bancaria</option>
           </select>
         </div>
         <div class="modal-footer">

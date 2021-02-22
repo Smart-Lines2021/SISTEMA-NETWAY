@@ -30,6 +30,7 @@
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Estado</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -38,6 +39,7 @@
               <tr>
                 <td>{{$municipio->id}}</td>
                 <td>{{$municipio->nombre}}</td>
+                <td>{{$municipio->estado_id}}</td>
                 <td>
                   <center>
                     <div class="btn-group">

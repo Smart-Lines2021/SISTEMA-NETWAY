@@ -8,6 +8,7 @@ use App\Recursos_Humanos\Proveedor;
 use App\Admin\CategoriaProveedor;
 use App\Http\Requests\Admin\ProveedorRequest;
 use Illuminate\Support\Facades\Crypt;
+use App\Admin\Estado;
 
 class ProveedorController extends Controller
 {
@@ -28,14 +29,26 @@ class ProveedorController extends Controller
         'proveedores'=>$proveedores]);
 }
 
+public function show($id)
+    {
+        $id=Crypt::decryptString($id);
+        $proveedor=Proveedor::findOrFail($id);
+        $estados = Estado::where('activo','=',1)->get();
+        return view('recursos_humanos.domicilios_proveedores.create',[
+            'proveedor'=>$proveedor,
+            'estados'=>$estados
+        ]);
+    }
+
 public function create()
 {
         //Aplicamos Politica de Acceso al metodo correspondiente
    $this->authorize('create',new Proveedor);
-   $categorias_proveedores=CategoriaProveedor::get()->all();
+   $categorias_proveedores=CategoriaProveedor::where('activo','=',1)->get();
    return view('recursos_humanos.proveedores.create',[
     'categorias_proveedores'=>$categorias_proveedores]);
 }
+
 public function store(ProveedorRequest $request)
 {
         //Aplicamos Politica de Acceso al metodo correspondiente
@@ -46,11 +59,14 @@ public function store(ProveedorRequest $request)
 public function edit($id)
 {
     $id=Crypt::decryptString($id);
+    $categorias_proveedores=CategoriaProveedor::where('activo','=',1)->get();
     $proveedor=Proveedor::findOrFail($id);
         //Aplicamos Politica de Acceso al metodo correspondiente
     $this->authorize('update',$proveedor);
     return view('recursos_humanos.proveedores.edit',[
-        'proveedor'=>$proveedor]);
+        'proveedor'=>$proveedor,
+        'categorias_proveedores'=>$categorias_proveedores
+      ]);
 }
 public function update(ProveedorRequest $request, $id)
 {
