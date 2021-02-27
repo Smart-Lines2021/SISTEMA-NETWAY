@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FacturaController extends Controller
 {
@@ -14,7 +15,7 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        return adios();
+        return view('recursos_humanos.facturas.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class FacturaController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +36,16 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Si todo lo intentamos como un path
+        //Almacenamos nuestra factura en el servidor
+        $rutaFactura=$request->file('ruta_factura')->store('public\Facturas');
+        //Obtenemos la ruta donde se almaceno y le concatenamos app
+        $url=storage_path('app/'.$rutaFactura);
+        //Obtener el path donde se almancena 2da forma
+        $urlAlterna= Storage::url($rutaFactura);
+        //Cambiamos todas las diagonales para que ninguna este incorrecta
+        $urlFactura = str_replace('/', '\\', $url);
+        return cargarXml($urlFactura);
     }
 
     /**
@@ -43,7 +53,7 @@ class FacturaController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
