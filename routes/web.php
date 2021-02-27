@@ -52,6 +52,7 @@ Route::resource('recursos_humanos/informaciones_laborales','Recursos_Humanos\Inf
 Route::resource('recursos_humanos/domicilios_proveedores','Recursos_Humanos\DomicilioProveedorController')->parameters(['domicilioProveedor'=>'domicilioProveedor'])->names('rh.domicilios_proveedores');
 Route::resource('recursos_humanos/servicios_vehiculos','Recursos_Humanos\ServicioVehiculoController')->parameters(['servicioVehiculo'=>'servicioVehiculo'])->names('rh.servicios_vehiculos');
 Route::resource('recursos_humanos/polizas_vehiculos','Recursos_Humanos\PolizaVehiculoController')->parameters(['polizaVehiculo'=>'polizaVehiculo'])->names('rh.polizas_vehiculos');
+Route::resource('recursos_humanos/facturas','Recursos_Humanos\FacturaController')->parameters(['factura'=>'factura'])->names('rh.facturas');
 
 
 //Control de Sesiones y de usuarios
