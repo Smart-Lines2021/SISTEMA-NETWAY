@@ -41,8 +41,6 @@ class FacturaController extends Controller
         $rutaFactura=$request->file('ruta_factura')->store('public\Facturas');
         //Obtenemos la ruta donde se almaceno y le concatenamos app
         $url=storage_path('app/'.$rutaFactura);
-        //Obtener el path donde se almancena 2da forma
-        $urlAlterna= Storage::url($rutaFactura);
         //Cambiamos todas las diagonales para que ninguna este incorrecta
         $urlFactura = str_replace('/', '\\', $url);
         return cargarXml($urlFactura);
