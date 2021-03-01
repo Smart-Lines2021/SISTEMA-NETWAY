@@ -37,7 +37,7 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        $persona = new Persona();
+        $persona = new Persona;
         //Si todo lo intentamos como un path
         //Almacenamos nuestra factura en el servidor
         $rutaFactura=$request->file('ruta_factura')->store('public\Facturas');

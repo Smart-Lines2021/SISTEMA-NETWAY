@@ -1,19 +1,11 @@
 <?php
-function hola(){
-	return "HOLA";
-}
-
-function adios(){
-	return "ADIOS";
-}
 function cargarXml($valor,$persona){
 	if (file_exists($valor)) {
 		$xml = simplexml_load_file($valor);
 		$ns = $xml->getNamespaces(true);
-		$xml->registerXPathNamespace('c', $ns['cfdi']);
 		$xml->registerXPathNamespace('t', $ns['tfd']); //Util para el ultimo path
        	//Leemos la información de forma individual
-		cfdiComprobante($xml);
+		comprobante($xml);
 		emisor($xml);
 		receptor($xml);
 		concepto($xml);
@@ -25,7 +17,7 @@ function cargarXml($valor,$persona){
 	}
 
 }
-function cfdiComprobante($xml){
+function comprobante($xml){
 	foreach ($xml->xpath('//cfdi:Comprobante') as $cfdiComprobante){
 		echo "Version: ".$cfdiComprobante['Version'];
 		echo "<br>";
@@ -103,6 +95,8 @@ function concepto($xml){
 		echo "Clave Unidad: ".$concepto['ClaveUnidad'];
 		echo "<br>";
 		echo "<br>";
+/*
+		traslado($xml); //Ejecutamos traslado para poder relacionarlas*/
 	}
 }
 function traslado($xml){
