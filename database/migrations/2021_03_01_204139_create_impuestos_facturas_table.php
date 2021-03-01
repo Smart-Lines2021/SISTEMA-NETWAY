@@ -15,6 +15,10 @@ class CreateImpuestosFacturasTable extends Migration
     {
         Schema::create('impuestos_facturas', function (Blueprint $table) {
             $table->id();
+            $table->double('impuesto_total');
+            $table->BigInteger('factura_id')->unsigned();
+            $table->foreign('factura_id')->references('id')->on('facturas');
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }

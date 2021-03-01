@@ -15,6 +15,17 @@ class CreateConceptosFacturasTable extends Migration
     {
         Schema::create('conceptos_facturas', function (Blueprint $table) {
             $table->id();
+            $table->double('cantidad');
+            $table->double('unidad')->nullable();
+            $table->integer('no_identificacion')->nullable();
+            $table->string('descripcion',200);
+            $table->double('valor_unitario');
+            $table->double('importe');
+            $table->string('clave_producto',20);
+            $table->string('clave_unidad',20);
+            $table->BigInteger('factura_id')->unsigned();
+            $table->foreign('factura_id')->references('id')->on('facturas');
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }

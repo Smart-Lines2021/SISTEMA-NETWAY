@@ -15,6 +15,16 @@ class CreateTimbresFiscalesDigitalesTable extends Migration
     {
         Schema::create('timbres_fiscales_digitales', function (Blueprint $table) {
             $table->id();
+            $table->string('version',10);
+            $table->string('uuid',50);
+            $table->string('fecha',25);
+            $table->string('rfc',20);
+            $table->text('sello');
+            $table->string('no_certificado_sat',30);
+            $table->text('sello_sat');
+            $table->BigInteger('factura_id')->unsigned();
+            $table->foreign('factura_id')->references('id')->on('facturas');
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }

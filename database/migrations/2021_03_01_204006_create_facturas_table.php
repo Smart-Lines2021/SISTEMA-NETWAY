@@ -15,6 +15,8 @@ class CreateFacturasTable extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
+            $table->string('url')->nullable($value = false);
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }

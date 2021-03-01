@@ -15,6 +15,12 @@ class CreateReceptoresFacturasTable extends Migration
     {
         Schema::create('receptores_facturas', function (Blueprint $table) {
             $table->id();
+            $table->string('rfc',20);
+            $table->string('nombre',80);
+            $table->integer('cfdi');
+            $table->BigInteger('factura_id')->unsigned();
+            $table->foreign('factura_id')->references('id')->on('facturas');
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }

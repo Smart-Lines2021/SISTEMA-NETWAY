@@ -15,6 +15,12 @@ class CreateTrasladosFacturasTable extends Migration
     {
         Schema::create('traslados_facturas', function (Blueprint $table) {
             $table->id();
+            $table->double('base');
+            $table->string('impuesto',20);
+            $table->string('tipo_factor',20);
+            $table->double('cuota');
+            $table->double('importe');
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }
