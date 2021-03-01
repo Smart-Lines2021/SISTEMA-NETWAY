@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ComprobantesFacturas extends Migration
+class CreateComprobantesFacturasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class ComprobantesFacturas extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('comprobantes_facturas', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +26,6 @@ class ComprobantesFacturas extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('comprobantes_facturas');
     }
 }

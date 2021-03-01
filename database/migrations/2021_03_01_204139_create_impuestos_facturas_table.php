@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ConceptosFacturas extends Migration
+class CreateImpuestosFacturasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class ConceptosFacturas extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('impuestos_facturas', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +26,6 @@ class ConceptosFacturas extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('impuestos_facturas');
     }
 }
