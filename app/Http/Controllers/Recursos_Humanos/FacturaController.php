@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Recursos_Humanos;
 
+use App\Admin\Persona;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -36,6 +37,7 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
+        $persona = new Persona();
         //Si todo lo intentamos como un path
         //Almacenamos nuestra factura en el servidor
         $rutaFactura=$request->file('ruta_factura')->store('public\Facturas');
@@ -43,7 +45,7 @@ class FacturaController extends Controller
         $url=storage_path('app/'.$rutaFactura);
         //Cambiamos todas las diagonales para que ninguna este incorrecta
         $urlFactura = str_replace('/', '\\', $url);
-        return cargarXml($urlFactura);
+        return cargarXml($urlFactura,$persona);
     }
 
     /**
