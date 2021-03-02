@@ -301,7 +301,14 @@
         </p>
       </a>
     </li>
-
+    <li class="nav-item">
+      <a href="{{route('rh.facturas.index')}}" class="nav-link">
+        <i class="far fa-address-book"></i>
+        <p>
+          Facturas
+        </p>
+      </a>
+    </li>
 
   </ul>
 </li> {{--Cierre de clientes--}}

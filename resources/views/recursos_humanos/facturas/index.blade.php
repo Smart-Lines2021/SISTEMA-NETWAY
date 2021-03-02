@@ -40,23 +40,23 @@
                 <td>{{$factura->url}}</td>
                 <td>
                   <center>
-                    {{-- <div class="btn-group">
+                    <div class="btn-group">
                       <button type="button" class="btn btn-info btn-flat">Opciones</button>
                       <button type="button" class="btn btn-info btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" data-target="#modal-edit-{{$cliente->id}}" data-toggle="modal"><i class="fas fa-user-edit"></i> Editar</a>
+                        <a class="dropdown-item" href="{{route('rh.facturas.show',Crypt::encryptString($factura->id))}}"><i class="fas fa-user-edit"></i>Ver</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" data-target="#modal-destroy-{{$cliente->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
+                        <a class="dropdown-item" data-target="#modal-destroy-{{$factura->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
                         <div class="dropdown-divider"></div>
                       </div>
-                    </div> --}}
+                    </div>
                   </center>
                 </td>
               </tr>
-        {{--       @include('recursos_humanos.Facturas.destroy')
-              @include('recursos_humanos.Facturas.edit') --}}
+              @include('recursos_humanos.Facturas.destroy')
+          {{--     @include('recursos_humanos.Facturas.edit') --}}
               @endforeach
             </tbody>
           </table>
