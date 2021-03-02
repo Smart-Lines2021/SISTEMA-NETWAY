@@ -20,6 +20,8 @@ class CreateTrasladosFacturasTable extends Migration
             $table->string('tipo_factor',20);
             $table->double('cuota');
             $table->double('importe');
+            $table->BigInteger('concepto_factura_id')->unsigned();
+            $table->foreign('concepto_factura_id')->references('id')->on('conceptos_facturas');
             $table->boolean('activo')->default(1);
             $table->timestamps();
         });

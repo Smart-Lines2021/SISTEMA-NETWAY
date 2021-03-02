@@ -14,7 +14,7 @@ class ConceptoFactura extends Model
 	{
     	return $this->belongsTo(Factura::class, 'factura_id'); //Se relacionan los modelos implicitos en la tabla del modelo actual
     }
-    /* public function trasladosFacturas(){
+     public function trasladosFacturas(){
         return $this->hasMany(TrasladoFactura::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
-    }*/
+    }
 }

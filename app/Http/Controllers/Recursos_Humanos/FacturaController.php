@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Recursos_Humanos;
 
-use App\Admin\Persona;
 use App\Http\Controllers\Controller;
+use App\Recursos_Humanos\Factura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +16,9 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        return view('recursos_humanos.facturas.index');
+        $facturas = Factura::where('activo','=',1)->get();
+        return view('recursos_humanos.facturas.index',[
+            'facturas'=>$facturas]);
     }
 
     /**
@@ -37,15 +39,20 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        $persona = new Persona;
-        //Si todo lo intentamos como un path
+        $factura = new Factura();//Creamos una nueva factura en la base de datos
         //Almacenamos nuestra factura en el servidor
         $rutaFactura=$request->file('ruta_factura')->store('public\Facturas');
+        //Almacenamos la ruta en la base de datos y obtenemos la id de nuestra nueva factura
+        $factura->url=$rutaFactura;
+        $factura->save();
+        $idFactura=$factura->id;
         //Obtenemos la ruta donde se almaceno y le concatenamos app
         $url=storage_path('app/'.$rutaFactura);
         //Cambiamos todas las diagonales para que ninguna este incorrecta
         $urlFactura = str_replace('/', '\\', $url);
-        return cargarXml($urlFactura,$persona);
+        //Mandamos todos los objetos
+        cargarXml($urlFactura,$idFactura);
+        return back()->with('mensaje','Se ha guardado una nueva factura');
     }
 
     /**

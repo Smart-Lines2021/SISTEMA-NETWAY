@@ -1,145 +1,137 @@
 <?php
-function cargarXml($valor,$persona){
+
+use App\Recursos_Humanos\ComprobanteFactura;
+use App\Recursos_Humanos\ConceptoFactura;
+use App\Recursos_Humanos\EmisorFactura;
+use App\Recursos_Humanos\ImpuestoFactura;
+use App\Recursos_Humanos\ReceptorFactura;
+use App\Recursos_Humanos\TimbreFiscalDigital;
+use App\Recursos_Humanos\TrasladoFactura;
+function cargarXml($valor,$idFactura){
 	if (file_exists($valor)) {
 		$xml = simplexml_load_file($valor);
 		$ns = $xml->getNamespaces(true);
 		$xml->registerXPathNamespace('t', $ns['tfd']); //Util para el ultimo path
        	//Leemos la información de forma individual
-		comprobante($xml);
-		emisor($xml);
-		receptor($xml);
-		concepto($xml);
-		traslado($xml);
-		impuesto($xml);
-		timbreFiscalDigital($xml);
+		comprobante($xml,$idFactura);
+		emisor($xml,$idFactura);
+		receptor($xml,$idFactura);
+		concepto($xml,$idFactura);
+		/*traslado($xml,$idFactura);*/
+		impuesto($xml,$idFactura);
+		timbreFiscalDigital($xml,$idFactura);
 	} else {
 		exit('Error al abrir el archivo.');
 	}
 
 }
-function comprobante($xml){
+function comprobante($xml,$idFactura){
 	foreach ($xml->xpath('//cfdi:Comprobante') as $cfdiComprobante){
-		echo "Version: ".$cfdiComprobante['Version'];
-		echo "<br>";
-		echo "Condiciones de Pago: ".$cfdiComprobante['CondicionesDePago'];
-		echo "<br>";
-		echo "Fecha: ".$cfdiComprobante['Fecha'];
-		echo "<br>";
-		echo "Folio: ".$cfdiComprobante['Folio'];
-		echo "<br>";
-		echo "Forma de Pago: ".$cfdiComprobante['FormaPago'];
-		echo "<br>";
-		echo "Lugar de Expedición: ".$cfdiComprobante['LugarExpedicion'];
-		echo "<br>";
-		echo "Metodo de Pago: ".$cfdiComprobante['MetodoPago'];
-		echo "<br>";
-		echo "Moneda: ".$cfdiComprobante['Moneda'];
-		echo "<br>";
-		echo "Serie: ".$cfdiComprobante['Serie'];
-		echo "<br>";
-		echo "Subtotal: ".$cfdiComprobante['SubTotal'];
-		echo "<br>";
-		echo "Tipo de Cambio: ".$cfdiComprobante['TipoCambio'];
-		echo "<br>";
-		echo "Tipo de Comprobante: ".$cfdiComprobante['TipoDeComprobante'];
-		echo "<br>";
-		echo "Total: ".$cfdiComprobante['Total'];
-		echo "<br>";
-		echo "Certificado: ".$cfdiComprobante['Certificado'];
-		echo "<br>";
-		echo "No Certificado: ".$cfdiComprobante['NoCertificado'];
-		echo "<br>";
-		echo "Sello del contribuyente: ".$cfdiComprobante['Sello'];
-		echo "<br>";
+		$comprobanteFactura = new ComprobanteFactura();
+		$comprobanteFactura->version= $cfdiComprobante['Version'];
+		$comprobanteFactura->condiciones_pago= $cfdiComprobante['CondicionesDePago'];
+		$comprobanteFactura->fecha= $cfdiComprobante['Fecha'];
+		$comprobanteFactura->folio= $cfdiComprobante['Folio'];
+		$comprobanteFactura->forma_pago= $cfdiComprobante['FormaPago'];
+		$comprobanteFactura->lugar_expedicion= $cfdiComprobante['LugarExpedicion'];
+		$comprobanteFactura->metodo_pago= $cfdiComprobante['MetodoPago'];
+		$comprobanteFactura->moneda= $cfdiComprobante['Moneda'];
+		$comprobanteFactura->serie= $cfdiComprobante['Serie'];
+		$comprobanteFactura->subtotal= $cfdiComprobante['SubTotal'];
+		$comprobanteFactura->tipo_cambio= $cfdiComprobante['TipoCambio'];
+		$comprobanteFactura->tipo_comprobante= $cfdiComprobante['TipoDeComprobante'];
+		$comprobanteFactura->total= $cfdiComprobante['Total'];
+		$comprobanteFactura->certificado= $cfdiComprobante['Certificado'];
+		$comprobanteFactura->no_certificado= $cfdiComprobante['NoCertificado'];
+		$comprobanteFactura->sello_contribuyente= $cfdiComprobante['Sello'];
+		$comprobanteFactura->factura_id= $idFactura;
+		$comprobanteFactura->save();
 	}
 }
-function emisor($xml){
+function emisor($xml,$idFactura){
 	foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Emisor') as $emisor){
-		echo "<br>";
-		echo "RFC: ".$emisor['Rfc'];
-		echo "<br>";
-		echo "Nombre del Emisor: ".$emisor['Nombre'];
-		echo "<br>";
-		echo "Regimen Fiscal: ".$emisor['RegimenFiscal'];
-		echo "<br>";
+		$emisorFactura = new EmisorFactura();
+		$emisorFactura->rfc=$emisor['Rfc'];
+		$emisorFactura->nombre=$emisor['Nombre'];
+		$emisorFactura->regimen_fiscal=$emisor['RegimenFiscal'];
+		$emisorFactura->factura_id=$idFactura;
+		$emisorFactura->save();
 	}
 }
-
-function receptor($xml){
+function receptor($xml,$idFactura){
 	foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Receptor') as $receptor){
-		echo "Rfc: ".$receptor['Rfc'];
-		echo "<br>";
-		echo "Receptor: ".$receptor['Nombre'];
-		echo "<br>";
-		echo "Uso CFDI: ".$receptor['UsoCFDI'];
-		echo "<br>";
+		$receptorFactura = new ReceptorFactura();
+		$receptorFactura->rfc=$receptor['Rfc'];
+		$receptorFactura->nombre=$receptor['Nombre'];
+		$receptorFactura->cfdi=$receptor['UsoCFDI'];
+		$receptorFactura->factura_id=$idFactura;
+		$receptorFactura->save();
 	}
 }
-function concepto($xml){
+function concepto($xml,$idFactura){
+	$idConcepto=array();
 	foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Conceptos//cfdi:Concepto') as $concepto){
-		echo "<br>";
-		echo "Cantidad: ".$concepto['Cantidad'];
-		echo "<br>";
-		echo "Unidad: ".$concepto['Unidad'];
-		echo "<br>";
-		echo "Número de Identificación: ".$concepto['NoIdentificacion'];
-		echo "<br>";
-		echo "Descripción: ".$concepto['Descripcion'];
-		echo "<br>";
-		echo "Valor Unitario: ".$concepto['ValorUnitario'];
-		echo "<br>";
-		echo "Importe: ".$concepto['Importe'];
-		echo "<br>";
-		echo "Clave Productos: ".$concepto['ClaveProdServ'];
-		echo "<br>";
-		echo "Clave Unidad: ".$concepto['ClaveUnidad'];
-		echo "<br>";
-		echo "<br>";
-/*
-		traslado($xml); //Ejecutamos traslado para poder relacionarlas*/
+		$conceptoFactura=new ConceptoFactura();
+		$conceptoFactura->cantidad=$concepto['Cantidad'];
+		$conceptoFactura->unidad=$concepto['Unidad'];
+		$conceptoFactura->no_identificacion=$concepto['NoIdentificacion'];
+		$conceptoFactura->descripcion=$concepto['Descripcion'];
+		$conceptoFactura->valor_unitario=$concepto['ValorUnitario'];
+		$conceptoFactura->importe=$concepto['Importe'];
+		$conceptoFactura->clave_producto=$concepto['ClaveProdServ'];
+		$conceptoFactura->clave_unidad=$concepto['ClaveUnidad'];
+		$conceptoFactura->factura_id=$idFactura;
+		$conceptoFactura->save();
+		/*guardaConceptos($conceptoFactura->id);*/
+		$idConcepto[]=$conceptoFactura->id;
+
+
 	}
+	guardaConceptos($xml,$idConcepto);
+	/*print_r($idConcepto[1]);*/
 }
-function traslado($xml){
+function traslado($xml,$concepto){
+	for ($i=0; $i < sizeof($concepto); $i++) {
 	foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Conceptos//cfdi:Concepto//cfdi:Impuestos//cfdi:Traslados//cfdi:Traslado') as $traslado){
-		echo "Base: ".$traslado['Base'];
-		echo "<br>";
-		echo "Impuesto: ".$traslado['Impuesto'];
-		echo "<br>";
-		echo "Tipo de Factor: ".$traslado['TipoFactor'];
-		echo "<br>";
-		echo "Tasa o Cuota: ".$traslado['TasaOCuota'];
-		echo "<br>";
-		echo "Importe: ".$traslado['Importe'];
-		echo "<br>";
-		echo "<br>";
+		$trasladoFactura=new TrasladoFactura();
+		$trasladoFactura->base=$traslado['Base'];
+		$trasladoFactura->impuesto=$traslado['Impuesto'];
+		$trasladoFactura->tipo_factor=$traslado['TipoFactor'];
+		$trasladoFactura->cuota=$traslado['TasaOCuota'];
+		$trasladoFactura->importe=$traslado['Importe'];
+		/*for ($j=1; $j <= $i; $j++) {*/
+		$trasladoFactura->concepto_factura_id=$concepto[$i++];
+		$trasladoFactura->save();
 	}
 }
-function impuesto($xml){
+}
+function impuesto($xml,$idFactura){
 	foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Impuestos') as $impuesto){
 		if ($impuesto['TotalImpuestosTrasladados'] !== null) {
-			echo "Impuesto: ".$impuesto['TotalImpuestosTrasladados'];
+			$impuestoFactura= new ImpuestoFactura();
+			$impuestoFactura->impuesto_total=$impuesto['TotalImpuestosTrasladados'];
+			$impuestoFactura->factura_id=$idFactura;
+			$impuestoFactura->save();
 		}
-		echo "<br>";
-		echo "<br>";
 	}
 }
 
-function timbreFiscalDigital($xml){
+function timbreFiscalDigital($xml,$idFactura){
 	foreach ($xml->xpath('//t:TimbreFiscalDigital') as $tfd) {
-		echo "Version: ".$tfd['Version'];
-		echo "<br>";
-		echo "UUID: ".$tfd['UUID'];
-		echo "<br>";
-		echo "Fecha Timbrado: ".$tfd['FechaTimbrado'];
-		echo "<br>";
-		echo "RFCProv: ".$tfd['RfcProvCertif'];
-		echo "<br>";
-		echo "Sello: ".$tfd['SelloCFD'];
-		echo "<br>";
-		echo "No Certificado del SAT: ".$tfd['NoCertificadoSAT'];
-		echo "<br>";
-		echo "Sello del SAT: ".$tfd['SelloSAT'];
+		$timbreFiscalDigital = new TimbreFiscalDigital();
+		$timbreFiscalDigital->version=$tfd['Version'];
+		$timbreFiscalDigital->uuid=$tfd['UUID'];
+		$timbreFiscalDigital->fecha=$tfd['FechaTimbrado'];
+		$timbreFiscalDigital->rfc=$tfd['RfcProvCertif'];
+		$timbreFiscalDigital->sello=$tfd['SelloCFD'];
+		$timbreFiscalDigital->no_certificado_sat=$tfd['NoCertificadoSAT'];
+		$timbreFiscalDigital->sello_sat=$tfd['SelloSAT'];
+		$timbreFiscalDigital->factura_id=$idFactura;
+		$timbreFiscalDigital->save();
 	}
 
+}
+function guardaConceptos($xml,$concepto){
+	traslado($xml,$concepto);
 }
 ?>

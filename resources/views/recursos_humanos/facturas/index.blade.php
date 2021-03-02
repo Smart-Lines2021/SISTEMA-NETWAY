@@ -29,17 +29,15 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>No_Cliente</th>
-                <th>Nombre de la Empresa</th>
+                <th>Ruta de Factura</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-             {{--  @foreach($cliente as $cliente) --}}
+              @foreach($facturas as $factura)
               <tr>
-                <td>{{-- {{$cliente->id}} --}}</td>
-                <td>{{-- {{$cliente->no_cliente}} --}}</td>
-                <td>{{-- {{$cliente->nombre_empresa}} --}}</td>
+                <td>{{$factura->id}}</td>
+                <td>{{$factura->url}}</td>
                 <td>
                   <center>
                     {{-- <div class="btn-group">
@@ -57,9 +55,9 @@
                   </center>
                 </td>
               </tr>
-             {{--  @include('recursos_humanos.Facturas.destroy')
-              @include('recursos_humanos.Facturas.edit')
-              @endforeach --}}
+        {{--       @include('recursos_humanos.Facturas.destroy')
+              @include('recursos_humanos.Facturas.edit') --}}
+              @endforeach
             </tbody>
           </table>
         </div>

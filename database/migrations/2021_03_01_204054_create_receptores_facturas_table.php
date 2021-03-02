@@ -17,7 +17,7 @@ class CreateReceptoresFacturasTable extends Migration
             $table->id();
             $table->string('rfc',20);
             $table->string('nombre',80);
-            $table->integer('cfdi');
+            $table->string('cfdi',20);
             $table->BigInteger('factura_id')->unsigned();
             $table->foreign('factura_id')->references('id')->on('facturas');
             $table->boolean('activo')->default(1);
