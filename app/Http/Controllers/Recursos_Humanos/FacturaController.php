@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Recursos_Humanos\FacturaRequest;
+use App\Recursos_Humanos\Cliente;
 use App\Recursos_Humanos\ComprobanteFactura;
 use App\Recursos_Humanos\ConceptoFactura;
 use App\Recursos_Humanos\EmisorFactura;
@@ -28,13 +30,15 @@ class FacturaController extends Controller
             'facturas'=>$facturas]);
     }
 
-    public function store(Request $request)
+    public function store(FacturaRequest $request)
     {
         $factura = new Factura();//Creamos una nueva factura en la base de datos
         //Almacenamos nuestra factura en el servidor
-        $rutaFactura=$request->file('ruta_factura')->store('public\Facturas');
+        $rutaFactura=$request->file('url')->store('public\Facturas');
+        $rutaPdfFactura=$request->file('url_pdf')->store('public\PDF de Facturas');
         //Almacenamos la ruta en la base de datos y obtenemos la id de nuestra nueva factura
         $factura->url=$rutaFactura;
+        $factura->url_pdf=$rutaPdfFactura;
         $factura->save();
         $idFactura=$factura->id;
         //Obtenemos la ruta donde se almaceno y le concatenamos app
@@ -43,7 +47,9 @@ class FacturaController extends Controller
         $urlFactura = str_replace('/', '\\', $url);
         //Mandamos todos los objetos
         cargarXml($urlFactura,$idFactura);
-        return back()->with('mensaje','Se ha guardado una nueva factura');
+        //Relacionamos el cliente a su factura
+        asociarCliente($idFactura,$request->cliente_id);
+        return redirect()->route('rh.facturas.index')->with('mensaje','Se ha guardado una nueva factura');
     }
 
     public function show($id)
@@ -56,14 +62,6 @@ class FacturaController extends Controller
         $impuestoFactura=ImpuestoFactura::where('factura_id','=',$factura->id)->get()->last();
         $timbreFiscalDigital=TimbreFiscalDigital::where('factura_id','=',$factura->id)->get()->last();
         $conceptosFacturas=ConceptoFactura::where('factura_id','=',$factura->id)->get();
-        /*foreach ($conceptoFactura as $concepto) {
-            print_r($concepto->cantidad);
-            print_r($concepto->valor_unitario);
-            print_r($concepto->descripcion);
-            foreach ($concepto->trasladosFacturas as $traslado) {
-                print_r($traslado->base);
-            }
-        }*/
         return view('recursos_humanos.facturas.show',[
             'factura'=>$factura,
             'comprobanteFactura'=>$comprobanteFactura,
@@ -76,6 +74,12 @@ class FacturaController extends Controller
     public function edit($id)
     {
         //
+    }
+     public function create()
+    {
+        $clientes=Cliente::where('activo','=',1)->get();
+        return view('recursos_humanos.facturas.create',[
+            'clientes'=>$clientes]);
     }
     public function update(Request $request, $id)
     {

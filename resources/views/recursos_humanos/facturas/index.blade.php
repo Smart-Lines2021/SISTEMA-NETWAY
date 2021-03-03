@@ -15,10 +15,9 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Tabla de Facturas</h3>
-          <a class="btn btn-secondary float-right" style="color: white" data-target="#modal-create" data-toggle="modal">
+          <a class="btn btn-secondary float-right" style="color: white" href="{{route('rh.facturas.create')}}">
             <i class="fa fa-plus" role="button"></i> Añadir Factura
           </a>
-          @include('recursos_humanos.facturas.create')
         </div>
         <br>
         <br>

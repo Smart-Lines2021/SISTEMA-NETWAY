@@ -3,10 +3,17 @@
 use App\Recursos_Humanos\ComprobanteFactura;
 use App\Recursos_Humanos\ConceptoFactura;
 use App\Recursos_Humanos\EmisorFactura;
+use App\Recursos_Humanos\FacturaCliente;
 use App\Recursos_Humanos\ImpuestoFactura;
 use App\Recursos_Humanos\ReceptorFactura;
 use App\Recursos_Humanos\TimbreFiscalDigital;
 use App\Recursos_Humanos\TrasladoFactura;
+function asociarCliente($idFactura,$cliente_id){
+	$facturaCliente=new FacturaCliente();
+	$facturaCliente->factura_id = $idFactura;
+	$facturaCliente->cliente_id=$cliente_id;
+	$facturaCliente->save();
+}
 function cargarXml($valor,$idFactura){
 	if (file_exists($valor)) {
 		$xml = simplexml_load_file($valor);

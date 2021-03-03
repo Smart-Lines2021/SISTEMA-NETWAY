@@ -5,6 +5,7 @@ namespace App\Recursos_Humanos;
 use App\Recursos_Humanos\ComprobanteFactura;
 use App\Recursos_Humanos\ConceptoFactura;
 use App\Recursos_Humanos\EmisorFactura;
+use App\Recursos_Humanos\FacturaCliente;
 use App\Recursos_Humanos\ImpuestoFactura;
 use App\Recursos_Humanos\ReceptorFactura;
 use App\Recursos_Humanos\TimbreFiscalDigital;
@@ -31,5 +32,8 @@ class Factura extends Model
     }
     public function timbresFiscalesDigitales(){
         return $this->hasMany(TimbreFiscalDigital::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
+    }
+    public function facturasClientes(){
+        return $this->hasMany(FacturaCliente::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
     }
 }
