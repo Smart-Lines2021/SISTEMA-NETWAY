@@ -27,17 +27,17 @@
 
 						<ul class="list-group list-group-unbordered mb-3">
 							<li class="list-group-item">
-								<b>Número de Cliente</b> <a class="float-right">{{$comprobanteFactura->folio}}</a>
+								<b>Número de Cliente</b> <a class="float-right">{{$cliente->no_cliente}}</a>
 							</li>
 							<li class="list-group-item">
-								<b>RFC</b> <a class="float-right">RAV985614455</a>
+								<b>RFC</b> <a class="float-right">{{$cliente->rfc}}</a>
 							</li>
 							<li class="list-group-item">
-								<b>Telefono</b> <a class="float-right">4925686532</a>
+								<b>Telefono</b> <a class="float-right">{{$cliente->telefono}}</a>
 							</li>
 						</ul>
 
-						<a href="#" class="btn btn-primary btn-block"><b>Ver Cliente</b></a>
+						<a href="{{route('rh.clientes.index')}}" class="btn btn-primary btn-block"><b>Ver Clientes</b></a>
 					</div>
 					<!-- /.card-body -->
 				</div>
@@ -304,7 +304,7 @@
 
 									<div class="row">
 										<div class="col-12">
-											<p class="lead">Amount Due 2/22/2014</p>
+											<p class="lead">Monto Total</p>
 
 											<div class="table-responsive">
 												<table class="table">
@@ -336,10 +336,18 @@
 									<div class="row no-print">
 										<div class="col-12">
 											<a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Generar XML</a>
-
+											@if($factura->url_pdf !== null)
+											@php
+											$urlPdf=asset($factura->url_pdf);
+											$urlPdf = str_replace('/', '\\', $urlPdf);
+											$urlPdf = str_replace('public', 'storage', $urlPdf);
+											@endphp
+											<a href="{{$urlPdf}}" target="_blank" class="btn btn-primary float-right"><i class="fas fa-download"></i> Ver PDF</a>
+											@else
 											<button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
 												<i class="fas fa-download"></i> Generar PDF
 											</button>
+											@endif
 										</div>
 									</div>
 								</div>

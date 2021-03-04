@@ -62,6 +62,7 @@ class FacturaController extends Controller
         $impuestoFactura=ImpuestoFactura::where('factura_id','=',$factura->id)->get()->last();
         $timbreFiscalDigital=TimbreFiscalDigital::where('factura_id','=',$factura->id)->get()->last();
         $conceptosFacturas=ConceptoFactura::where('factura_id','=',$factura->id)->get();
+        $cliente=Cliente::findOrFail($factura->facturasClientes->last()->cliente->id);
         return view('recursos_humanos.facturas.show',[
             'factura'=>$factura,
             'comprobanteFactura'=>$comprobanteFactura,
@@ -69,7 +70,8 @@ class FacturaController extends Controller
             'receptorFactura'=>$receptorFactura,
             'impuestoFactura'=>$impuestoFactura,
             'timbreFiscalDigital'=>$timbreFiscalDigital,
-            'conceptosFacturas'=>$conceptosFacturas]);
+            'conceptosFacturas'=>$conceptosFacturas,
+            'cliente'=>$cliente]);
     }
     public function edit($id)
     {
