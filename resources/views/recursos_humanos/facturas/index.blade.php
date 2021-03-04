@@ -54,8 +54,8 @@
                   </center>
                 </td>
               </tr>
-              @include('recursos_humanos.Facturas.destroy')
-          {{--     @include('recursos_humanos.Facturas.edit') --}}
+              @include('recursos_humanos.facturas.destroy')
+   {{--            @include('recursos_humanos.Facturas.edit') --}}
               @endforeach
             </tbody>
           </table>
