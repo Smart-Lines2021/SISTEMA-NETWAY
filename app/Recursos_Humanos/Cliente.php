@@ -4,6 +4,7 @@ namespace App\Recursos_Humanos;
 
 use App\Recursos_Humanos\ContactoCliente;
 use App\Recursos_Humanos\DomicilioCliente;
+use App\Recursos_Humanos\FacturaCliente;
 use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
@@ -14,5 +15,8 @@ class Cliente extends Model
     }
     public function contactosClientes(){
         return $this->hasMany(ContactoCliente::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
+    }
+    public function facturasClientes(){
+        return $this->hasMany(FacturaCliente::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
     }
 }

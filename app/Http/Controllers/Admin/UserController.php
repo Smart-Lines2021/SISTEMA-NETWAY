@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\User;
+use App\Admin\Persona;
 use Illuminate\Http\Request;
+use App\Admin\PersonaUsuario;
 use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -46,6 +48,7 @@ class UserController extends Controller
         $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
         $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
         $permisosGastos=Permission::where('category', 'Gastos e Información Bancaria')->pluck('name','id'); //Clasificamos los permisos
+        $personas=Persona::where('activo','=',1)->where('cuenta','=','Sin Asignar')->get();
         return view('admin.usuarios.create',[
             'usuario'=>$usuario,
             'roles'=>$roles,
@@ -54,7 +57,8 @@ class UserController extends Controller
             'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
             'permisosProductos'=>$permisosProductos,
             'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos,
-            'permisosGastos'=>$permisosGastos]);
+            'permisosGastos'=>$permisosGastos,
+            'personas'=>$personas]);
     }
 
     /**
@@ -70,12 +74,21 @@ class UserController extends Controller
         $usuario = User::create($request->validated());
         //asignamos roles
         if ($request->filled('roles')) {
-           $usuario->assignRole($request->roles);
-       }
+         $usuario->assignRole($request->roles);
+     }
         //asignamos permisos
-       if ($request->filled('permissions')) {
+     if ($request->filled('permissions')) {
         $usuario->givePermissionTo($request->permissions);
     }
+    //Asignamos la persona al usuario
+    $persona = Persona::findOrFail($request->persona_id);
+    $asignarUsuario=new PersonaUsuario();
+    $asignarUsuario->persona_id=$persona->id;
+    $asignarUsuario->user_id=$usuario->id;
+    $asignarUsuario->save();
+    //Cambiamos el estatus de la cuenta del usuario para ya no mostrarlo de opcion
+    $persona->cuenta="Asignada";
+    $persona->update();
     return redirect()->route('admin.usuarios.index')->with('mensaje','Se ha creado un nuevo usuario');
 }
 

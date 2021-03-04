@@ -23,6 +23,7 @@ class CreatePersonasTable extends Migration
             $table->string('correo',80);
             $table->string('nss',15);
             $table->string('carrera',30);
+            $table->enum('cuenta', ['Sin Asignar', 'Asignada','Suspendida']);
             $table->boolean('activo')->default(1);
             $table->timestamps();
         });

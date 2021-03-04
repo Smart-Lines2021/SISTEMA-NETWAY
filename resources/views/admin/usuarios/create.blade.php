@@ -30,6 +30,16 @@
 						<label for="email">Correo Electronico: </label>
 						<input type="email" name="email" value="{{old('email')}}" class="form-control">
 					</div>
+					 <div class="form-group">
+                        <label for="persona_id">Empleados</label>
+                        <select class="form-control select2" id="bancos"
+                        data-placeholder="Seleccione el empleado a asignar" style="width: 100%;" name="persona_id" required>
+                        <option selected="selected" value="">Seleccione el empleado a asignar</option>
+                        @foreach ($personas as $persona)
+                        <option {{ old('persona_id') == $persona->id ? "selected" : "" }}  value="{{$persona->id}}">{{$persona->nombre}} </option>
+                        @endforeach
+                    </select>
+                </div>
 					<div class="form-group col-md-12">
 						@include('admin.usuarios.checkboxes.roles')
 					</div>
@@ -44,3 +54,16 @@
 	</div>
 </div>
 @endsection
+@push('styles')
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
+@endpush
+@push('scripts')
+<script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
+<script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+<script>
+    $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+})
+</script>
+@endpush

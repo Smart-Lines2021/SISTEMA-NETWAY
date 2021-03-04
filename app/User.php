@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\UserResetPassword;
 
 class User extends Authenticatable
 {
@@ -39,5 +40,11 @@ class User extends Authenticatable
     ];
     public function personasUsuarios(){
         return $this->hasMany(PersonaUsuario::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
+    }
+
+    //Metodo para las notificaciones de correo electronico de restablecer contraseña
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new UserResetPassword($token));
     }
 }

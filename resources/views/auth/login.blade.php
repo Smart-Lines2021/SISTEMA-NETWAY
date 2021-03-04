@@ -35,6 +35,7 @@
 				</div>
 				<div>
 					<input  type="submit" value="Ingresar" />
+					<a class="btn btn-danger" href="{{route('password.request')}}">¿Has olvidado tu contraseña?</a>
 				</div>
 			</form><!-- form -->
 		</section><!-- content -->
