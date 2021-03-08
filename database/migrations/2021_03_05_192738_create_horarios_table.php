@@ -17,6 +17,7 @@ class CreateHorariosTable extends Migration
             $table->id();
             $table->string('dias',30);
             $table->string('horas',20);
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }

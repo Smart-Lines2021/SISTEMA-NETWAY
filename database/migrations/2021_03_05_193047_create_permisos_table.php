@@ -22,6 +22,7 @@ class CreatePermisosTable extends Migration
             $table->BigInteger('razon_permiso_id')->unsigned();
             $table->foreign('razon_permiso_id')->references('id')->on('razones_permisos');
             $table->date('fecha');
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }

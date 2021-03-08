@@ -21,6 +21,7 @@ class CreateAsistenciasTable extends Migration
             $table->foreign('horario_id')->references('id')->on('horarios');
             $table->enum('estado', ['Presente', 'Ausente','Justificado']);
             $table->date('fecha');
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }

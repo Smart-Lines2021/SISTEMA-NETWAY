@@ -17,6 +17,7 @@ class CreateRazonesPermisosTable extends Migration
             $table->id();
             $table->string('descripcion',100);
             $table->string('duracion',25);
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }
