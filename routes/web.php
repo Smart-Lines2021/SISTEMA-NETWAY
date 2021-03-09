@@ -61,6 +61,7 @@ Route::resource('recursos_humanos/polizas_vehiculos','Recursos_Humanos\PolizaVeh
 Route::resource('recursos_humanos/facturas','Recursos_Humanos\FacturaController')->parameters(['factura'=>'factura'])->names('rh.facturas');
 Route::resource('recursos_humanos/horarios','Recursos_Humanos\HorarioController')->parameters(['horario'=>'horario'])->names('rh.horarios');
 Route::resource('recursos_humanos/razones_permisos','Recursos_Humanos\RazonPermisoController')->parameters(['razonPermiso'=>'razonPermiso'])->names('rh.razones_permisos');
+Route::resource('recursos_humanos/asistencias','Recursos_Humanos\AsistenciaController')->parameters(['asistencia'=>'asistencia'])->names('rh.asistencias');
 
 
 
