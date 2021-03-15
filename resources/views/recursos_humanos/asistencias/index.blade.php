@@ -48,7 +48,7 @@
               data-placeholder="Seleccione el empleado" style="width: 100%;" name="horario_id" required>
               <option selected="selected" value="">Seleccione el empleado</option>
               @foreach ($horarios as $horario)
-              <option {{ old('horario_id') == $horario->id ? "selected" : "" }}  value="{{$horario->id}}">{{$horario->dias.' '.$horario->horas}} </option>
+              <option {{ old('horario_id') == $horario->id ? "selected" : "" }}  value="{{$horario->id}}">{{$horario->dias.' '.$horario->hora_entrada.'-'.$horario->hora_salida}} </option>
               @endforeach
             </select>
           </div>
@@ -104,7 +104,7 @@
               <tr>
                 <td>{{$asistencia->persona->nombre.' '.$asistencia->persona->apellido}}</td>
                 <td>{{$asistencia->persona->informacionesLaborales->last()->departamento->nombre}}</td>
-                <td>{{$asistencia->horario->dias.' '.$asistencia->horario->horas}}</td>
+                <td>{{$asistencia->horario->dias.' '.$asistencia->horario->hora_entrada.'-'.$asistencia->horario->hora_salida}}</td>
                 <td>{{$asistencia->estado}}</td>
                 <td>{{$asistencia->fecha}}</td>
               </tr>

@@ -30,7 +30,8 @@
               <tr>
                 <th>ID</th>
                 <th>Dias</th>
-                <th>Horas</th>
+                <th>Hora de entrada</th>
+                <th>Hora de salida</th>
                 <th>Opciones</th>
               </tr>
             </thead>
@@ -39,7 +40,8 @@
               <tr>
                 <td>{{$horario->id}}</td>
                 <td>{{$horario->dias}}</td>
-                <td>{{$horario->horas}}</td>
+                <td>{{$horario->hora_entrada}}</td>
+                <td>{{$horario->hora_salida}}</td>
                 <td>
                   <center>
                     <div class="btn-group">

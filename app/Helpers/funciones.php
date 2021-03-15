@@ -143,7 +143,7 @@ function guardaConceptos($xml,$concepto){
 	traslado($xml,$concepto);
 }
 
-function verificaAsistencias($verificaAsistencias,$empleados,$fecha){
+function verificaAsistencias($verificaAsistencias,$empleados,$fecha,$registroEmpleados){
 	 foreach ($verificaAsistencias as $asistencia) {
         //Si el empleado ya tiene la asistencia de hoy, ya no lo mandamos al select
             if ($asistencia->fecha === $fecha) {
@@ -159,7 +159,7 @@ function filtroAsistencias($consulta,$fecha){
 	if ($consulta === null) {
             $asistencias=Asistencia::where('activo','=',1)->where('fecha','=',$fecha)->paginate(10);
         }else{
-              $asistencias=Asistencia::join('personas as p', 'asistencias.persona_id', '=', 'p.id')->join('informaciones_laborales as informaciones','p.id','=','informaciones.persona_id')->join('departamentos as dep','informaciones.departamento_id','=','dep.id')->join('horarios as hor','asistencias.horario_id','=','hor.id')->orWhere('p.nombre','LIKE','%'.$consulta.'%')->orWhere('p.apellido','LIKE','%'.$consulta.'%')->orWhere('dep.nombre','LIKE','%'.$consulta.'%')->orWhere('asistencias.estado','LIKE','%'.$consulta.'%')->orWhere('asistencias.fecha','LIKE','%'.$consulta.'%')->orWhere('hor.dias','LIKE','%'.$consulta.'%')->orWhere('hor.horas','LIKE','%'.$consulta.'%')->paginate(10);
+              $asistencias=Asistencia::join('personas as p', 'asistencias.persona_id', '=', 'p.id')->join('informaciones_laborales as informaciones','p.id','=','informaciones.persona_id')->join('departamentos as dep','informaciones.departamento_id','=','dep.id')->join('horarios as hor','asistencias.horario_id','=','hor.id')->orWhere('p.nombre','LIKE','%'.$consulta.'%')->orWhere('p.apellido','LIKE','%'.$consulta.'%')->orWhere('dep.nombre','LIKE','%'.$consulta.'%')->orWhere('asistencias.estado','LIKE','%'.$consulta.'%')->orWhere('asistencias.fecha','LIKE','%'.$consulta.'%')->orWhere('hor.dias','LIKE','%'.$consulta.'%')->orWhere('hor.hora_entrada','LIKE','%'.$consulta.'%')->orWhere('hor.hora_salida','LIKE','%'.$consulta.'%')->paginate(10);
         }
         return $asistencias;
 }

@@ -19,11 +19,18 @@
           value="{{old('dias')}}">
         </div>
         <div class="form-group">
-          <label for="horas">Horas:</label>
-          <input type="text" name="horas" class="form-control" placeholder="Ejemplo 9:00-18:00" required pattern="[0-9-:]{1,20}"
-          minlegth="1" maxlength="20"
-          title="Solo se permiten letras y guion medio. Tamaño mínimo: 1. Tamaño máximo: 20"
-          value="{{old('horas')}}">
+          <label for="hora_entrada">Hora de entrada:</label>
+          <input type="text" name="hora_entrada" class="form-control" placeholder="Ejemplo 9:00" required pattern="[0-9:]{4,5}"
+          minlegth="4" maxlength="5"
+          title="Solo se permiten horas. Tamaño mínimo: 4. Tamaño máximo: 5"
+          value="{{old('hora_entrada')}}">
+        </div>
+        <div class="form-group">
+          <label for="hora_salida">Hora de salida:</label>
+          <input type="text" name="hora_salida" class="form-control" placeholder="Ejemplo 15:00" required pattern="[0-9:]{4,5}"
+          minlegth="4" maxlength="5"
+          title="Solo se permiten horas. Tamaño mínimo: 4. Tamaño máximo: 5"
+          value="{{old('hora_salida')}}">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

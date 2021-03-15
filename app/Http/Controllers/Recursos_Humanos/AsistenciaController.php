@@ -27,7 +27,7 @@ class AsistenciaController extends Controller
         $horarios=Horario::where('activo','=',1)->get();
         $verificaAsistencias=Asistencia::where('activo','=',1)->where('fecha','=',$fecha)->get();
         $asistencias=filtroAsistencias($consulta,$fecha);
-        $empleados= verificaAsistencias($verificaAsistencias,$empleados,$fecha);
+        $empleados= verificaAsistencias($verificaAsistencias,$empleados,$fecha,$registroEmpleados);
          return view('recursos_humanos.asistencias.index',[
             'empleados'=>$empleados,
             'horarios'=>$horarios,
