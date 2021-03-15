@@ -78,6 +78,18 @@
                   <p>Cargos</p>
                 </a>
               </li>
+               <li class="nav-item">
+                <a href="{{route('rh.horarios.index')}}" class="nav-link">
+                 <i class="fas fa-user-clock nav-icon"></i>
+                  <p>Horarios</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{{route('rh.razones_permisos.index')}}" class="nav-link">
+                  <i class="fas fa-head-side-cough nav-icon"></i>
+                  <p>Justificaciones</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{route('admin.bancos.index')}}" class="nav-link">
                   <i class="fas fa-university nav-icon"></i>
@@ -214,6 +226,18 @@
       <a href="{{route('admin.personas.index')}}" class="nav-link">
         <i class="fas fa-id-badge"></i>
         <p>Empleados</p>
+      </a>
+    </li>
+     <li class="nav-item">
+      <a href="{{route('rh.asistencias.index')}}" class="nav-link">
+       <i class="fas fa-user-check"></i>
+        <p>Asistencias</p>
+      </a>
+    </li>
+     <li class="nav-item">
+      <a href="{{route('rh.permisos_empleados.index')}}" class="nav-link">
+       <i class="far fa-calendar-alt"></i>
+        <p>Permisos</p>
       </a>
     </li>
 

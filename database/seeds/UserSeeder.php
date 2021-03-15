@@ -30,12 +30,26 @@ class UserSeeder extends Seeder
     	$usuario->save();
     	$usuario->assignRole($administrador);
 
+        $usuario=new User;
+        $usuario->name="Angel 2";
+        $usuario->email="juanangelmolinadt2018@gmail.com";
+        $usuario->password=bcrypt('12345');
+        $usuario->save();
+        $usuario->assignRole($administrador);
+
     	$usuario=new User;
     	$usuario->name="Brian Aaron";
     	$usuario->email="brian@hotmail.com";
     	$usuario->password=bcrypt('12345');
     	$usuario->save();
     	$usuario->assignRole($administrador);
+
+        $usuario=new User;
+        $usuario->name="Brian Aaron 2";
+        $usuario->email="bray9720@gmail.com";
+        $usuario->password=bcrypt('12345');
+        $usuario->save();
+        $usuario->assignRole($administrador);
 
     	$usuario=new User;
     	$usuario->name="Jesus Ramirez";
@@ -44,12 +58,26 @@ class UserSeeder extends Seeder
     	$usuario->save();
     	$usuario->assignRole($administrador);
 
+        $usuario=new User;
+        $usuario->name="Jesus Ramirez 2";
+        $usuario->email="jesus21c.jrv@gmail.com";
+        $usuario->password=bcrypt('12345');
+        $usuario->save();
+        $usuario->assignRole($administrador);
+
     	$usuario=new User;
     	$usuario->name="Juan Eduardo";
     	$usuario->email="eduardo@hotmail.com";
     	$usuario->password=bcrypt('12345');
     	$usuario->save();
     	$usuario->assignRole($recursosHumanos);
+
+        $usuario=new User;
+        $usuario->name="Juan Eduardo 2";
+        $usuario->email="jereyess98@gmail.com";
+        $usuario->password=bcrypt('12345');
+        $usuario->save();
+        $usuario->assignRole($recursosHumanos);
 
     	$usuario=new User;
     	$usuario->name="Deni Sarai";
@@ -58,11 +86,25 @@ class UserSeeder extends Seeder
     	$usuario->save();
     	$usuario->assignRole($recursosHumanos);
 
+        $usuario=new User;
+        $usuario->name="Deni Sarai 2";
+        $usuario->email="elfish.deni@gmail.com";
+        $usuario->password=bcrypt('12345');
+        $usuario->save();
+        $usuario->assignRole($recursosHumanos);
+
     	$usuario=new User;
     	$usuario->name="Fabian";
     	$usuario->email="fabian@hotmail.com";
     	$usuario->password=bcrypt('12345');
     	$usuario->save();
     	$usuario->assignRole($recursosHumanos);
+
+        $usuario=new User;
+        $usuario->name="Fabian 2";
+        $usuario->email="fabianalex10095@gmail.com";
+        $usuario->password=bcrypt('12345');
+        $usuario->save();
+        $usuario->assignRole($recursosHumanos);
     }
 }

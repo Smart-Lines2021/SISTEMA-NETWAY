@@ -9,7 +9,9 @@ use App\Documentos\ConstanciaSeguro;
 use App\Documentos\Curp;
 use App\Documentos\IdentificacionOficial;
 use App\Documentos\Pcr;
+use App\Recursos_Humanos\Asistencia;
 use App\Recursos_Humanos\InformacionLaboral;
+use App\Recursos_Humanos\PermisoEmpleado;
 use Illuminate\Database\Eloquent\Model;
 
 class Persona extends Model
@@ -39,5 +41,11 @@ class Persona extends Model
     }
     public function pcrs(){
         return $this->hasMany(Pcr::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
+    }
+    public function asistencias(){
+        return $this->hasMany(Asistencia::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
+    }
+    public function permisos(){
+        return $this->hasMany(PermisoEmpleado::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
     }
 }

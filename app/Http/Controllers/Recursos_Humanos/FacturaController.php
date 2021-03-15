@@ -89,6 +89,10 @@ class FacturaController extends Controller
     }
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $factura=Factura::findOrFail($id);
+        $factura->activo=0;
+        $factura->update();
+        return back()->with('mensaje','Se ha eliminado la factura');
     }
 }

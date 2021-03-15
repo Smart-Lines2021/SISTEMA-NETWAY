@@ -1,11 +1,11 @@
 @extends('admin.layout.layout')
 @section('title')
-<h1 class="m-0 text-dark">Facturas</h1>
+<h1 class="m-0 text-dark">Horarios</h1>
 @endsection
 @section('content-header')
 <ol class="breadcrumb float-sm-right">
   <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
-  <li class="breadcrumb-item active">Recursos Humanos</li>
+  <li class="breadcrumb-item active">Administración</li>
 </ol>
 @stop
 @section('content')
@@ -14,10 +14,11 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Tabla de Facturas</h3>
-          <a class="btn btn-secondary float-right" style="color: white" href="{{route('rh.facturas.create')}}">
-            <i class="fa fa-plus" role="button"></i> Añadir Factura
+          <h3 class="card-title">Tabla de Horarios</h3>
+          <a class="btn btn-secondary float-right" style="color: white" data-target="#modal-create" data-toggle="modal">
+            <i class="fa fa-plus" role="button"></i> Añadir Horarios
           </a>
+          @include('recursos_humanos.horarios.create')
         </div>
         <br>
         <br>
@@ -28,15 +29,19 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Ruta de Factura</th>
+                <th>Dias</th>
+                <th>Hora de entrada</th>
+                <th>Hora de salida</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($facturas as $factura)
+              @foreach($horarios as $horario)
               <tr>
-                <td>{{$factura->id}}</td>
-                <td>{{$factura->url}}</td>
+                <td>{{$horario->id}}</td>
+                <td>{{$horario->dias}}</td>
+                <td>{{$horario->hora_entrada}}</td>
+                <td>{{$horario->hora_salida}}</td>
                 <td>
                   <center>
                     <div class="btn-group">
@@ -45,17 +50,17 @@
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" href="{{route('rh.facturas.show',Crypt::encryptString($factura->id))}}"><i class="fas fa-user-edit"></i>Ver</a>
+                        <a class="dropdown-item" data-target="#modal-edit-{{$horario->id}}" data-toggle="modal"><i class="fas fa-user-edit"></i> Editar</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" data-target="#modal-destroy-{{$factura->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
+                        <a class="dropdown-item" data-target="#modal-destroy-{{$horario->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
                         <div class="dropdown-divider"></div>
                       </div>
                     </div>
                   </center>
                 </td>
               </tr>
-              @include('recursos_humanos.facturas.destroy')
-   {{--            @include('recursos_humanos.Facturas.edit') --}}
+              @include('recursos_humanos.horarios.destroy')
+              @include('recursos_humanos.horarios.edit')
               @endforeach
             </tbody>
           </table>
