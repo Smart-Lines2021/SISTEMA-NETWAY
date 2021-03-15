@@ -4,12 +4,8 @@ namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
-use App\Http\Requests\Flotillas\PolizaVehiculoDetalleRequest;
-use App\Recursos_Humanos\PolizaVehiculo;
 
-
-class PolizaVehiculoController extends Controller
+class FirmaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +14,7 @@ class PolizaVehiculoController extends Controller
      */
     public function index()
     {
-        return "Poliza de vehiculo";
+        
     }
 
     /**
@@ -28,7 +24,7 @@ class PolizaVehiculoController extends Controller
      */
     public function create()
     {
-        //
+        return "hola";
     }
 
     /**
@@ -37,15 +33,9 @@ class PolizaVehiculoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PolizaVehiculoDetalleRequest $request)
+    public function store(Request $request)
     {
-        $vehiculo_id = Crypt::decryptString($request->vehiculo_id);
-
-        $poliza = PolizaVehiculo::create($request->validated());
-        $poliza->vehiculo_id = $vehiculo_id;
-        $poliza->save();
-
-        return back()->with('mensaje', 'Se ha añadido una nueva aseguradora');
+        //
     }
 
     /**
@@ -67,8 +57,7 @@ class PolizaVehiculoController extends Controller
      */
     public function edit($id)
     {
-        $id = Crypt::decryptString($id);
-        return $id;
+        //
     }
 
     /**
@@ -92,29 +81,5 @@ class PolizaVehiculoController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-
-    public function storePorVistaDetalle(PolizaVehiculoDetalleRequest $request)
-    {
-        $vehiculo_id = Crypt::decryptString($request->vehiculo_id);
-   
-
-        $poliza = PolizaVehiculo::make($request->validated());
-        $poliza->vehiculo_id = $vehiculo_id;
-        $poliza->save();
-        return back()->with('mensaje', 'Se ha añadido una nueva Poliza');
-
-
-        
     }
 }

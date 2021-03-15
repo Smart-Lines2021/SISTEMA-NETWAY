@@ -83,3 +83,11 @@ Route::post('documentos/{persona_id}/curps', 'Documentos\CurpController@store')-
 Route::post('documentos/{persona_id}/certificados_alturas', 'Documentos\CertificadoAlturaController@store')->name('documentos.certificados_alturas.store');
 
 Route::post('documentos/{persona_id}/pcrs', 'Documentos\PcrController@store')->name('documentos.pcr.store');
+
+
+
+//Poliza Vehiculo por vista detalle
+
+Route::get('vehiculos/individual/{id_vehiculo}', 'Recursos_Humanos\PolizaVehiculoController@createPorVistaDetalle')->name('create.poliza.vista.detalle');
+
+Route::post('vehiculos/individual', 'Recursos_Humanos\PolizaVehiculoController@storePorVistaDetalle')->name('store.poliza.vista.detalle');

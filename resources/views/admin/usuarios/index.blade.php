@@ -8,7 +8,6 @@
   <li class="breadcrumb-item active">Administración</li>
 </ol>
 @stop
-
 @section('content')
 <div class="container-fluid">
   <div class="row">

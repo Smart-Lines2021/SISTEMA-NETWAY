@@ -36,7 +36,8 @@
                                 <label for="foto_vehiculo">Foto del Vehículo</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" name="foto_vehiculo" value="{{old('foto_vehiculo')}}" class="custom-file-input" id="inputFoto">
+                                        <input type="file" name="foto_vehiculo" value="{{old('foto_vehiculo')}}"
+                                            class="custom-file-input" id="inputFoto">
                                         <label class="custom-file-label" for="foto_vehiculo">Elegir imagen</label>
                                     </div>
                                 </div>
@@ -47,35 +48,38 @@
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label for="nombre">Nombre del vehículo: </label>
-                                <input type="text" name="nombre" value="{{old('nombre')}}" class="form-control" placeholder="Ingrese el nombre del vehículo" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,40}" minlegth="2" maxlength="40" title="Solo se permiten letras. Tamaño mínimo: 2. Tamaño máximo: 40">
+                                <input type="text" name="nombre" value="{{old('nombre')}}" class="form-control"
+                                    placeholder="Ingrese el nombre del vehículo" required
+                                    pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,40}" minlegth="2" maxlength="40"
+                                    title="Solo se permiten letras. Tamaño mínimo: 2. Tamaño máximo: 40">
                             </div>
                         </div>
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label for="anio_modelo">Año del modelo del vehiculo:</label>
                                 <input type="number" name="anio_modelo" value="{{old('anio_modelo')}}"
-                                class="form-control" placeholder="Ingrese año del vehiculo" required pattern="[0-9]"
-                                minlegth="2" maxlength="4"
-                                title="Solo se permiten numeros. Tamaño mínimo: 2. Tamaño máximo: 4. Ejemplo: 1998">
+                                    class="form-control" placeholder="Ingrese año del vehiculo" required pattern="[0-9]"
+                                    minlegth="2" maxlength="4"
+                                    title="Solo se permiten numeros. Tamaño mínimo: 2. Tamaño máximo: 4. Ejemplo: 1998">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 text-left-center">
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label for="kilometraje">Kilometraje:</label>
                                 <input type="number" name="kilometraje" value="{{old('kilometraje')}}"
-                                class="form-control" placeholder="Ingrese el kilometraje del vehiculo (km ó mi)" required pattern="[0-9]"
-                                minlegth="1" maxlength="10"
-                                title="Solo se permiten numeros. Tamaño mínimo: 1. Tamaño máximo: 10. Ejemplo: 15000">
+                                    class="form-control" placeholder="Ingrese el kilometraje del vehiculo (km ó mi)"
+                                    required pattern="[0-9]" minlegth="1" maxlength="10"
+                                    title="Solo se permiten numeros. Tamaño mínimo: 1. Tamaño máximo: 10. Ejemplo: 15000">
                             </div>
                         </div>
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label for="placa">Placa:</label>
-                                <input type="text" name="placa" value="{{old('placa')}}"
-                                    class="form-control" placeholder="Ingrese la placa del vehículo"required pattern="[A-Z 1-9]+"
+                                <input type="text" name="placa" value="{{old('placa')}}" class="form-control"
+                                    placeholder="Ingrese la placa del vehículo" required pattern="[A-Z 1-9]+"
                                     minlegth="1" maxlength="30"
                                     title="Solo se permiten numeros y letras. Tamaño mínimo: 1. Tamaño máximo: 30">
                             </div>
@@ -87,10 +91,12 @@
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label for="color">Color:</label>
-                                <select id="color" name="color" class="form-control select2" required title="Por favor, seleccione el color del vehículo.">
+                                <select id="color" name="color" class="form-control select2" required
+                                    title="Por favor, seleccione el color del vehículo.">
                                     <option value="">Seleccione un color</option>
                                     @foreach ($colores as $color)
-                                    <option value="{{ $color->id }}" {{ old('color') == $color->id ? 'selected' : '' }}>{{ $color->nombre }}</option>
+                                    <option value="{{ $color->id }}" {{ old('color') == $color->id ? 'selected' : '' }}>
+                                        {{ $color->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -98,8 +104,8 @@
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label for="no_serie">Número de serie:</label>
-                                <input type="text" name="no_serie" value="{{old('no_serie')}}"
-                                    class="form-control" placeholder="Ingrese el número de serie del vehículo"required pattern="[A-Z 1-9]+"
+                                <input type="text" name="no_serie" value="{{old('no_serie')}}" class="form-control"
+                                    placeholder="Ingrese el número de serie del vehículo" required pattern="[A-Z 1-9]+"
                                     minlegth="1" maxlength="30"
                                     title="Solo se permiten numeros y letras. Tamaño mínimo: 1. Tamaño máximo: 30">
                             </div>
@@ -112,10 +118,13 @@
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label for="marca_id">Marca:</label>
-                                <select id="marca_id" name="marca_id" class="form-control select2" required title="Por favor, seleccione la marca del vehículo.">
+                                <select id="marca_id" name="marca_id" class="form-control select2" required
+                                    title="Por favor, seleccione la marca del vehículo.">
                                     <option value="">Seleccione una marca</option>
                                     @foreach ($marcas as $marca)
-                                    <option value="{{ $marca->id }}" {{ old('marca_id') == $marca->id ? 'selected' : '' }}>{{ $marca->nombre }}</option>
+                                    <option value="{{ $marca->id }}"
+                                        {{ old('marca_id') == $marca->id ? 'selected' : '' }}>{{ $marca->nombre }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -124,10 +133,13 @@
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label for="tipo_vehiculo_id">Tipo de vehículo:</label>
-                                <select id="tipo_vehiculo_id" name="tipo_vehiculo_id" class="form-control select2" required title="Por favor, seleccione el tipo del vehículo.">
+                                <select id="tipo_vehiculo_id" name="tipo_vehiculo_id" class="form-control select2"
+                                    required title="Por favor, seleccione el tipo del vehículo.">
                                     <option value="">Seleccione un tipo</option>
                                     @foreach ($tipos_vehiculos as $tipo_vehiculo)
-                                    <option value="{{ $tipo_vehiculo->id }}" {{ old('tipo_vehiculo_id') == $tipo_vehiculo->id ? 'selected' : '' }}>{{ $tipo_vehiculo->nombre }}</option>
+                                    <option value="{{ $tipo_vehiculo->id }}"
+                                        {{ old('tipo_vehiculo_id') == $tipo_vehiculo->id ? 'selected' : '' }}>
+                                        {{ $tipo_vehiculo->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -136,12 +148,12 @@
 
                     <div class="row">
 
-                      
+
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label for="no_serie">Póliza de seguro::</label>
-                                <input type="text" name="poliza" value="{{old('poliza')}}"
-                                    class="form-control" placeholder="Ingrese el número de poliza del vehículo"required pattern="[A-Z 1-9]+"
+                                <input type="text" name="poliza" value="{{old('poliza')}}" class="form-control"
+                                    placeholder="Ingrese el número de poliza del vehículo" required pattern="[A-Z 1-9]+"
                                     minlegth="1" maxlength="30"
                                     title="Solo se permiten numeros y letras. Tamaño mínimo: 1. Tamaño máximo: 30">
                             </div>
@@ -151,10 +163,13 @@
                         <div class="col-md-6 text-left-center">
                             <div class="form-group">
                                 <label for="aseguradora_id">Aseguradora:</label>
-                                <select id="aseguradora_id" name="aseguradora_id" class="form-control select2" required title="Por favor, seleccione aseguradora.">
+                                <select id="aseguradora_id" name="aseguradora_id" class="form-control select2" required
+                                    title="Por favor, seleccione aseguradora.">
                                     <option value="">Seleccione aseguradora</option>
                                     @foreach ($aseguradoras as $aseguradora)
-                                    <option value="{{ $aseguradora->id }}" {{ old('aseguradora_id') == $tipo_vehiculo->id ? 'selected' : '' }}>{{ $aseguradora->nombre }}</option>
+                                    <option value="{{ $aseguradora->id }}"
+                                        {{ old('aseguradora_id') == $aseguradora->id ? 'selected' : '' }}>
+                                        {{ $aseguradora->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -162,14 +177,23 @@
                     </div>
 
                     <div class="row">
+
+                        <div class="col-md-3 text-left-center">
+                            <div class="form-group">
+                                <label for="vigencia_poliza">Fecha de inicio de póliza::</label>
+                                <input value="{{old('inicio_poliza')}}" type="date" name="inicio_poliza"
+                                    class="form-control" required>
+                            </div>
+                        </div>
                         <div class="col-md-3 text-left-center">
                             <div class="form-group">
                                 <label for="vigencia_poliza">Fecha de vigencia de póliza::</label>
-                                <input value="{{old('vigencia_poliza')}}" type="date" name="vigencia_poliza" class="form-control" required>
+                                <input value="{{old('vigencia_poliza')}}" type="date" name="vigencia_poliza"
+                                    class="form-control" required>
                             </div>
                         </div>
                     </div>
-                    
+
                     <button class="btn btn-info btn-block">Crear Vehiculo</button>
                 </form>
             </div>
@@ -219,4 +243,3 @@
 </script>
 
 @endpush
-
