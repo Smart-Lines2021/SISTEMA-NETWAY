@@ -87,6 +87,11 @@
             <br>
           </form>
   </div>
+  @if(isset($consulta))
+  <button onclick="descargarTabla('table_id', 'Asistencias de {{$consulta}}')" class="btn btn-secondary">Descargar Con Nombre</button>
+  @else
+  <button onclick="descargarTabla('table_id', 'Asistencias de {{date('Y-m-d')}}')" class="btn btn-secondary">Descargar con Fecha</button>
+  @endif
   <table id="table_id" class="table table-bordered table-striped">
     <thead>
       <tr>
@@ -127,6 +132,32 @@ Incluimos los links del diseño de la tabla de un solo archivo
 @include('auxiliares.design-datatables')
 @endpush --}}
 @push('scripts')
+<script type="text/javascript">
+function descargarTabla(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    // Create download link element
+    downloadLink = document.createElement("a");
+    document.body.appendChild(downloadLink);
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+        // Setting the file name
+        downloadLink.download = filename;
+        //triggering the function
+        downloadLink.click();
+    }
+}
+</script>
 {{-- Incluimos los scripts de la tabla de un solo archivo --}}
 {{-- @include('auxiliares.scripts-datatables') --}}
 {{-- Scripts para el select2 --}}
