@@ -76,6 +76,17 @@
   </form>
   <br>
   <div class="clearfix"></div>
+  <div class="box-tools float-right">
+          <form action="{{route('rh.asistencias.index')}}" method="get" onsubmit="return showLoad()">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="consulta" class="form-control float-right" placeholder="Buscar" value="{{$consulta}}">
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-sm"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+            <br>
+          </form>
+  </div>
   <table id="table_id" class="table table-bordered table-striped">
     <thead>
       <tr>
@@ -98,23 +109,26 @@
                 <td>{{$asistencia->fecha}}</td>
               </tr>
               @endforeach
+
             </tbody>
           </table>
+            {{$asistencias->links()}}{{--  Paginación --}}
+          </div>
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
     </div>
   </div>
-</div>
+
 @stop
-@push('styles')
-{{-- Incluimos los links del diseño de la tabla de un solo archivo --}}
+{{-- @push('styles')
+Incluimos los links del diseño de la tabla de un solo archivo
 @include('auxiliares.design-datatables')
-@endpush
+@endpush --}}
 @push('scripts')
 {{-- Incluimos los scripts de la tabla de un solo archivo --}}
-@include('auxiliares.scripts-datatables')
+{{-- @include('auxiliares.scripts-datatables') --}}
 {{-- Scripts para el select2 --}}
 {{-- <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>

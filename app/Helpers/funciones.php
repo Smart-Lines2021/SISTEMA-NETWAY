@@ -1,5 +1,6 @@
 <?php
 
+use App\Recursos_Humanos\Asistencia;
 use App\Recursos_Humanos\ComprobanteFactura;
 use App\Recursos_Humanos\ConceptoFactura;
 use App\Recursos_Humanos\EmisorFactura;
@@ -140,5 +141,26 @@ function timbreFiscalDigital($xml,$idFactura){
 }
 function guardaConceptos($xml,$concepto){
 	traslado($xml,$concepto);
+}
+
+function verificaAsistencias($verificaAsistencias,$empleados,$fecha){
+	 foreach ($verificaAsistencias as $asistencia) {
+        //Si el empleado ya tiene la asistencia de hoy, ya no lo mandamos al select
+            if ($asistencia->fecha === $fecha) {
+                $registroEmpleados[]= $asistencia->persona_id;
+            }
+        }
+        foreach ($registroEmpleados  as $registroEmpleado) {
+            $empleados=$empleados->where('id', '!=', $registroEmpleado);
+        }
+        return $empleados;
+}
+function filtroAsistencias($consulta,$fecha){
+	if ($consulta === null) {
+            $asistencias=Asistencia::where('activo','=',1)->where('fecha','=',$fecha)->paginate(10);
+        }else{
+              $asistencias=Asistencia::join('personas as p', 'asistencias.persona_id', '=', 'p.id')->join('informaciones_laborales as informaciones','p.id','=','informaciones.persona_id')->join('departamentos as dep','informaciones.departamento_id','=','dep.id')->join('horarios as hor','asistencias.horario_id','=','hor.id')->orWhere('p.nombre','LIKE','%'.$consulta.'%')->orWhere('p.apellido','LIKE','%'.$consulta.'%')->orWhere('dep.nombre','LIKE','%'.$consulta.'%')->orWhere('asistencias.estado','LIKE','%'.$consulta.'%')->orWhere('asistencias.fecha','LIKE','%'.$consulta.'%')->orWhere('hor.dias','LIKE','%'.$consulta.'%')->orWhere('hor.horas','LIKE','%'.$consulta.'%')->paginate(10);
+        }
+        return $asistencias;
 }
 ?>

@@ -16,29 +16,23 @@ class AsistenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //Consulta desde el buscador
+        $consulta=$request->consulta;
         //Obtener fecha actual
         $fecha=date('Y-m-d');
         $registroEmpleados=array();
         $empleados=Persona::where('activo','=',1)->orderBy('apellido','desc')->get();
         $horarios=Horario::where('activo','=',1)->get();
-        $conteoEmpleados=Persona::where('activo','=',1)->get();
-        $cantidadEmpleados= sizeof($conteoEmpleados); //Contamos la cantidad de empleados
-        $asistencias=Asistencia::where('activo','=',1)->where('fecha','=',$fecha)->paginate($cantidadEmpleados);
-        foreach ($asistencias as $asistencia) {
-        //Si el empleado ya tiene la asistencia de hoy, ya no lo mandamos al select
-            if ($asistencia->fecha === $fecha) {
-                $registroEmpleados[]= $asistencia->persona_id;
-            }
-        }
-        foreach ($registroEmpleados  as $registroEmpleado) {
-            $empleados=$empleados->where('id', '!=', $registroEmpleado);
-        }
+        $verificaAsistencias=Asistencia::where('activo','=',1)->where('fecha','=',$fecha)->get();
+        $asistencias=filtroAsistencias($consulta,$fecha);
+        $empleados= verificaAsistencias($verificaAsistencias,$empleados,$fecha);
          return view('recursos_humanos.asistencias.index',[
             'empleados'=>$empleados,
             'horarios'=>$horarios,
-            'asistencias'=>$asistencias]);
+            'asistencias'=>$asistencias,
+            'consulta'=>$consulta]);
         }
 
     /**
