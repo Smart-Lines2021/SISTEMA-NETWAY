@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AseguradoraSeeder::class);//Ejecutamos el Seeder
         $this->call(BancoSeeder::class);//Ejecutamos el Seeder
         $this->call(TallerMecanicoSeeder::class);//Ejecutamos el Seeder
+        $this->call(HorarioSeeder::class);//Ejecutamos el Seeder
+        $this->call(EmpleadoSeeder::class);//Ejecutamos el Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
