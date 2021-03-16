@@ -63,6 +63,8 @@ Route::resource('recursos_humanos/horarios','Recursos_Humanos\HorarioController'
 Route::resource('recursos_humanos/razones_permisos','Recursos_Humanos\RazonPermisoController')->parameters(['razonPermiso'=>'razonPermiso'])->names('rh.razones_permisos');
 Route::resource('recursos_humanos/asistencias','Recursos_Humanos\AsistenciaController')->parameters(['asistencia'=>'asistencia'])->names('rh.asistencias');
 Route::resource('recursos_humanos/permisos_empleados','Recursos_Humanos\PermisoEmpleadoController')->parameters(['permisoEmpleado'=>'permisoEmpleado'])->names('rh.permisos_empleados');
+//Firma
+Route::resource('recursos_humanos/firmas','Recursos_Humanos\FirmaController')->parameters(['firma'=>'firma'])->names('rh.firmas');
 
 
 
@@ -96,3 +98,4 @@ Route::post('documentos/{persona_id}/pcrs', 'Documentos\PcrController@store')->n
 Route::get('vehiculos/individual/{id_vehiculo}', 'Recursos_Humanos\PolizaVehiculoController@createPorVistaDetalle')->name('create.poliza.vista.detalle');
 
 Route::post('vehiculos/individual', 'Recursos_Humanos\PolizaVehiculoController@storePorVistaDetalle')->name('store.poliza.vista.detalle');
+

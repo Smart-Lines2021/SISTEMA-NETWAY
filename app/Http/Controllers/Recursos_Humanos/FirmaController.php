@@ -24,7 +24,7 @@ class FirmaController extends Controller
      */
     public function create()
     {
-        return "hola";
+        return view('Recursos_Humanos.firmas.create');
     }
 
     /**
