@@ -72,15 +72,15 @@
   <br>
   <div class="clearfix"></div>
   <div class="box-tools float-right">
-          <form action="{{route('rh.asistencias.index')}}" method="get" onsubmit="return showLoad()">
-            <div class="input-group input-group-sm" style="width: 150px;">
-              <input type="text" name="consulta" class="form-control float-right" placeholder="Buscar" value="{{$consulta}}">
-              <div class="input-group-btn">
-                <button type="submit" class="btn btn-sm"><i class="fa fa-search"></i></button>
-              </div>
-            </div>
-            <br>
-          </form>
+    <form action="{{route('rh.asistencias.index')}}" method="get" onsubmit="return showLoad()">
+      <div class="input-group input-group-sm" style="width: 150px;">
+        <input type="text" name="consulta" class="form-control float-right" placeholder="Buscar" value="{{$consulta}}">
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-sm"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+      <br>
+    </form>
   </div>
   @if(isset($consulta))
   <button onclick="descargarTabla('table_id', 'Asistencias de {{$consulta}}')" class="btn btn-secondary">Descargar Con Nombre</button>
@@ -95,31 +95,48 @@
         <th>Horarios</th>
         <th>Asistio</th>
         <th>Fecha</th>
-              {{--   <th>Descripción</th>
-                <th>Duración</th> --}}
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($asistencias as $asistencia)
-              <tr>
-                <td>{{$asistencia->persona->nombre.' '.$asistencia->persona->apellido}}</td>
-                <td>{{$asistencia->persona->informacionesLaborales->last()->departamento->nombre}}</td>
-                <td>{{$asistencia->horario->dias.' '.$asistencia->horario->hora_entrada.'-'.$asistencia->horario->hora_salida}}</td>
-                <td>{{$asistencia->estado}}</td>
-                <td>{{$asistencia->fecha}}</td>
-              </tr>
-              @endforeach
+        <th>Opciones</th>
 
-            </tbody>
-          </table>
-            {{$asistencias->links()}}{{--  Paginación --}}
-          </div>
-        </div>
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
-    </div>
-  </div>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($asistencias as $asistencia)
+      <tr>
+        <td>{{$asistencia->persona->nombre.' '.$asistencia->persona->apellido}}</td>
+        <td>{{$asistencia->persona->informacionesLaborales->last()->departamento->nombre}}</td>
+        <td>{{$asistencia->horario->dias.' '.$asistencia->horario->hora_entrada.'-'.$asistencia->horario->hora_salida}}</td>
+        <td>{{$asistencia->estado}}</td>
+        <td>{{$asistencia->fecha}}</td>
+        <td>
+          <center>
+            <div class="btn-group">
+              <button type="button" class="btn btn-info btn-flat">Opciones</button>
+              <button type="button" class="btn btn-info btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                {{-- <span class="sr-only"></span> --}}
+              </button>
+              <div class="dropdown-menu" role="menu">
+                <a class="dropdown-item" href="{{route('rh.asistencias.edit',Crypt::encryptString($asistencia->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" data-target="#modal-destroy-{{$asistencia->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
+                <div class="dropdown-divider"></div>
+              </div>
+            </div>
+          </center>
+        </td>
+      </tr>
+       @include('recursos_humanos.asistencias.destroy')
+      @endforeach
+
+    </tbody>
+  </table>
+  {{$asistencias->links()}}{{--  Paginación --}}
+</div>
+</div>
+<!-- /.card-body -->
+</div>
+<!-- /.card -->
+</div>
+</div>
 
 @stop
 {{-- @push('styles')
@@ -128,9 +145,9 @@ Incluimos los links del diseño de la tabla de un solo archivo
 @endpush --}}
 @push('scripts')
 <script type="text/javascript">
-function descargarTabla(tableID, filename = ''){
+  function descargarTabla(tableID, filename = ''){
     var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
+    var dataType = 'application/vnd.ms-excel' +  ';charset=utf-8';
     var tableSelect = document.getElementById(tableID);
     var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
     // Specify file name
@@ -139,10 +156,10 @@ function descargarTabla(tableID, filename = ''){
     downloadLink = document.createElement("a");
     document.body.appendChild(downloadLink);
     if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
+      var blob = new Blob(['ufeff', tableHTML], {
+        type: dataType
+      });
+      navigator.msSaveOrOpenBlob( blob, filename);
     }else{
         // Create a link to the file
         downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
@@ -150,12 +167,12 @@ function descargarTabla(tableID, filename = ''){
         downloadLink.download = filename;
         //triggering the function
         downloadLink.click();
+      }
     }
-}
-</script>
-{{-- Incluimos los scripts de la tabla de un solo archivo --}}
-{{-- @include('auxiliares.scripts-datatables') --}}
-{{-- Scripts para el select2 --}}
+  </script>
+  {{-- Incluimos los scripts de la tabla de un solo archivo --}}
+  {{-- @include('auxiliares.scripts-datatables') --}}
+  {{-- Scripts para el select2 --}}
 {{-- <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <script>

@@ -7,6 +7,7 @@ use App\Http\Requests\Recursos_Humanos\PermisoEmpleadoRequest;
 use App\Recursos_Humanos\Asistencia;
 use App\Recursos_Humanos\PermisoEmpleado;
 use App\Recursos_Humanos\RazonPermiso;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 
 class PermisoEmpleadoController extends Controller
@@ -42,49 +43,31 @@ class PermisoEmpleadoController extends Controller
         $asistencia->update();
         return back()->with('mensaje','Se ha registrado un nuevo permiso');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $asistencias=Asistencia::where('activo','=',1)->where('estado','=','ausente')->get(); //Mandamos listar los empleados ausentes, obtenemos la fecha y lo necesario
+        $justificaciones = RazonPermiso::where('activo','=',1)->get();
+        $id=Crypt::decryptString($id);
+        $permisoEmpleado=PermisoEmpleado::findOrFail($id);
+        return view('recursos_humanos.permisos_empleados.edit',[
+            'asistencias'=>$asistencias,
+            'justificaciones'=>$justificaciones,
+            'permisoEmpleado'=>$permisoEmpleado]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(PermisoEmpleadoRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $permisoEmpleado=PermisoEmpleado::findOrFail($id);
+        $permisoEmpleado->update($request->validated());
+        return redirect()->route('rh.permisos_empleados.index')->with('mensaje','Se ha actualizado el permiso del empleado '.$permisoEmpleado->persona->nombre.' '.$permisoEmpleado->persona->apellido);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $permisoEmpleado=PermisoEmpleado::findOrFail($id);
+        $permisoEmpleado->delete();
+        return back()->with('mensaje','Se ha eliminado el permiso del empleado '.$permisoEmpleado->persona->nombre.' '.$permisoEmpleado->persona->apellido);
     }
 }

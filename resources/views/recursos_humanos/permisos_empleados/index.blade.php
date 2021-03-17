@@ -39,7 +39,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="asistencia_id">Empleado:</label>
+              <label for="asistencia_id">Asistencia:</label>
               <select class="form-control select2" id="empleados"
               data-placeholder="Seleccione la fecha de asistencia" style="width: 100%;" name="asistencia_id" required>
               <option selected="selected" value="">Seleccione la fecha de asistencia</option>
@@ -104,6 +104,7 @@
         <th>Departamento</th>
         <th>Motivo</th>
         <th>Dias Ausente</th>
+        <th>Opciones</th>
       </tr>
     </thead>
     <tbody>
@@ -113,7 +114,24 @@
         <td>{{$permiso->persona->informacionesLaborales->last()->departamento->nombre}}</td>
         <td>{{$permiso->razonPermiso->descripcion}}</td>
         <td>{{$permiso->fecha_inicio.'-'.$permiso->fecha_fin}}</td>
+         <td>
+          <center>
+            <div class="btn-group">
+              <button type="button" class="btn btn-info btn-flat">Opciones</button>
+              <button type="button" class="btn btn-info btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                {{-- <span class="sr-only"></span> --}}
+              </button>
+              <div class="dropdown-menu" role="menu">
+                <a class="dropdown-item" href="{{route('rh.permisos_empleados.edit',Crypt::encryptString($permiso->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" data-target="#modal-destroy-{{$permiso->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
+                <div class="dropdown-divider"></div>
+              </div>
+            </div>
+          </center>
+        </td>
       </tr>
+      @include('recursos_humanos.permisos_empleados.destroy')
       @endforeach
 
     </tbody>
