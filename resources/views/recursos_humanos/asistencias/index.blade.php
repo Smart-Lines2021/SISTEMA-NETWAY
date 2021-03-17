@@ -15,10 +15,6 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Tabla de Asistencias</h3>
-          <a class="btn btn-secondary float-right" style="color: white" data-target="#modal-create" data-toggle="modal">
-            <i class="fa fa-plus" role="button"></i> Añadir Asistencia
-          </a>
-          {{-- @include('recursos_humanos.razones_permisos.create') --}}
         </div>
         <br>
         <br>
@@ -61,7 +57,6 @@
             <option selected="selected" value="">Seleccione una opción</option>
             <option {{ old('estado')}}  value="Presente">Presente</option>
             <option {{ old('estado')}}  value="Ausente">Ausente</option>
-            <option {{ old('estado')}}  value="Justificado">Justificado</option>
           </select>
         </div>
         <div class="form-group">
