@@ -66,6 +66,9 @@ Route::resource('recursos_humanos/permisos_empleados','Recursos_Humanos\PermisoE
 //Firma
 Route::resource('recursos_humanos/firmas','Recursos_Humanos\FirmaController')->parameters(['firma'=>'firma'])->names('rh.firmas');
 
+//Rutas
+Route::resource('recursos_humanos/rutas','Recursos_Humanos\RutaController')->parameters(['ruta'=>'ruta'])->names('rh.rutas');
+
 
 
 //Control de Sesiones y de usuarios
