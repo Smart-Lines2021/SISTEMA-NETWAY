@@ -15,7 +15,7 @@ class CreateServicioVehiculosTable extends Migration
     {
         Schema::create('servicio_vehiculos', function (Blueprint $table) {
             $table->id();
-            $table->double('kilometraje',8,2);
+            $table->double('kilometraje',12,2);
             $table->BigInteger('tipo_servicio_id')->unsigned();
             $table->foreign('tipo_servicio_id')->references('id')->on('tipo_servicio_vehiculos');
             $table->BigInteger('taller_id')->unsigned();

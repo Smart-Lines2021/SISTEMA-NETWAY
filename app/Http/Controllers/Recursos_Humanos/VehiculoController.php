@@ -5,16 +5,15 @@ namespace App\Http\Controllers\Recursos_Humanos;
 use App\Admin\Aseguradora;
 use App\Admin\Color;
 use App\Admin\Marca;
+use App\Admin\TallerMecanico;
+use App\Admin\TipoServicioVehiculo;
 use App\Admin\TipoVehiculo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\VehiculoRequest;
-
-use App\Recursos_Humanos\Vehiculo;
 use App\Recursos_Humanos\PolizaVehiculo;
-use Illuminate\Support\Facades\DB;
-
-
+use App\Recursos_Humanos\Vehiculo;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -98,9 +97,13 @@ class VehiculoController extends Controller
         $id = Crypt::decryptString($id);
         $vehiculo = Vehiculo::findOrFail($id);
         $aseguradoras = Aseguradora::get();
-       
+        $tiposServicios=TipoServicioVehiculo::where('activo','=',1)->get();
+        $talleres=TallerMecanico::where('activo','=',1)->get();
         return view('flotillas.vehiculos.vista_detalle', [
-            'vehiculo' => $vehiculo, 'aseguradoras'=> $aseguradoras
+            'vehiculo' => $vehiculo,
+            'aseguradoras'=> $aseguradoras,
+            'tiposServicios'=>$tiposServicios,
+            'talleres'=>$talleres,
         ]);
     }
 

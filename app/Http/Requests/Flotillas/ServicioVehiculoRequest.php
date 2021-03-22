@@ -27,12 +27,10 @@ class ServicioVehiculoRequest extends FormRequest
            'kilometraje'=>'required|numeric|digits_between:1,8',
            'tipo_servicio_id'=>'required|integer',
            'taller_id'=>'required|integer',
-           'vehiculo_id'=>'required|integer',
            'observaciones'=>'string|max:150',
            'fecha'=>'required|date',
            'estado'=>'required|in:Programado,Realizado,Suspendido,Cancelado',
            'tipo_mantenimiento'=>'required|in:Programado,Imprevisto',
-
        ];
    }
    public function messages(){
@@ -41,8 +39,8 @@ class ServicioVehiculoRequest extends FormRequest
             'tipo_servicio_id.integer' => 'Seleccione una opción valida para el tipo de servicio',
             'taller_id.required' => 'Es necesario seleccionar un taller',
             'taller_id.integer' => 'Seleccione una opción valida para el taller',
-            'vehiculo_id.required' => 'Es necesario seleccionar un vehiculo',
-            'vehiculo_id.integer' => 'Seleccione una opción valida para el vehiculo',
+           /* 'vehiculo_id.required' => 'Es necesario seleccionar un vehiculo',
+            'vehiculo_id.integer' => 'Seleccione una opción valida para el vehiculo',*/
             'observaciones.max'=>'Las observaciones no deben pasar de 150 caracteres',
             'fecha.required'=>'Es necesario indicar la fecha de realización del servicio',
             'fecha.date'=>'El formato de fecha no es valido',

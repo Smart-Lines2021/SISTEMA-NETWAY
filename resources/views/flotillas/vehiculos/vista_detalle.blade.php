@@ -95,10 +95,10 @@
                         <li class="nav-item"><a class="nav-link active" href="#polizas" data-toggle="tab">Pólizas de
                                 seguro</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#mantenimientos" data-toggle="tab">Mantenimientos
-                                Programados</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Historial de
-                                Mantenimientos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#mantenimientosProgramados" data-toggle="tab">Mantenimientos
+                              Programados</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#mantenimientosImprevistos" data-toggle="tab">
+                                Mantenimientos Imprevistos</a></li>
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -171,18 +171,15 @@
                         </div>
                         <!-- /.tab-pane -->
 
-                        <div class="tab-pane" id="mantenimientos">
-                        </div>
-                        <!-- /.tab-pane -->
-
-                        <div class="tab-pane" id="settings">
-                            <a data-target="#modal-create-2-{{$vehiculo->id}}" data-toggle="modal"
+                        <div class="tab-pane" id="mantenimientosProgramados">
+                            <a data-target="#modal-create-2" data-toggle="modal"
                                 class="btn btn-secondary float-rigth">
                                 <i class="fa fa-plus"></i> Añadir Servicio
                             </a>
                             <br>
                             <br>
-                            <table id="table_id" class="table table-bordered table-striped">
+                            <div class="table table-responsive">
+                            <table id="other_table"  class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -197,10 +194,11 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($vehiculo->serviciosVehiculos as $servicio)
+                                    @if(isset($servicio->tipo_mantenimiento) && $servicio->tipo_mantenimiento === 'Programado')
                                     <tr>
                                         <td>{{$servicio->id}}</td>
                                         <td>{{$servicio->kilometraje}}</td>
-                                        <td>{{$servicio->tipoServicio}}</td>
+                                        <td>{{$servicio->tipoServicio->nombre}}</td>
                                         <td>{{$servicio->taller->nombre}}</td>
                                         <td>{{$servicio->observaciones}}</td>
                                         <td>{{$servicio->fecha}}</td>
@@ -216,12 +214,13 @@
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
-                                                        <a class="dropdown-item"
-                                                            href="{{route('create.poliza.vista.detalle',Crypt::encryptString($poliza->id))}}"><i
-                                                                class="fas fa-user-edit"></i> Editar</a>
+                                                       <a class="dropdown-item"
+                                                            data-target="#modal-edit-2-{{$servicio->id}}"
+                                                            data-toggle="modal"><i class="fas fa-user-times"></i>
+                                                            Editar</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item"
-                                                            data-target="#modal-destroy-{{$poliza->id}}"
+                                                            data-target="#modal-destroy-2-{{$servicio->id}}"
                                                             data-toggle="modal"><i class="fas fa-user-times"></i>
                                                             Eliminar</a>
                                                         <div class="dropdown-divider"></div>
@@ -231,11 +230,80 @@
                                             </center>
                                         </td>
                                     </tr>
-                                    @include('flotillas.polizas.destroy')
+                                    @include('flotillas.mantenimientos.destroy')
+                                    @include('flotillas.mantenimientos.edit')
+                                    @endif
                                     @endforeach
                                     @include('flotillas.mantenimientos.create')
                                 </tbody>
                             </table>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+
+                        <div class="tab-pane" id="mantenimientosImprevistos">
+                            <br>
+                            <br>
+                            <div class="table table-responsive">
+                            <table id="other_table"  class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Kilometraje</th>
+                                        <th>Tipo de Servicio</th>
+                                        <th>Taller</th>
+                                        <th>Observaciones</th>
+                                        <th>Fecha Programada</th>
+                                        <th>Estado</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($vehiculo->serviciosVehiculos as $servicio)
+                                    @if(isset($servicio->tipo_mantenimiento) && $servicio->tipo_mantenimiento === 'Imprevisto')
+                                    <tr>
+                                        <td>{{$servicio->id}}</td>
+                                        <td>{{$servicio->kilometraje}}</td>
+                                        <td>{{$servicio->tipoServicio->nombre}}</td>
+                                        <td>{{$servicio->taller->nombre}}</td>
+                                        <td>{{$servicio->observaciones}}</td>
+                                        <td>{{$servicio->fecha}}</td>
+                                        <td>{{$servicio->estado}}</td>
+                                        <td>
+                                            <center>
+                                                <div class="btn-group">
+                                                    <button type="button"
+                                                        class="btn btn-info btn-flat">Opciones</button>
+                                                    <button type="button"
+                                                        class="btn btn-info btn-flat dropdown-toggle dropdown-icon"
+                                                        data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu" role="menu">
+                                                       <a class="dropdown-item"
+                                                            data-target="#modal-edit-2-{{$servicio->id}}"
+                                                            data-toggle="modal"><i class="fas fa-user-times"></i>
+                                                            Editar</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item"
+                                                            data-target="#modal-destroy-2-{{$servicio->id}}"
+                                                            data-toggle="modal"><i class="fas fa-user-times"></i>
+                                                            Eliminar</a>
+                                                        <div class="dropdown-divider"></div>
+
+                                                    </div>
+                                                </div>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    @include('flotillas.mantenimientos.destroy')
+                                    @include('flotillas.mantenimientos.edit')
+                                    @endif
+                                    @endforeach
+                                    @include('flotillas.mantenimientos.create')
+                                </tbody>
+                            </table>
+                            </div>
 
                         </div>
                         <!-- /.tab-pane -->
