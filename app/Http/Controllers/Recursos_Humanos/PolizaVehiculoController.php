@@ -40,7 +40,6 @@ class PolizaVehiculoController extends Controller
     public function store(PolizaVehiculoDetalleRequest $request)
     {
         $vehiculo_id = Crypt::decryptString($request->vehiculo_id);
-
         $poliza = PolizaVehiculo::create($request->validated());
         $poliza->vehiculo_id = $vehiculo_id;
         $poliza->save();
@@ -78,43 +77,30 @@ class PolizaVehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PolizaVehiculoDetalleRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $vehiculo_id=Crypt::decryptString($request->vehiculo_id); //Quitamos la encriptacion del vehiculo
+        $poliza=PolizaVehiculo::findOrFail($id);
+        $poliza->update($request->validated());
+        $poliza->vehiculo_id=$vehiculo_id;
+        $poliza->save();
+        return back()->with('mensaje','Se ha actualizado la poliza del vehiculo');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $poliza=PolizaVehiculo::findOrFail($id);
+        $poliza->delete();
+        return back()->with('mensaje','Se ha eliminado la poliza');
     }
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
 
     public function storePorVistaDetalle(PolizaVehiculoDetalleRequest $request)
     {
         $vehiculo_id = Crypt::decryptString($request->vehiculo_id);
-   
-
         $poliza = PolizaVehiculo::make($request->validated());
         $poliza->vehiculo_id = $vehiculo_id;
         $poliza->save();
         return back()->with('mensaje', 'Se ha añadido una nueva Poliza');
-
-
-        
     }
 }

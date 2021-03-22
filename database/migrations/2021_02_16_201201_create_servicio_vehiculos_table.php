@@ -24,6 +24,8 @@ class CreateServicioVehiculosTable extends Migration
             $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
             $table->text('observaciones')->nullable($value=true);
             $table->date("fecha");
+            $table->enum('estado', ['Programado', 'Realizado','Suspendido','Cancelado']);
+            $table->enum('tipo_mantenimiento', ['Programado', 'Imprevisto']);
             $table->timestamps();
         });
     }

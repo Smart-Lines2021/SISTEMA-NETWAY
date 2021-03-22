@@ -107,11 +107,10 @@
 
                         <div class="active tab-pane" id="polizas">
 
-                            <a data-target="#modal-create-1-{{$vehiculo->id}}" data-toggle="modal"
+                           <a data-target="#modal-create-1-{{$vehiculo->id}}" data-toggle="modal"
                                 class="btn btn-secondary float-rigth">
                                 <i class="fa fa-plus"></i> Añadir Poliza
                             </a>
-
 
                             <table id="table_id" class="table table-bordered table-striped">
 
@@ -147,8 +146,9 @@
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
                                                         <a class="dropdown-item"
-                                                            href="{{route('create.poliza.vista.detalle',Crypt::encryptString($poliza->id))}}"><i
-                                                                class="fas fa-user-edit"></i> Editar</a>
+                                                            data-target="#modal-edit-{{$poliza->id}}"
+                                                            data-toggle="modal"><i class="fas fa-user-times"></i>
+                                                            Editar</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item"
                                                             data-target="#modal-destroy-{{$poliza->id}}"
@@ -162,8 +162,9 @@
                                         </td>
                                     </tr>
                                     @include('flotillas.polizas.destroy')
+                                    @include('flotillas.polizas.edit')
                                     @endforeach
-                                    @include('flotillas.mantenimientos.create_detalle')
+                                    @include('flotillas.polizas.create')
                                 </tbody>
                             </table>
 
@@ -171,45 +172,39 @@
                         <!-- /.tab-pane -->
 
                         <div class="tab-pane" id="mantenimientos">
-
-
-
                         </div>
                         <!-- /.tab-pane -->
 
                         <div class="tab-pane" id="settings">
-                            <a data-target="#modal-create-1-{{$vehiculo->id}}" data-toggle="modal"
+                            <a data-target="#modal-create-2-{{$vehiculo->id}}" data-toggle="modal"
                                 class="btn btn-secondary float-rigth">
                                 <i class="fa fa-plus"></i> Añadir Servicio
                             </a>
                             <br>
                             <br>
-
-
                             <table id="table_id" class="table table-bordered table-striped">
-
                                 <thead>
-
                                     <tr>
-                                        <th>ID<</th> 
-                                        <th>Aseguradora</th>
-                                        <th>Póliza de Seguro</th>
-                                        <th>Inicio de Póliza</th>
-                                        <th>Vigencia</th>
+                                        <th>ID</th>
+                                        <th>Kilometraje</th>
+                                        <th>Tipo de Servicio</th>
+                                        <th>Taller</th>
+                                        <th>Observaciones</th>
+                                        <th>Fecha Programada</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($vehiculo->serviciosVehiculos as $servicio)
-
-
                                     <tr>
                                         <td>{{$servicio->id}}</td>
-                                        <td>{{$servicio->aseguradora->nombre}}</td>
-                                        <td>{{$servicio->taller->tipoServicio}}</td>
-                                        <td>{{$servicio->vehiculo->tipoServicio}}</td>
+                                        <td>{{$servicio->kilometraje}}</td>
+                                        <td>{{$servicio->tipoServicio}}</td>
                                         <td>{{$servicio->taller->nombre}}</td>
                                         <td>{{$servicio->observaciones}}</td>
+                                        <td>{{$servicio->fecha}}</td>
+                                        <td>{{$servicio->estado}}</td>
                                         <td>
                                             <center>
                                                 <div class="btn-group">
@@ -238,7 +233,7 @@
                                     </tr>
                                     @include('flotillas.polizas.destroy')
                                     @endforeach
-                                    @include('flotillas.polizas.create_x_detalle')
+                                    @include('flotillas.mantenimientos.create')
                                 </tbody>
                             </table>
 
