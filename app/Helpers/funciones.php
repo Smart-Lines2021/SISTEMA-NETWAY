@@ -6,6 +6,7 @@ use App\Recursos_Humanos\ConceptoFactura;
 use App\Recursos_Humanos\EmisorFactura;
 use App\Recursos_Humanos\FacturaCliente;
 use App\Recursos_Humanos\ImpuestoFactura;
+use App\Recursos_Humanos\PolizaVehiculo;
 use App\Recursos_Humanos\ReceptorFactura;
 use App\Recursos_Humanos\TimbreFiscalDigital;
 use App\Recursos_Humanos\TrasladoFactura;
@@ -100,67 +101,83 @@ function concepto($xml,$idFactura){
 }
 function traslado($xml,$concepto){
 	for ($i=0; $i < sizeof($concepto); $i++) {
-	foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Conceptos//cfdi:Concepto//cfdi:Impuestos//cfdi:Traslados//cfdi:Traslado') as $traslado){
-		$trasladoFactura=new TrasladoFactura();
-		$trasladoFactura->base=$traslado['Base'];
-		$trasladoFactura->impuesto=$traslado['Impuesto'];
-		$trasladoFactura->tipo_factor=$traslado['TipoFactor'];
-		$trasladoFactura->cuota=$traslado['TasaOCuota'];
-		$trasladoFactura->importe=$traslado['Importe'];
-		/*for ($j=1; $j <= $i; $j++) {*/
-		$trasladoFactura->concepto_factura_id=$concepto[$i++];
-		$trasladoFactura->save();
-	}
-}
-}
-function impuesto($xml,$idFactura){
-	foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Impuestos') as $impuesto){
-		if ($impuesto['TotalImpuestosTrasladados'] !== null) {
-			$impuestoFactura= new ImpuestoFactura();
-			$impuestoFactura->impuesto_total=$impuesto['TotalImpuestosTrasladados'];
-			$impuestoFactura->factura_id=$idFactura;
-			$impuestoFactura->save();
+		foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Conceptos//cfdi:Concepto//cfdi:Impuestos//cfdi:Traslados//cfdi:Traslado') as $traslado){
+			$trasladoFactura=new TrasladoFactura();
+			$trasladoFactura->base=$traslado['Base'];
+			$trasladoFactura->impuesto=$traslado['Impuesto'];
+			$trasladoFactura->tipo_factor=$traslado['TipoFactor'];
+			$trasladoFactura->cuota=$traslado['TasaOCuota'];
+			$trasladoFactura->importe=$traslado['Importe'];
+			/*for ($j=1; $j <= $i; $j++) {*/
+				$trasladoFactura->concepto_factura_id=$concepto[$i++];
+				$trasladoFactura->save();
+			}
 		}
 	}
-}
-
-function timbreFiscalDigital($xml,$idFactura){
-	foreach ($xml->xpath('//t:TimbreFiscalDigital') as $tfd) {
-		$timbreFiscalDigital = new TimbreFiscalDigital();
-		$timbreFiscalDigital->version=$tfd['Version'];
-		$timbreFiscalDigital->uuid=$tfd['UUID'];
-		$timbreFiscalDigital->fecha=$tfd['FechaTimbrado'];
-		$timbreFiscalDigital->rfc=$tfd['RfcProvCertif'];
-		$timbreFiscalDigital->sello=$tfd['SelloCFD'];
-		$timbreFiscalDigital->no_certificado_sat=$tfd['NoCertificadoSAT'];
-		$timbreFiscalDigital->sello_sat=$tfd['SelloSAT'];
-		$timbreFiscalDigital->factura_id=$idFactura;
-		$timbreFiscalDigital->save();
+	function impuesto($xml,$idFactura){
+		foreach ($xml->xpath('//cfdi:Comprobante//cfdi:Impuestos') as $impuesto){
+			if ($impuesto['TotalImpuestosTrasladados'] !== null) {
+				$impuestoFactura= new ImpuestoFactura();
+				$impuestoFactura->impuesto_total=$impuesto['TotalImpuestosTrasladados'];
+				$impuestoFactura->factura_id=$idFactura;
+				$impuestoFactura->save();
+			}
+		}
 	}
 
-}
-function guardaConceptos($xml,$concepto){
-	traslado($xml,$concepto);
-}
+	function timbreFiscalDigital($xml,$idFactura){
+		foreach ($xml->xpath('//t:TimbreFiscalDigital') as $tfd) {
+			$timbreFiscalDigital = new TimbreFiscalDigital();
+			$timbreFiscalDigital->version=$tfd['Version'];
+			$timbreFiscalDigital->uuid=$tfd['UUID'];
+			$timbreFiscalDigital->fecha=$tfd['FechaTimbrado'];
+			$timbreFiscalDigital->rfc=$tfd['RfcProvCertif'];
+			$timbreFiscalDigital->sello=$tfd['SelloCFD'];
+			$timbreFiscalDigital->no_certificado_sat=$tfd['NoCertificadoSAT'];
+			$timbreFiscalDigital->sello_sat=$tfd['SelloSAT'];
+			$timbreFiscalDigital->factura_id=$idFactura;
+			$timbreFiscalDigital->save();
+		}
 
-function verificaAsistencias($verificaAsistencias,$empleados,$fecha,$registroEmpleados){
-	 foreach ($verificaAsistencias as $asistencia) {
+	}
+	function guardaConceptos($xml,$concepto){
+		traslado($xml,$concepto);
+	}
+
+	function verificaAsistencias($verificaAsistencias,$empleados,$fecha,$registroEmpleados){
+		foreach ($verificaAsistencias as $asistencia) {
         //Si el empleado ya tiene la asistencia de hoy, ya no lo mandamos al select
-            if ($asistencia->fecha === $fecha) {
-                $registroEmpleados[]= $asistencia->persona_id;
-            }
-        }
-        foreach ($registroEmpleados  as $registroEmpleado) {
-            $empleados=$empleados->where('id', '!=', $registroEmpleado);
-        }
-        return $empleados;
-}
-function filtroAsistencias($consulta,$fecha){
-	if ($consulta === null) {
-            $asistencias=Asistencia::where('activo','=',1)->where('fecha','=',$fecha)->paginate(10);
-        }else{
-              $asistencias=Asistencia::join('personas as p', 'asistencias.persona_id', '=', 'p.id')->join('informaciones_laborales as informaciones','p.id','=','informaciones.persona_id')->join('departamentos as dep','informaciones.departamento_id','=','dep.id')->join('horarios as hor','asistencias.horario_id','=','hor.id')->orWhere('p.nombre','LIKE','%'.$consulta.'%')->orWhere('p.apellido','LIKE','%'.$consulta.'%')->orWhere('dep.nombre','LIKE','%'.$consulta.'%')->orWhere('asistencias.estado','LIKE','%'.$consulta.'%')->orWhere('asistencias.fecha','LIKE','%'.$consulta.'%')->orWhere('hor.dias','LIKE','%'.$consulta.'%')->orWhere('hor.hora_entrada','LIKE','%'.$consulta.'%')->orWhere('hor.hora_salida','LIKE','%'.$consulta.'%')->paginate(10);
-        }
-        return $asistencias;
-}
-?>
+			if ($asistencia->fecha === $fecha) {
+				$registroEmpleados[]= $asistencia->persona_id;
+			}
+		}
+		foreach ($registroEmpleados  as $registroEmpleado) {
+			$empleados=$empleados->where('id', '!=', $registroEmpleado);
+		}
+		return $empleados;
+	}
+	function filtroAsistencias($consulta,$fecha){
+		if ($consulta === null) {
+			$asistencias=Asistencia::where('activo','=',1)->where('fecha','=',$fecha)->paginate(10);
+		}else{
+			$asistencias=Asistencia::join('personas as p', 'asistencias.persona_id', '=', 'p.id')->join('informaciones_laborales as informaciones','p.id','=','informaciones.persona_id')->join('departamentos as dep','informaciones.departamento_id','=','dep.id')->join('horarios as hor','asistencias.horario_id','=','hor.id')->orWhere('p.nombre','LIKE','%'.$consulta.'%')->orWhere('p.apellido','LIKE','%'.$consulta.'%')->orWhere('dep.nombre','LIKE','%'.$consulta.'%')->orWhere('asistencias.estado','LIKE','%'.$consulta.'%')->orWhere('asistencias.fecha','LIKE','%'.$consulta.'%')->orWhere('hor.dias','LIKE','%'.$consulta.'%')->orWhere('hor.hora_entrada','LIKE','%'.$consulta.'%')->orWhere('hor.hora_salida','LIKE','%'.$consulta.'%')->paginate(10);
+		}
+		return $asistencias;
+	}
+
+	function cantidadNotificaciones(){
+		//Obtenemos la fecha de cada una de las polizas y mantenimientos
+		$notificacion = 0; //Inicializamos la variable en cero
+		$fecha=date('Y-m-d'); //Obtenemos la fecha actual
+		$polizas=PolizaVehiculo::where('activo','=',1)->get();
+		foreach ($polizas as $poliza) {
+			$fechaPoliza = $poliza->vigencia_poliza;
+			//Obtenemos la fecha de hace 3 dias
+			$fechaPoliza =  date('Y-m-d',strtotime($fechaPoliza."- 3 days"));
+			if ($fechaPoliza == $fecha) { //Si la fecha de hoy coincide con la fecha del vencimiento de la poliza 3 dias antes
+				$notificacion++;
+			}
+		}
+		return $notificacion;
+	}
+	?>
