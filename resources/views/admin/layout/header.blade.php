@@ -15,20 +15,25 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
           <span class="dropdown-item dropdown-header">{{cantidadNotificaciones()}} Notificaciones</span>
           <div class="dropdown-divider"></div>
+          @php
+              $mensajes = mensajesNotificaciones();
+          @endphp
+          @forelse($mensajes as $mensaje)
+          @php
+          $mensaje=explode('°', $mensaje);
+          @endphp
+          <a href="{{route($mensaje[2],$mensaje[3])}}" class="dropdown-item">
+            <p><i class="fas fa-envelope mr-2"></i> {{$mensaje[0]}} <span class="float-right text-muted text-sm">Hace {{$mensaje[1]}} horas</span></p>
+
+          </a>
+          <div class="dropdown-divider"></div>
+          @empty
           <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <i class="fas fa-envelope mr-2"></i> No tienes notificaciones
             <span class="float-right text-muted text-sm">3 mins</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
+          @endforelse
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
