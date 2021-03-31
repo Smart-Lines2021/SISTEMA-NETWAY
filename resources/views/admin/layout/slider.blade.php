@@ -72,6 +72,12 @@
                   <p>Departamentos</p>
                 </a>
               </li>
+               <li class="nav-item">
+                <a href="{{route('rh.tipos_documentos.index')}}" class="nav-link">
+                  <i class="fas fa-folder-open nav-icon"></i>
+                  <p>Tipos de Documentos</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{route('admin.cargos.index')}}" class="nav-link">
                   <i class="fas fa-briefcase nav-icon"></i>

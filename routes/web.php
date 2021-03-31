@@ -69,6 +69,8 @@ Route::resource('recursos_humanos/firmas','Recursos_Humanos\FirmaController')->p
 //Rutas
 Route::resource('recursos_humanos/rutas','Recursos_Humanos\RutaController')->parameters(['ruta'=>'ruta'])->names('rh.rutas');
 
+//Documentos
+Route::resource('recursos_humanos/tipos_documentos','Recursos_Humanos\TipoDocumentoController')->parameters(['tipoDocumento'=>'tipoDocumento'])->names('rh.tipos_documentos');
 
 
 //Control de Sesiones y de usuarios

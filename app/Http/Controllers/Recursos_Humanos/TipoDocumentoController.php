@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Recursos_Humanos\TipoDocumentoRequest;
+use App\Recursos_Humanos\TipoDocumento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class TipoDocumentoController extends Controller
 {
@@ -14,72 +17,28 @@ class TipoDocumentoController extends Controller
      */
     public function index()
     {
-        //
+        $tiposDocumentos=TipoDocumento::where('activo','=',1)->get();
+        return view('recursos_humanos.tipos_documentos.index',[
+            'tiposDocumentos'=>$tiposDocumentos]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(TipoDocumentoRequest $request)
     {
-        //
+        $tipoDocumento=TipoDocumento::create($request->validated());
+        return back()->with('mensaje','Se ha añadido un nuevo tipo de documento');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(TipoDocumentoRequest $request, $id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $tipoDocumento=TipoDocumento::findOrFail($id);
+        $tipoDocumento->update($request->validated());
+        return back()->with('mensaje','Se ha actualizado el tipo de documento');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $id=Crypt::decryptString($id);
+        $tipoDocumento=TipoDocumento::findOrFail($id);
+        $tipoDocumento->activo=0;
+        $tipoDocumento->save();
+        return back()->with('mensaje','Se ha eliminado el tipo de documento');
     }
 }
