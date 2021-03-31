@@ -10,6 +10,7 @@ use App\Documentos\Curp;
 use App\Documentos\IdentificacionOficial;
 use App\Documentos\Pcr;
 use App\Recursos_Humanos\Asistencia;
+use App\Recursos_Humanos\Documento;
 use App\Recursos_Humanos\InformacionLaboral;
 use App\Recursos_Humanos\PermisoEmpleado;
 use Illuminate\Database\Eloquent\Model;
@@ -47,5 +48,8 @@ class Persona extends Model
     }
     public function permisos(){
         return $this->hasMany(PermisoEmpleado::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
+    }
+    public function documentos(){
+        return $this->hasMany(Documento::class); //Se relacionan las llaves foraneas que tiene el modelo en otras tablas
     }
 }

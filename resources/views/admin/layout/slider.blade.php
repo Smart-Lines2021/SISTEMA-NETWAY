@@ -263,7 +263,7 @@
         </p>
       </a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
       <a href="{{route('rh.servicios_vehiculos.index')}}" class="nav-link">
         <i class="fas fa-truck-moving"></i>
         <p>
@@ -278,7 +278,7 @@
           Polizas de Vehiculos
         </p>
       </a>
-    </li>
+    </li> --}}
 
 
   </ul>

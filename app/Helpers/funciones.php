@@ -175,7 +175,7 @@ function traslado($xml,$concepto){
 		foreach ($polizas as $poliza) {
 			$fechaPoliza = $poliza->vigencia_poliza;
 			//Obtenemos la fecha de hace 3 dias
-			$fechaPoliza =  date('Y-m-d',strtotime($fechaPoliza."- 3 days"));
+			$fechaPoliza =  date('Y-m-d',strtotime($fechaPoliza."- 31 days"));
 			if ($fechaPoliza == $fecha) { //Si la fecha de hoy coincide con la fecha del vencimiento de la poliza 3 dias antes
 				$notificacion++;
 			}
@@ -201,9 +201,9 @@ function traslado($xml,$concepto){
 		foreach ($polizas as $poliza) {
 			$fechaPoliza = $poliza->vigencia_poliza;
 			//Obtenemos la fecha de hace 3 dias
-			$fechaPoliza =  date('Y-m-d',strtotime($fechaPoliza."- 3 days"));
+			$fechaPoliza =  date('Y-m-d',strtotime($fechaPoliza."- 31 days"));
 			if ($fecha == $fechaPoliza && $poliza->activo == 1) {
-				$mensaje[]='La poliza de la flotilla '.$poliza->vehiculo->nombre.' vencera en 3 dias'.'°'.$tiempo.'°'.'rh.vehiculos.show'.'°'.Crypt::encryptString($poliza->vehiculo_id);
+				$mensaje[]='La poliza de la flotilla '.$poliza->vehiculo->nombre.' vencera en 31 dias'.'°'.$tiempo.'°'.'rh.vehiculos.show'.'°'.Crypt::encryptString($poliza->vehiculo_id);
 			}
 		}
 		foreach ($servicios as $servicio) {

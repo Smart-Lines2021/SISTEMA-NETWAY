@@ -454,4 +454,32 @@ function enviarPcr(){
   Dropzone.autoDiscover = false;
 }
 </script>
+
+@for($i =0;$i<=10;$i++)
+<script type="text/javascript">
+//Enviar Constancia de Seguro
+function prueba(){
+  var myDropzone = new Dropzone("#constanciaSeguro{{$i}}", {
+    url: '/documentos/{{$persona->id}}/constancias_seguros',
+    acceptedFiles: 'image/*,.pdf',
+    maxFiles: 1,
+    addRemoveLinks: false,
+    maxFilesize: 1,
+    paramName: 'constanciaSeguro',
+    headers: {
+      'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    dictDefaultMessage: 'Arrastre la constancia del seguro para subirla',
+    dictFileTooBig: 'El archivo es mayor a 1MB, por favor suba uno mas ligero',
+    dictInvalidFileType: 'Solamente se permite subir archivos de tipo imagen y pdf',
+    dictMaxFilesExceeded: 'Solamente puedes subir un archivo',
+  });
+  myDropzone.on('error', function(file, res){
+    var msg = "La " + res.errors.identificacion[0];
+    $('.dz-error-message:last > span').text(msg);
+  });
+  Dropzone.autoDiscover = false;
+}
+</script>
+@endfor
 @endpush
