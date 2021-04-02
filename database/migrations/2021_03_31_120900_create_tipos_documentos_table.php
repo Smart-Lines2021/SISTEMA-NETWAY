@@ -16,6 +16,7 @@ class CreateTiposDocumentosTable extends Migration
         Schema::create('tipos_documentos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre',30);
+            $table->string('clave',25);
             $table->mediumText('descripcion')->nullable($value = true);
             $table->string('carpeta',40);
             $table->string('formato',5);

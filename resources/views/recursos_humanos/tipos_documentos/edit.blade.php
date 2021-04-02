@@ -20,6 +20,13 @@
           value="{{old('nombre',$tipoDocumento->nombre)}}">
         </div>
         <div class="form-group">
+          <label for="clave">Clave:</label>
+          <input type="text" name="clave" class="form-control" placeholder="Ingrese la clave del Tipo de Documento" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,20}"
+          minlegth="2" maxlength="20"
+          title="Solo se permiten letras. Tamaño mínimo: 2. Tamaño máximo: 20"
+          value="{{old('clave',$tipoDocumento->clave)}}">
+        </div>
+        <div class="form-group">
           <label for="descripcion">Descripción:</label>
           <input type="text" name="descripcion" class="form-control" placeholder="Ingrese la descripción del Tipo de Documento" required pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]{2,50}"
           minlegth="2" maxlength="50"

@@ -236,31 +236,13 @@
   								<div class="timeline-body">
   									<div class="dropzone"  id="actaNacimiento2" style="display: none"></div>
   									<div class="row">
+                      @foreach($tiposDocumentos as $tipoDocumento)
   										<div class="col-lg-4 col-6">
-  											<label>Constancia del Seguro</label>
-  											<div class="dropzone" id="constanciaSeguro"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarConstanciaSeguro();">Subir</a>
+  											<label>{{$tipoDocumento->nombre}}</label>
+  											<div class="dropzone" id="{{$tipoDocumento->clave}}"></div>
+  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="{{$tipoDocumento->clave}}();">Subir</a>
   										</div>
-  										<div class="col-lg-4 col-6">
-  											<label>Credencial INE</label>
-  											<div class="dropzone" id="ine"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarIne();">Subir</a>
-  										</div>
-  										<div class="col-lg-4 col-6">
-  											<label>Curp</label>
-  											<div class="dropzone" id="curp"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarCurp();">Subir</a>
-  										</div>
-  										<div class="col-lg-4 col-6">
-  											<label>Certificados de Altura</label>
-  											<div class="dropzone" id="certificadoAltura"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarCertificadoAltura();">Subir</a>
-  										</div>
-  										<div class="col-lg-4 col-6">
-  											<label>PCR</label>
-  											<div class="dropzone" id="pcr"></div>
-  											<a href='javascript:;' style="background-color: #007bff; color: white" class="btn btn-block" type="button" onclick="enviarPcr();">Subir</a>
-  										</div>
+                      @endforeach
   									</div>
 
   								</div>
@@ -340,136 +322,22 @@
 @endpush
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"> </script>
-<script type="text/javascript">
-//Enviar Constancia de Seguro
-function enviarConstanciaSeguro(){
-	var myDropzone = new Dropzone("#constanciaSeguro", {
-		url: '/documentos/{{$persona->id}}/constancias_seguros',
-		acceptedFiles: 'image/*,.pdf',
-		maxFiles: 1,
-		addRemoveLinks: false,
-		maxFilesize: 1,
-		paramName: 'constanciaSeguro',
-		headers: {
-			'X-CSRF-TOKEN': '{{ csrf_token() }}'
-		},
-		dictDefaultMessage: 'Arrastre la constancia del seguro para subirla',
-		dictFileTooBig: 'El archivo es mayor a 1MB, por favor suba uno mas ligero',
-		dictInvalidFileType: 'Solamente se permite subir archivos de tipo imagen y pdf',
-		dictMaxFilesExceeded: 'Solamente puedes subir un archivo',
-	});
-	myDropzone.on('error', function(file, res){
-		var msg = "La " + res.errors.identificacion[0];
-		$('.dz-error-message:last > span').text(msg);
-	});
-	Dropzone.autoDiscover = false;
-}
 
-function enviarCertificadoAltura(){
-  var myDropzone = new Dropzone("#certificadoAltura", {
-    url: '/documentos/{{$persona->id}}/certificados_alturas',
-    acceptedFiles: 'image/*,.pdf',
-    maxFiles: 1,
-    addRemoveLinks: false,
-    maxFilesize: 1,
-    paramName: 'certificadoAltura',
-    headers: {
-      'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    },
-    dictDefaultMessage: 'Arrastre el certificado de altura para subirlo',
-    dictFileTooBig: 'El archivo es mayor a 1MB, por favor suba uno mas ligero',
-    dictInvalidFileType: 'Solamente se permite subir archivos de tipo imagen y pdf',
-    dictMaxFilesExceeded: 'Solamente puedes subir un archivo',
-  });
-  myDropzone.on('error', function(file, res){
-    var msg = "La " + res.errors.identificacion[0];
-    $('.dz-error-message:last > span').text(msg);
-  });
-  Dropzone.autoDiscover = false;
-}
-function enviarCurp(){
-  var myDropzone = new Dropzone("#curp", {
-    url: '/documentos/{{$persona->id}}/curps',
-    acceptedFiles: 'image/*,.pdf',
-    maxFiles: 1,
-    addRemoveLinks: false,
-    maxFilesize: 1,
-    paramName: 'curp',
-    headers: {
-      'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    },
-    dictDefaultMessage: 'Arrastre la curp para subirla',
-    dictFileTooBig: 'El archivo es mayor a 1MB, por favor suba uno mas ligero',
-    dictInvalidFileType: 'Solamente se permite subir archivos de tipo imagen y pdf',
-    dictMaxFilesExceeded: 'Solamente puedes subir un archivo',
-  });
-  myDropzone.on('error', function(file, res){
-    var msg = "La " + res.errors.identificacion[0];
-    $('.dz-error-message:last > span').text(msg);
-  });
-  Dropzone.autoDiscover = false;
-}
-function enviarIne(){
-  var myDropzone = new Dropzone("#ine", {
-    url: '/documentos/{{$persona->id}}/ines',
-    acceptedFiles: 'image/*,.pdf',
-    maxFiles: 1,
-    addRemoveLinks: false,
-    maxFilesize: 1,
-    paramName: 'ine',
-    headers: {
-      'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    },
-    dictDefaultMessage: 'Arrastre una Identificación Oficial para subirla',
-    dictFileTooBig: 'El archivo es mayor a 1MB, por favor suba uno mas ligero',
-    dictInvalidFileType: 'Solamente se permite subir archivos de tipo imagen y pdf',
-    dictMaxFilesExceeded: 'Solamente puedes subir un archivo',
-  });
-  myDropzone.on('error', function(file, res){
-    var msg = "La " + res.errors.identificacion[0];
-    $('.dz-error-message:last > span').text(msg);
-  });
-  Dropzone.autoDiscover = false;
-}
-function enviarPcr(){
-  var myDropzone = new Dropzone("#pcr", {
-    url: '/documentos/{{$persona->id}}/pcrs',
-    acceptedFiles: 'image/*,.pdf',
-    maxFiles: 1,
-    addRemoveLinks: false,
-    maxFilesize: 1,
-    paramName: 'pcr',
-    headers: {
-      'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    },
-    dictDefaultMessage: 'Arrastre el PCR para subirlo',
-    dictFileTooBig: 'El archivo es mayor a 1MB, por favor suba uno mas ligero',
-    dictInvalidFileType: 'Solamente se permite subir archivos de tipo imagen y pdf',
-    dictMaxFilesExceeded: 'Solamente puedes subir un archivo',
-  });
-  myDropzone.on('error', function(file, res){
-    var msg = "La " + res.errors.identificacion[0];
-    $('.dz-error-message:last > span').text(msg);
-  });
-  Dropzone.autoDiscover = false;
-}
-</script>
-
-@for($i =0;$i<=10;$i++)
 <script type="text/javascript">
-//Enviar Constancia de Seguro
-function prueba(){
-  var myDropzone = new Dropzone("#constanciaSeguro{{$i}}", {
-    url: '/documentos/{{$persona->id}}/constancias_seguros',
+//Enviar Documento
+@foreach($tiposDocumentos as $tipoDocumento)
+function {{$tipoDocumento->clave}}(){
+  var myDropzone = new Dropzone("#{{$tipoDocumento->clave}}", {
+    url: '/documentos/{{$persona->id}}/{{$tipoDocumento->carpeta}}/{{$tipoDocumento->clave}}/{{$tipoDocumento->id}}/cargar_documentos',
     acceptedFiles: 'image/*,.pdf',
     maxFiles: 1,
     addRemoveLinks: false,
     maxFilesize: 1,
-    paramName: 'constanciaSeguro',
+    paramName: '{{$tipoDocumento->clave}}',
     headers: {
       'X-CSRF-TOKEN': '{{ csrf_token() }}'
     },
-    dictDefaultMessage: 'Arrastre la constancia del seguro para subirla',
+    dictDefaultMessage: 'Arrastre el documento correspondiente a {{$tipoDocumento->nombre}} para subirlo',
     dictFileTooBig: 'El archivo es mayor a 1MB, por favor suba uno mas ligero',
     dictInvalidFileType: 'Solamente se permite subir archivos de tipo imagen y pdf',
     dictMaxFilesExceeded: 'Solamente puedes subir un archivo',
@@ -480,6 +348,6 @@ function prueba(){
   });
   Dropzone.autoDiscover = false;
 }
+@endforeach
 </script>
-@endfor
 @endpush

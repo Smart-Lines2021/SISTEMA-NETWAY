@@ -12,6 +12,7 @@ use App\Http\Requests\Recursos_Humanos\DomicilioPersonaRequest;
 use App\Http\Requests\Recursos_Humanos\EmpleadoRequest;
 use App\Http\Requests\Recursos_Humanos\InformacionLaboralRequest;
 use App\Recursos_Humanos\InformacionLaboral;
+use App\Recursos_Humanos\TipoDocumento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -42,10 +43,12 @@ class PersonaController extends Controller
         $this->authorize('view',$persona);
         $domicilio=$persona->domiciliosPersonas->last();
         $informacionLaboral=$persona->informacionesLaborales->last();
+        $tiposDocumentos=TipoDocumento::where('activo','=',1)->get();
         return view('recursos_humanos.documentos.cargar_documentos',[
             'persona'=>$persona,
             'domicilio'=>$domicilio,
-            'informacionLaboral'=>$informacionLaboral]);
+            'informacionLaboral'=>$informacionLaboral,
+            'tiposDocumentos'=>$tiposDocumentos]);
     }
 
     /**

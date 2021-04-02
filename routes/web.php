@@ -84,17 +84,7 @@ Route::put('administracion/usuarios/{usuario}/permisos','Admin\UserPermissionCon
 
 
 //Rutas relacionadas a la subida/control de documentos
-//SUBIR INE
-Route::post('documentos/{persona_id}/constancias_seguros', 'Documentos\ConstanciaSeguroController@store')->name('documentos.constancias_seguros.store');
-/*Route::get('solicitudes/ines/{persona_id}/show', 'Solicitante\IdentificacionOficialController@show')->name('solicitudes.ines.show');
-Route::put('solicitudes/ines/{persona_id}/update', 'Solicitante\IdentificacionOficialController@update')->name('solicitudes.ines.update');*/
-Route::post('documentos/{persona_id}/ines', 'Documentos\IdentificacionOficialController@store')->name('documentos.ines.store');
-
-Route::post('documentos/{persona_id}/curps', 'Documentos\CurpController@store')->name('documentos.curps.store');
-
-Route::post('documentos/{persona_id}/certificados_alturas', 'Documentos\CertificadoAlturaController@store')->name('documentos.certificados_alturas.store');
-
-Route::post('documentos/{persona_id}/pcrs', 'Documentos\PcrController@store')->name('documentos.pcr.store');
+Route::post('documentos/{persona_id}/{carpeta}/{parametro}/{tipoDocumento}/cargar_documentos', 'Recursos_Humanos\DocumentoController@store')->name('documentos.documento.store');
 
 
 

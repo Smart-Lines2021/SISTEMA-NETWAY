@@ -30,6 +30,7 @@
               <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Clave</th>
                 <th>Descripcion</th>
                 <th>Carpeta</th>
                 <th>Formato</th>
@@ -41,6 +42,7 @@
               <tr>
                 <td>{{$tipoDocumento->id}}</td>
                 <td>{{$tipoDocumento->nombre}}</td>
+                <td>{{$tipoDocumento->clave}}</td>
                 <td>{{$tipoDocumento->descripcion}}</td>
                 <td>{{$tipoDocumento->carpeta}}</td>
                 <td>{{$tipoDocumento->formato}}</td>

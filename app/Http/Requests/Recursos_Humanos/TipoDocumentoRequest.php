@@ -25,6 +25,7 @@ class TipoDocumentoRequest extends FormRequest
     {
         return [
             'nombre'=> 'required|regex:/^[\pL\s]+$/u|max:30',
+            'clave'=> 'required|regex:/^[\pL\s]+$/u|max:20',
             'descripcion'=> 'required|regex:/^[\pL\s]+$/u|max:50',
             'carpeta'=> 'required|regex:/^[\pL\s]+$/u|max:40',
             'formato'=> 'required|regex:/^[\pL\s]+$/u|max:5',
@@ -36,6 +37,9 @@ class TipoDocumentoRequest extends FormRequest
          'nombre.required'=>'Es obligatorio ingresar el nombre del tipo de documento',
          'nombre.regex'=>'El nombre del tipo de documento solamente puede llevar letras',
          'nombre.max'=>'El nombre del tipo de documento no debe exceder a 30 caracteres',
+         'clave.required'=>'Es obligatorio ingresar la clave del tipo de documento',
+         'clave.regex'=>'La clave del tipo de documento solamente puede llevar letras',
+         'clave.max'=>'La clave del tipo de documento no debe exceder a 30 caracteres',
          'descripcion.required'=>'Es obligatorio ingresar la descripcion del tipo de documento',
          'descripcion.regex'=>'La descripcion del tipo de documento solamente puede llevar letras',
          'descripcion.max'=>'La descripcion del tipo de documento no debe exceder a 50 caracteres',
