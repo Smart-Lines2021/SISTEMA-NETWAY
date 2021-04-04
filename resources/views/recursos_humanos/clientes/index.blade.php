@@ -54,6 +54,7 @@
                     <div class="btn-group">
                       <button type="button" class="btn btn-info btn-flat"><i class="fa fa-address-book"
                           role="button" ></i> <i class="fa fa-address-card"
+                          role="button" ></i> <i class="fa fa-building"
                           role="button" ></i></button>
                       <button type="button" class="btn btn-info btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
                         <span class="sr-only">Toggle Dropdown</span>
@@ -64,6 +65,9 @@
                         <div class="dropdown-divider"></div>
                         <a href="{{route('rh.domicilios_clientes.show',Crypt::encryptString($cliente->id))}}" class="dropdown-item"><i class="fa fa-address-card"
                           role="button" ></i> Domicilios</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{route('rh.empresas_clientes.show',Crypt::encryptString($cliente->id))}}" class="dropdown-item"><i class="fa fa-building"
+                          role="button" ></i> Subempresas</a>
                         <div class="dropdown-divider"></div>
                       </div>
                     </div>
