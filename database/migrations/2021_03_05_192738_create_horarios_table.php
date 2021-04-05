@@ -15,7 +15,8 @@ class CreateHorariosTable extends Migration
     {
         Schema::create('horarios', function (Blueprint $table) {
             $table->id();
-            $table->string('dias',30);
+            $table->string('dia_inicio',10);
+            $table->string('dia_final',10);
             $table->string('hora_entrada',10);
             $table->string('hora_salida',10);
             $table->boolean('activo')->default(1);

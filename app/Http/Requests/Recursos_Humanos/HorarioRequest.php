@@ -24,17 +24,22 @@ class HorarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'dias' => 'required|string|max:30|min:10',
+            'dia_entrada' => 'required|string|max:10|min:5',
+            'dia_salida' => 'required|string|max:10|min:5',
             'hora_entrada' => 'required|string|max:5|min:4',
             'hora_salida' => 'required|string|max:5|min:4',
         ];
     }
     public function messages(){
         return [
-            'dias.required'=>'Es necesario ingresar un rango de dias',
-            'dias.string'=>'Ingrese un formato correcto en los dias',
-            'dias.max'=>'Has excedido el número de caracteres en los dias',
-            'dias.min'=>'La cantidad de caracteres minima en los dias es de 10',
+            'dia_entrada.required'=>'Es necesario ingresar el dia de entrada',
+            'dia_entrada.string'=>'Ingrese un formato correcto en el dia de entrada',
+            'dia_entrada.max'=>'Has excedido el número de caracteres en el dia de entrada',
+            'dia_entrada.min'=>'La cantidad de caracteres minima en el dia de entrada es de 5',
+            'dia_salida.required'=>'Es necesario ingresar el dia de salida',
+            'dia_salida.string'=>'Ingrese un formato correcto en el dia de salida',
+            'dia_salida.max'=>'Has excedido el número de caracteres en el dia de salida',
+            'dia_salida.min'=>'La cantidad de caracteres minima en el dia de salida es de 5',
             'hora_entrada.required'=>'Es necesario ingresar la hora de entrada',
             'hora_entrada.string'=>'Ingrese un formato correcto en la hora de entrada',
             'hora_entrada.max'=>'Has excedido el número de caracteres en la hora de entrada',
