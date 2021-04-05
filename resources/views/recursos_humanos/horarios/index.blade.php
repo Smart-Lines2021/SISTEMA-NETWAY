@@ -39,7 +39,7 @@
               @foreach($horarios as $horario)
               <tr>
                 <td>{{$horario->id}}</td>
-                <td>{{$horario->dias}}</td>
+                <td>{{$horario->dia_inicio.' - '.$horario->dia_final}}</td>
                 <td>{{$horario->hora_entrada}}</td>
                 <td>{{$horario->hora_salida}}</td>
                 <td>
