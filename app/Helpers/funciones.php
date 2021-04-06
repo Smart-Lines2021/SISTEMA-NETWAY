@@ -159,9 +159,9 @@ function traslado($xml,$concepto){
 	}
 	function filtroAsistencias($consulta,$fecha){
 		if ($consulta === null) {
-			$asistencias=Asistencia::where('activo','=',1)->where('fecha','=',$fecha)->paginate(10);
+			$asistencias=Asistencia::where('activo','=',1)->where('fecha','=',$fecha)->orderBy('updated_at', 'ASC')->paginate(10);
 		}else{
-			$asistencias=Asistencia::join('personas as p', 'asistencias.persona_id', '=', 'p.id')->join('informaciones_laborales as informaciones','p.id','=','informaciones.persona_id')->join('departamentos as dep','informaciones.departamento_id','=','dep.id')->join('horarios as hor','asistencias.horario_id','=','hor.id')->orWhere('p.nombre','LIKE','%'.$consulta.'%')->orWhere('p.apellido','LIKE','%'.$consulta.'%')->orWhere('dep.nombre','LIKE','%'.$consulta.'%')->orWhere('asistencias.estado','LIKE','%'.$consulta.'%')->orWhere('asistencias.fecha','LIKE','%'.$consulta.'%')->orWhere('hor.dias','LIKE','%'.$consulta.'%')->orWhere('hor.hora_entrada','LIKE','%'.$consulta.'%')->orWhere('hor.hora_salida','LIKE','%'.$consulta.'%')->paginate(10);
+			$asistencias=Asistencia::join('personas as p', 'asistencias.persona_id', '=', 'p.id')->join('informaciones_laborales as informaciones','p.id','=','informaciones.persona_id')->join('departamentos as dep','informaciones.departamento_id','=','dep.id')->join('horarios as hor','asistencias.horario_id','=','hor.id')->orWhere('p.nombre','LIKE','%'.$consulta.'%')->orWhere('p.apellido','LIKE','%'.$consulta.'%')->orWhere('dep.nombre','LIKE','%'.$consulta.'%')->orWhere('asistencias.estado','LIKE','%'.$consulta.'%')->orWhere('asistencias.fecha','LIKE','%'.$consulta.'%')->orWhere('hor.dia_inicio','LIKE','%'.$consulta.'%')->orWhere('hor.dia_final','LIKE','%'.$consulta.'%')->orWhere('hor.hora_entrada','LIKE','%'.$consulta.'%')->orWhere('hor.hora_salida','LIKE','%'.$consulta.'%')->paginate(10);
 		}
 		return $asistencias;
 	}

@@ -39,6 +39,14 @@ class AsistenciaController extends Controller
     public function store(AsistenciaRequest $request)
     {
         $asistencia=Asistencia::create($request->validated());
+        $horaEntrada=getdate();
+        if ($horaEntrada['minutes'] < 10) {
+             $horaEntrada=$horaEntrada['hours'].':0'.$horaEntrada['minutes'];
+        }else{
+        $horaEntrada=$horaEntrada['hours'].':'.$horaEntrada['minutes'];
+        }
+        $asistencia->hora_entrada=$horaEntrada;
+        $asistencia->save();
         return back()->with('mensaje','Se ha registrado la asistencia del empleado');
 
     }
@@ -60,6 +68,23 @@ class AsistenciaController extends Controller
         $asistencia=Asistencia::findOrFail($id);
         $asistencia->update($request->validated());
         return redirect()->route('rh.asistencias.index')->with('mensaje','Se ha actualizado la asistencia de '.$asistencia->persona->nombre.' '.$asistencia->persona->apellido);
+    }
+    public function horaSalida(Request $request, $id)
+    {
+        $id=Crypt::decryptString($id);
+        $asistencia=Asistencia::findOrFail($id);
+        $asistencia->estado=$request->estado;
+        $horaSalida=getdate();
+        if ($horaSalida['minutes'] < 10) {
+             $horaSalida=$horaSalida['hours'].':0'.$horaSalida['minutes'];
+        }else{
+        $horaSalida=$horaSalida['hours'].':'.$horaSalida['minutes'];
+        }
+        if ($request->estado !== 'Ausente') {
+             $asistencia->hora_salida=$horaSalida;
+        }
+        $asistencia->save();
+        return back();
     }
     public function destroy($id)
     {

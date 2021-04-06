@@ -19,8 +19,8 @@ class CreateAsistenciasTable extends Migration
             $table->foreign('persona_id')->references('id')->on('personas');
             $table->BigInteger('horario_id')->unsigned();
             $table->foreign('horario_id')->references('id')->on('horarios');
-            $table->string('hora_entrada',10);
-            $table->string('hora_salida',10);
+            $table->string('hora_entrada',10)->nullable();
+            $table->string('hora_salida',10)->nullable();
             $table->enum('estado', ['Presente', 'Ausente','Justificado']);
             $table->date('fecha');
             $table->boolean('activo')->default(1);

@@ -44,7 +44,7 @@
               data-placeholder="Seleccione el empleado" style="width: 100%;" name="horario_id" required>
               <option selected="selected" value="">Seleccione el empleado</option>
               @foreach ($horarios as $horario)
-              <option {{ old('horario_id') == $horario->id ? "selected" : "" }}  value="{{$horario->id}}">{{$horario->dias.' '.$horario->hora_entrada.'-'.$horario->hora_salida}} </option>
+              <option {{ old('horario_id') == $horario->id ? "selected" : "" }}  value="{{$horario->id}}">{{$horario->dia_inicio.' - '.$horario->dia_final.' '.$horario->hora_entrada.'-'.$horario->hora_salida}} </option>
               @endforeach
             </select>
           </div>
@@ -52,11 +52,11 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="estado">Estado:</label>
-            <select class="form-control select2" id="estados"
+            <select class="form-control select2" id="estado"
             data-placeholder="Seleccione una opción" style="width: 100%;" name="estado" required>
             <option selected="selected" value="">Seleccione una opción</option>
-            <option {{ old('estado')}}  value="Presente">Presente</option>
-            <option {{ old('estado')}}  value="Ausente">Ausente</option>
+            <option {{old('estado')}}  value="Presente">Presente</option>
+            <option {{old('estado')}}  value="Ausente">Ausente</option>
           </select>
         </div>
         <div class="form-group">
@@ -94,7 +94,7 @@
         <th>Departamento</th>
         <th>Horarios</th>
         <th>Asistio</th>
-        <th>Fecha</th>
+        <th>Turno</th>
         <th>Opciones</th>
 
       </tr>
@@ -104,9 +104,13 @@
       <tr>
         <td>{{$asistencia->persona->nombre.' '.$asistencia->persona->apellido}}</td>
         <td>{{$asistencia->persona->informacionesLaborales->last()->departamento->nombre}}</td>
-        <td>{{$asistencia->horario->dias.' '.$asistencia->horario->hora_entrada.'-'.$asistencia->horario->hora_salida}}</td>
+        <td>{{$asistencia->horario->dia_inicio.' - '.$asistencia->horario->dia_final.' '.$asistencia->horario->hora_entrada.'-'.$asistencia->horario->hora_salida}}</td>
         <td>{{$asistencia->estado}}</td>
-        <td>{{$asistencia->fecha}}</td>
+        @if(isset($asistencia->hora_salida))
+        <td>Finalizado</td>
+        @else
+        <td>En Jornada Laboral</td>
+        @endif
         <td>
           <center>
             <div class="btn-group">
@@ -115,6 +119,8 @@
                 {{-- <span class="sr-only"></span> --}}
               </button>
               <div class="dropdown-menu" role="menu">
+                <a class="dropdown-item" data-target="#modal-hora-salida-{{$asistencia->id}}" data-toggle="modal"><i class="fas fa-user-times"></i>Marcar Salida</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{route('rh.asistencias.edit',Crypt::encryptString($asistencia->id))}}"><i class="fas fa-user-edit"></i> Editar</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" data-target="#modal-destroy-{{$asistencia->id}}" data-toggle="modal"><i class="fas fa-user-times"></i> Eliminar</a>
@@ -125,6 +131,7 @@
         </td>
       </tr>
        @include('recursos_humanos.asistencias.destroy')
+       @include('recursos_humanos.asistencias.hora_salida')
       @endforeach
 
     </tbody>

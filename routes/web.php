@@ -65,6 +65,7 @@ Route::resource('recursos_humanos/facturas','Recursos_Humanos\FacturaController'
 Route::resource('recursos_humanos/horarios','Recursos_Humanos\HorarioController')->parameters(['horario'=>'horario'])->names('rh.horarios');
 Route::resource('recursos_humanos/razones_permisos','Recursos_Humanos\RazonPermisoController')->parameters(['razonPermiso'=>'razonPermiso'])->names('rh.razones_permisos');
 Route::resource('recursos_humanos/asistencias','Recursos_Humanos\AsistenciaController')->parameters(['asistencia'=>'asistencia'])->names('rh.asistencias');
+Route::put('recursos_humanos/asistencias/{asistencia}/hora_salida','Recursos_Humanos\AsistenciaController@horaSalida')->name('rh.asistencias.hora_salida');
 Route::resource('recursos_humanos/permisos_empleados','Recursos_Humanos\PermisoEmpleadoController')->parameters(['permisoEmpleado'=>'permisoEmpleado'])->names('rh.permisos_empleados');
 //Firma
 Route::resource('recursos_humanos/firmas','Recursos_Humanos\FirmaController')->parameters(['firma'=>'firma'])->names('rh.firmas');

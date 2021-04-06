@@ -57,10 +57,28 @@
       <label for="fecha">Fecha:</label>
       <input type="date" name="fecha" value="{{old('fecha',$asistencia->fecha)}}" class="form-control">
     </div>
-    <div class="align-self-center text-center">
-      <input type="submit" class="btn btn-lg btn-primary" name="" value="Modificar">
+    <div class="row">
+      <div class="col-md-6">
+       <div class="form-group">
+        <label for="fecha">Hora de Entrada:</label>
+        <input type="text" name="hora_entrada" value="{{old('hora_entrada',$asistencia->hora_entrada)}}" class="form-control" required pattern="[0-9 :]{4,5}"
+        minlegth="4" maxlength="5"
+        title="Solo se permiten números y dos puntos. Tamaño mínimo: 4. Tamaño máximo: 5">
+      </div>
+    </div>
+    <div class="col-md-6">
+     <div class="form-group">
+      <label for="fecha">Hora de Salida:</label>
+      <input type="text" name="hora_salida" value="{{old('hora_salida',$asistencia->hora_salida)}}" class="form-control" required pattern="[0-9 :]{4,5}"
+      minlegth="4" maxlength="5"
+      title="Solo se permiten números y dos puntos. Tamaño mínimo: 4. Tamaño máximo: 5">
     </div>
   </div>
+</div>
+<div class="align-self-center text-center">
+  <input type="submit" class="btn btn-lg btn-primary" name="" value="Modificar">
+</div>
+</div>
 </div>
 </div>
 

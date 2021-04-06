@@ -23,14 +23,31 @@ class AsistenciaRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+       $rules = [
+            'persona_id'=> ['required','integer'],
+            'horario_id'=> ['required','integer'],
+            'estado'=> ['required','in:Presente,Ausente,Justificado'],
+            'fecha'=> ['required','date'],
+        ];
+        if($this->method() === 'PUT'){ //Si es para actualizar
+          $rules = [
+            'persona_id'=> ['required','integer'],
+            'horario_id'=> ['required','integer'],
+            'estado'=> ['required','in:Presente,Ausente,Justificado'],
+            'fecha'=> ['required','date'],
+            'hora_entrada'=> ['required','string','max:5','min:4'],
+            'hora_salida'=> ['required','string','max:5','min:4'],
+        ];
+        }
+        /*return [
             'persona_id'=>'required|integer',
             'horario_id'=>'required|integer',
             'estado'=>'required|in:Presente,Ausente,Justificado',
             'fecha'=>'required|date',
             'hora_entrada' => 'required|string|max:5|min:4',
             'hora_salida' => 'required|string|max:5|min:4',
-        ];
+        ];*/
+        return $rules;
     }
     public function messages(){
 
