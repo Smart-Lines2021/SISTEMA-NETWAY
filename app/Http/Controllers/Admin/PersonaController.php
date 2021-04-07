@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Recursos_Humanos\DomicilioPersonaRequest;
 use App\Http\Requests\Recursos_Humanos\EmpleadoRequest;
 use App\Http\Requests\Recursos_Humanos\InformacionLaboralRequest;
+use App\Recursos_Humanos\Documento;
 use App\Recursos_Humanos\InformacionLaboral;
 use App\Recursos_Humanos\TipoDocumento;
 use Illuminate\Http\Request;
@@ -44,11 +45,13 @@ class PersonaController extends Controller
         $domicilio=$persona->domiciliosPersonas->last();
         $informacionLaboral=$persona->informacionesLaborales->last();
         $tiposDocumentos=TipoDocumento::where('activo','=',1)->get();
+        $documentos=Documento::where('activo','=',1)->where('persona_id','=',$persona->id)->paginate(4);
         return view('recursos_humanos.documentos.cargar_documentos',[
             'persona'=>$persona,
             'domicilio'=>$domicilio,
             'informacionLaboral'=>$informacionLaboral,
-            'tiposDocumentos'=>$tiposDocumentos]);
+            'tiposDocumentos'=>$tiposDocumentos,
+            'documentos'=>$documentos]);
     }
 
     /**
