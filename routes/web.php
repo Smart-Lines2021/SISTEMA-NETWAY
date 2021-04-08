@@ -89,6 +89,7 @@ Route::put('administracion/usuarios/{usuario}/permisos','Admin\UserPermissionCon
 
 //Rutas relacionadas a la subida/control de documentos
 Route::post('documentos/{persona_id}/{carpeta}/{parametro}/{tipoDocumento}/cargar_documentos', 'Recursos_Humanos\DocumentoController@store')->name('documentos.documento.store');
+Route::post('documentos/enviar_documentos', 'Recursos_Humanos\DocumentoController@send')->name('documentos.documento.send');
 
 
 

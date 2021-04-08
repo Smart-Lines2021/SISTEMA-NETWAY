@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Recursos_Humanos;
 
 use App\Admin\Persona;
 use App\Http\Controllers\Controller;
+use App\Mail\EnviarDocumentos;
 use App\Recursos_Humanos\Documento;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class DocumentoController extends Controller
 {
@@ -23,4 +26,14 @@ class DocumentoController extends Controller
             'tipo_documento_id' => $request->tipoDocumento
         ]);
      }
+     public function send(Request $request){
+        $documentos=array();
+        $remitente=User::findOrFail(auth()->user()->id);
+        //Almacenamos todos los documentos
+        for ($i=0; $i < sizeof($request->documentos) ; $i++) {
+           $documentos[]=Documento::findOrFail($request->documentos[$i]);
+       }
+       Mail::to('juanangelmolinadt2018@gmail.com')->send(new EnviarDocumentos($documentos,$remitente));
+       return back()->with('mensaje','Se han enviado sus documentos');
+   }
 }

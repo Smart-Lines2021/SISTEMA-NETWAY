@@ -2,9 +2,19 @@
 <div class="sidebar">
   <!-- Sidebar user panel (optional) -->
   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    @if(auth()->user()->personasUsuarios !== null)
+     <div class="image">
+      @if(auth()->user()->personasUsuarios->first()->persona->foto_perfil !== 'avatar.png')
+              <img class="img-circle elevation-2" src="{{Storage::url(auth()->user()->personasUsuarios->first()->persona->foto_perfil)}}" alt="User profile picture">
+              @else
+              <img class="img-circle elevation-2" src="{{asset('images/empleados.jpg')}}" alt="User profile picture">
+      @endif
+    </div>
+    @else
     <div class="image">
       <img src="{{ asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
     </div>
+    @endif
     <div class="info">
       <a href="#" class="d-block">{{auth()->user()->name}}</a>
     </div>

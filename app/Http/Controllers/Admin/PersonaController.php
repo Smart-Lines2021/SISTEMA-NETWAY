@@ -45,7 +45,7 @@ class PersonaController extends Controller
         $domicilio=$persona->domiciliosPersonas->last();
         $informacionLaboral=$persona->informacionesLaborales->last();
         $tiposDocumentos=TipoDocumento::where('activo','=',1)->get();
-        $documentos=Documento::where('activo','=',1)->where('persona_id','=',$persona->id)->paginate(4);
+        $documentos=Documento::where('activo','=',1)->where('persona_id','=',$persona->id)->get();
         return view('recursos_humanos.documentos.cargar_documentos',[
             'persona'=>$persona,
             'domicilio'=>$domicilio,
