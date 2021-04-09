@@ -14,6 +14,7 @@ use App\Http\Requests\Recursos_Humanos\InformacionLaboralRequest;
 use App\Recursos_Humanos\Documento;
 use App\Recursos_Humanos\InformacionLaboral;
 use App\Recursos_Humanos\TipoDocumento;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
@@ -40,6 +41,7 @@ class PersonaController extends Controller
     {
         $id=Crypt::decryptString($id);
         $persona=Persona::findOrFail($id);
+        $usuarios=User::where('activo','=',1)->get();
         //Aplicamos Politica de Acceso al metodo correspondiente
         $this->authorize('view',$persona);
         $domicilio=$persona->domiciliosPersonas->last();
@@ -51,7 +53,8 @@ class PersonaController extends Controller
             'domicilio'=>$domicilio,
             'informacionLaboral'=>$informacionLaboral,
             'tiposDocumentos'=>$tiposDocumentos,
-            'documentos'=>$documentos]);
+            'documentos'=>$documentos,
+            'usuarios'=>$usuarios]);
     }
 
     /**

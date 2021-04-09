@@ -27,13 +27,16 @@ class DocumentoController extends Controller
         ]);
      }
      public function send(Request $request){
+      if (auth()->user()->personasUsuarios->first() === null) {
+        return back()->with('mensaje','No puedes enviar documentos si no tienes un perfil creado');
+      }
         $documentos=array();
         $remitente=User::findOrFail(auth()->user()->id);
         //Almacenamos todos los documentos
         for ($i=0; $i < sizeof($request->documentos) ; $i++) {
            $documentos[]=Documento::findOrFail($request->documentos[$i]);
        }
-       Mail::to(['juanangelmolinadt2018@gmail.com','juangemoltor@hotmail.com'])->send(new EnviarDocumentos($documentos,$remitente));
+       Mail::to($request->contactos)->send(new EnviarDocumentos($documentos,$remitente));
        return back()->with('mensaje','Se han enviado sus documentos');
    }
 }

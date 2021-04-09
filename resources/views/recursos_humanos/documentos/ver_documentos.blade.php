@@ -116,19 +116,17 @@
       {{$documentos->links()}}
     </nav> --}}
     <div class="text-right">
+      <label>Seleccione la(s) direcciones de correo a enviar:</label>
       <div class="form-group">
-                  <label>Multiple</label>
-                  <select class="select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true" name="contactos" required>
-                    <option>Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Select a State" style="width: 492.5px;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                  <select class="select2 select2-hidden-accessible" multiple="" data-placeholder="Seleccione la(s) direcciones de correo" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true" name="contactos[]" required>
+                    @forelse($usuarios as $usuario)
+                    <option value="{{$usuario->email}}">{{$usuario->email}}</option>
+                    @empty
+                    <option value="">No hay opciones disponibles</option>
+                    @endforelse
+                  </select>
                 </div>
-      <input type="submit" name="enviar" value="Enviar" class="btn btn-lg btn-secondary">
+      <input type="submit" value="Enviar" class="btn btn-lg btn-secondary">
     </div>
   </div>
 </form>
