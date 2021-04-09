@@ -74,10 +74,10 @@ class UserController extends Controller
         $usuario = User::create($request->validated());
         //asignamos roles
         if ($request->filled('roles')) {
-         $usuario->assignRole($request->roles);
-     }
+           $usuario->assignRole($request->roles);
+       }
         //asignamos permisos
-     if ($request->filled('permissions')) {
+       if ($request->filled('permissions')) {
         $usuario->givePermissionTo($request->permissions);
     }
     //Asignamos la persona al usuario
@@ -122,6 +122,7 @@ class UserController extends Controller
         $permisosProductos=Permission::where('category', 'Productos')->pluck('name','id'); //Clasificamos los permisos
         $permisosProveedoresVehiculos=Permission::where('category', 'Proveedores y Vehiculos')->pluck('name','id'); //Clasificamos los permisos
         $permisosGastos=Permission::where('category', 'Gastos e Información Bancaria')->pluck('name','id'); //Clasificamos los permisos
+        $personas=Persona::where('activo','=',1)->get();
         return view('admin.usuarios.edit',[
             'usuario'=>$usuario,
             'roles'=>$roles,
@@ -130,7 +131,8 @@ class UserController extends Controller
             'permisosUbicacionesGeograficas'=>$permisosUbicacionesGeograficas,
             'permisosProductos'=>$permisosProductos,
             'permisosProveedoresVehiculos'=>$permisosProveedoresVehiculos,
-            'permisosGastos'=>$permisosGastos]);
+            'permisosGastos'=>$permisosGastos,
+            'personas'=>$personas]);
     }
 
     /**
@@ -145,6 +147,15 @@ class UserController extends Controller
         //Aplicamos Politica de Acceso al metodo correspondiente
         $this->authorize('update', $usuario);
         $usuario->update($request->validated());
+         //Asignamos la persona al usuario
+        $persona = Persona::findOrFail($request->persona_id);
+        $asignarUsuario=new PersonaUsuario();
+        $asignarUsuario->persona_id=$persona->id;
+        $asignarUsuario->user_id=$usuario->id;
+        $asignarUsuario->save();
+         //Cambiamos el estatus de la cuenta del usuario para ya no mostrarlo de opcion
+        $persona->cuenta="Asignada";
+        $persona->update();
         return back()->with('mensaje','Se ha Actualizado el usuario');
     }
 

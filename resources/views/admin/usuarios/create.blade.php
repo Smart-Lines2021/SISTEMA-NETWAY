@@ -36,7 +36,7 @@
                         data-placeholder="Seleccione el empleado a asignar" style="width: 100%;" name="persona_id" required>
                         <option selected="selected" value="">Seleccione el empleado a asignar</option>
                         @foreach ($personas as $persona)
-                        <option {{ old('persona_id') == $persona->id ? "selected" : "" }}  value="{{$persona->id}}">{{$persona->nombre}} </option>
+                        <option {{ old('persona_id') == $persona->id ? "selected" : "" }}  value="{{$persona->id}}">{{$persona->nombre.' '.$persona->apellido}} </option>
                         @endforeach
                     </select>
                 </div>

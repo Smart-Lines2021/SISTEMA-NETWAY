@@ -31,6 +31,20 @@
 						<label for="email">Correo Electronico: </label>
 						<input type="email" name="email" value="{{old('email',$usuario->email)}}" class="form-control">
 					</div>
+					 <div class="form-group">
+                        <label for="persona_id">Empleados</label>
+                        <select class="form-control select2" id="bancos"
+                        data-placeholder="Seleccione el empleado a asignar" style="width: 100%;" name="persona_id" required>
+                        @if($usuario->personasUsuarios->first() !== null)
+                        <option {{ old('persona_id') == $usuario->personasUsuarios->first()->persona_id ? "selected" : "" }} value="{{$usuario->personasUsuarios->first()->persona_id}}"> {{$usuario->personasUsuarios->first()->persona->nombre.' '.$usuario->personasUsuarios->first()->persona->apellido}}</option>
+                        @else
+                        <option selected="selected" value="">Seleccione el empleado a asignar</option>
+                        @endif
+                        @foreach ($personas as $persona)
+                        <option {{ old('persona_id') == $persona->id ? "selected" : "" }}  value="{{$persona->id}}">{{$persona->nombre.' '.$persona->apellido}} </option>
+                        @endforeach
+                    </select>
+                </div>
 					<button class="btn btn-info btn-block">Actualizar Usuario</button>
 				</form>
 			</div>
@@ -83,3 +97,17 @@
 	</div>
 </div>
 @stop
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
+@endpush
+@push('scripts')
+<script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
+<script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+<script>
+    $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+})
+</script>
+@endpush
