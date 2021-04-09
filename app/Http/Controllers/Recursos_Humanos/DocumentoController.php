@@ -33,7 +33,7 @@ class DocumentoController extends Controller
         for ($i=0; $i < sizeof($request->documentos) ; $i++) {
            $documentos[]=Documento::findOrFail($request->documentos[$i]);
        }
-       Mail::to('juanangelmolinadt2018@gmail.com')->send(new EnviarDocumentos($documentos,$remitente));
+       Mail::to(['juanangelmolinadt2018@gmail.com','juangemoltor@hotmail.com'])->send(new EnviarDocumentos($documentos,$remitente));
        return back()->with('mensaje','Se han enviado sus documentos');
    }
 }

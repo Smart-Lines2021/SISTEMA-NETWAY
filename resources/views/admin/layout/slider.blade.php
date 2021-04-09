@@ -2,7 +2,7 @@
 <div class="sidebar">
   <!-- Sidebar user panel (optional) -->
   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-    @if(auth()->user()->personasUsuarios !== null)
+    @if(auth()->user()->personasUsuarios->first() !== null)
      <div class="image">
       @if(auth()->user()->personasUsuarios->first()->persona->foto_perfil !== 'avatar.png')
               <img class="img-circle elevation-2" src="{{Storage::url(auth()->user()->personasUsuarios->first()->persona->foto_perfil)}}" alt="User profile picture">
