@@ -16,7 +16,7 @@ class MunicipioSeeder extends Seeder
     	//Vaciamos la tabla
     	Municipio::truncate();
 
-/*
+
        Municipio::create([
             'nombre' =>  'Aguascalientes',
             'estado_id' => '01',
@@ -12011,7 +12011,7 @@ class MunicipioSeeder extends Seeder
             'nombre' =>  'Yobaín',
             'estado_id' => '31',
             'numero' =>  '106',
-        ]);*/
+        ]);
         Municipio::create([
             'nombre' =>  'Apozol',
             'estado_id' => '32',
